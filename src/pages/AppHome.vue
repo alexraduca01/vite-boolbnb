@@ -3,7 +3,7 @@
     <div class="h-100 bg-rich-black">
         <div class="container py-3">
             <div class="row">
-                <router-link v-for="item in store.apartments" class="col-sm-6 col-md-4 col-lg-3 text-white mb-4 text-decoration-none" :to="{name: 'show', params: { slug: item.slug}}">
+                <router-link v-for="item in store.apartments" @click="postVisuals(item.slug)" class="col-sm-6 col-md-4 col-lg-3 text-white mb-4 text-decoration-none" :to="{name: 'show', params: { slug: item.slug}}">
                     <div v-if="!searchFlag">
                         <div>
                             <img class="img-fluid my-img" :src="store.imgBasePath + item.cover_img" :alt="item.title">
@@ -57,6 +57,11 @@ import AppHeader from '../components/AppHeader.vue'
                     // console.log(store.apartments);
                 })
             },
+            postVisuals(apartmentSlug){
+                axios.post(store.viewsUrl + apartmentSlug + store.viewsEndPoint).then((res) => {
+                    console.log(res.data);
+                })
+            }
         },
         created(){
             this.getApartments();
