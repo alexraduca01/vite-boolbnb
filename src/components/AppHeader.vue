@@ -1,15 +1,36 @@
 <template>
-    <div>
-
+    <div class="w-100 bg-rich-black p-2">
+        <div class="container text-white">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-sm-10">
+                    <div class="input-group flex-nowrap">
+                        <span style="transform: translate(27px, 6px); z-index: 1000;" id="addon-wrapping"><i class="fa-solid text-black fa-magnifying-glass"></i></span>
+                        <input type="text" class="form-control ps-5 rounded-pill" placeholder="Search" aria-label="Username" aria-describedby="addon-wrapping">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <a href="#">login</a>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+import axios from 'axios';
+import { store } from '../store.js';
     export default {
-        name: 'AppHeader'
+        name: 'AppHeader',
+        data(){
+            return{
+                store,
+            }
+        },
     }
 </script>
 
 <style lang="scss" scoped>
+
+@use '../assets/style/main.scss' as *;
 
 </style>
