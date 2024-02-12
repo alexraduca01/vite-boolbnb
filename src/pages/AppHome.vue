@@ -1,6 +1,6 @@
 <template>
     <div class="h-100 bg-rich-black">
-        <div class="container">
+        <div class="container py-3">
             <div class="row">
                 <router-link v-for="item in store.apartments" class="col-sm-6 col-md-4 col-lg-3 text-white mb-4 text-decoration-none" :to="{name: 'show', params: { slug: item.slug}}">
                     <div>
@@ -45,11 +45,7 @@ import { store } from '../store.js'
         methods:{
             getApartments(){
                 axios.get(store.apiUrl + 'apartments').then((res) => {
-                    for(let i = 0; i < res.data.length; i++){
-                        if(res.data[i].visible == 1){
-                            store.apartments.push(res.data[i]);
-                        }
-                    }
+                    store.apartments = res.data
                     // console.log(store.apartments);
                 })
             }
