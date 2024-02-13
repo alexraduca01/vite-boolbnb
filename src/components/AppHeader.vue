@@ -24,20 +24,20 @@
                 <div class="col-1">
                     <div class="container">
                         <span class="float-start">
-                            <span><i class="fa-solid fa-filter" @click.prevent="showOffcanvasMenu()" @click="removeDisplayNoneOffcanvas()"></i></span>
+                            <span><i class="fa-solid fa-filter" @click.prevent="showOffcanvasMenu()" :disabled="filterDisabled"></i></span>
                         </span>
                     </div>
-                    <div class="offcanvas offcanvas-end" :class="showMenu ? 'show' : ''" tabindex="-1"
+                    <div v-if="filterOpen && filterDisabled && showMenu" class="offcanvas offcanvas-end" :class="showMenu ? 'show' : ''" tabindex="-1"
                         :style="{ visibility: showMenu ? 'visible' : 'hidden' }">
                         <div class="offcanvas-header">
                             <h5 class="offcanvas-title" id="">Filtri</h5>
                             <button type="button" class="btn-close text-reset"
-                                @click.prevent="showOffcanvasMenu()" @click="displayNoneOffcanvas()"></button>
+                                @click.prevent="showOffcanvasMenu()"></button>
                         </div>
                         <div class="offcanvas-body">
                             <form action="">
                                 <!-- Stanze -->
-                                <div class="d-flex gap-5">
+                                <div class="d-flex gap-4">
                                     <div>
                                         <h3 class="fw-bold">Rooms</h3>
                                         <select name="rooms" id=""></select>
@@ -93,6 +93,8 @@ export default {
             store,
             userInput: '',
             showMenu: false,
+            filterDisabled: false,
+            filterOpen: false
         }
     },
     methods: {
@@ -103,14 +105,10 @@ export default {
             })
         },
         showOffcanvasMenu() {
+            this.filterDisabled = true;
+            this.filterOpen = true;
             this.showMenu ? this.showMenu = false : this.showMenu = true;
         },
-        removeDisplayNoneOffcanvas(){
-            document.querySelector('.offcanvas-body').classList.remove('d-none');
-        },
-        displayNoneOffcanvas(){
-            document.querySelector('.offcanvas-body').classList.add('d-none');
-        }
     },
 }
 </script>
