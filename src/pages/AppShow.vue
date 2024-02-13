@@ -1,15 +1,16 @@
 <template>
-    <div>
-        <img :src="store.imgBasePath + apartment.cover_img" alt="" class="w-100">
-    </div>
-    <div class="container bg-prussian-blue">
+    <div class="w-100 bg-prussian-blue">
+        <div class="container">
         <div class="row">
             <div class="col-sm-12 text-white">
+                <div>
+                    <img :src="store.imgBasePath + apartment.cover_img" alt="" class="w-100">
+                </div>
                 <div class="pt-3">
-                    <h2 class="fst-italic">{{ apartment.title}}</h2>
+                    <h2 class="">{{ apartment.title}}</h2>
                 </div>
                 <div class="py-2">
-                    <h6 class="fst-italic"> Host Name: <span class="text-danger">{{ apartment.user.name + ' ' + apartment.user.surname }}</span></h6>
+                    <h6 class=""> Host Name: <span class="text-danger">{{ apartment.user?.name + ' ' + apartment.user?.surname }}</span></h6>
                 </div>
                 <h5 class="py-2">Cosa troverai:</h5>
                 <div>
@@ -25,7 +26,11 @@
                 </div> -->
                 <div>
                     <h4>Dove ti troverai</h4>
-                    <h4>Mappa TomTom</h4>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div id="map"></div>
+                        </div>
+                    </div>
                 </div>
                 <div>
                     <h4>Nome Host</h4>
@@ -34,9 +39,11 @@
             </div>
         </div>
     </div>  
+    </div>
 </template>
 
 <script>
+import tt from '@tomtom-international/web-sdk-maps';
 import axios from 'axios';
 import { store } from '../store.js';
     export default {
@@ -45,22 +52,49 @@ import { store } from '../store.js';
             return {
                 store,
                 apartment: [],
+                // lat: null,
+                // lon: null,
             }
         },
         methods:{
             getApartments(){
+                let lat 
+                let lon
                 axios.get(`${this.store.apiUrl}apartments/${this.$route.params.slug}`).then((res) => {
-                    this.apartment = res.data
-                    console.log(this.apartment);
+                    this.apartment = res.data;
+                    lat = this.apartment.lat
+                    lon = this.apartment.lon
                 })
+                const mapTime = setTimeout(()=>{
+                    this.makeMap(lon, lat);
+
+                }, 1500)
             },
+            makeMap(lon, lat){
+                let center = [ lon, lat ];
+                console.log(lat, lon);
+                // let center = [this.location[1], this.location[0]];
+                const map = tt.map({
+                    key: '2HI9GWKpWiwAq3zKIGlnZVdmoLe7u7xs',
+                    container: 'map',
+                    center: center,
+                    zoom:10,                    
+                })
+                const marker = new tt.Marker().setLngLat(center).addTo(map);
+            }, 
         },
-        created(){
+        mounted(){
             this.getApartments();
+        }, 
+        created(){
         }
     }
 </script>
 
 <style lang="scss" scoped>
-
+#map {
+    aspect-ratio: 21 / 9;
+    width: 100%;
+    max-height: 100%;
+}
 </style>
