@@ -1,7 +1,9 @@
 <template>
-    <div>
-        <h1>NotFound</h1>
+<section>
+    <div class="container">
+        <h3><a href=""><img src=".." alt=""></a></h3>
     </div>
+</section>
 </template>
 
 <script>
