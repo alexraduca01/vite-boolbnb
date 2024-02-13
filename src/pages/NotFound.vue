@@ -10,7 +10,7 @@
             </div>
             <div class="col-lg-6 col-md-4 mb-3 mt-5">
                 <div class="d-flex justify-content-center">
-                    <img src="/public/images/notfound-gif.gif"  alt="">
+                    <img src="/public/images/notfound-gif.gif"  alt="logo-notfound">
                 </div>
             </div>
         </div>
