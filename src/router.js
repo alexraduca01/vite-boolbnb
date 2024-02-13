@@ -3,6 +3,7 @@ import AppHome from './pages/AppHome.vue'
 import AppSearch from './pages/AppSearch.vue'
 import AppShow from './pages/AppShow.vue'
 import NotFound from "./pages/NotFound.vue";
+import AppMap from "./components/AppMap.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -21,6 +22,11 @@ const router = createRouter({
       path: '/apartments/:slug',
       name: 'show',
       component: AppShow
+    },
+    {
+      path: '/map',
+      name: 'map',
+      component: AppMap
     },
     {
       path: "/:pathMatch(.*)*",
