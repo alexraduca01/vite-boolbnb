@@ -31,7 +31,6 @@
                     <h4>Nome Host</h4>
                     <span class="btn btn-primary bg-light text-dark">Contatta l'host</span>
                 </div>
-                <div id="map"></div>
             </div>
         </div>
     </div>  
