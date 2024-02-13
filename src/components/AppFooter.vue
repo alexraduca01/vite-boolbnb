@@ -1,5 +1,5 @@
 <template>
-    <footer class="bg-body-tertiary w-100 py-3 ">
+    <footer class="bg-body-tertiary w-100 py-5 ">
             <section class=" container">
                <div class="row">
                 <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
@@ -74,11 +74,11 @@
               </div>
             </section>               
 
-             <section class="container mt-4 p-0">
-                   <div class="row d-flex justify-content-around align-items-center">
+             <section class="container mt-4">
+                   <div class="row d-flex justify-content-around  mb-justify-content-center">
                             <hr class="w-100">
-                        <div class=" col-lg-8 col-md-8 mb-2 mt-3 d-flex">
-                            <ul class="d-flex list-unstyled p-0">
+                        <div class=" col-sm-12 col-lg-8 col-md-8 mb-2 mt-3 d-flex lg-justify-content-start">
+                            <ul class="d-flex list-unstyled">
                                 <li><a class="text-body fw-bold" href="#!"> © 2024 Copyright:BoolBnb.com</a></li>
                                 <li><a class="text-body d-none d-md-flex" href="#">Privacy</a></li>
                                 <li><a class="text-body d-none d-md-flex" href="#">Termini</a></li>
@@ -86,7 +86,7 @@
                                 <li><a class="text-body d-none d-md-flex" href="#">Dettagli del sito</a></li>
                             </ul>
                         </div>
-                        <div class="col-lg-4 col-md-8 mb-2 d-flex justify-content-end">
+                        <div class="col-sm-12 col-lg-4 col-md-8 d-flex lg-justify-content-end mt-3">
                                 <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
                                 ><i class="fab fa-facebook-f"></i
                               ></a>
