@@ -24,7 +24,7 @@
                 <div class="col-1">
                     <div class="container">
                         <span class="float-start">
-                            <span><i class="fa-solid fa-filter" @click.prevent="showOffcanvasMenu()"></i></span>
+                            <span><i class="fa-solid fa-filter" @click.prevent="showOffcanvasMenu()" @click="removeDisplayNoneOffcanvas()"></i></span>
                         </span>
                     </div>
                     <div class="offcanvas offcanvas-end" :class="showMenu ? 'show' : ''" tabindex="-1"
@@ -32,7 +32,7 @@
                         <div class="offcanvas-header">
                             <h5 class="offcanvas-title" id="">Filtri</h5>
                             <button type="button" class="btn-close text-reset"
-                                @click.prevent="showOffcanvasMenu()"></button>
+                                @click.prevent="showOffcanvasMenu()" @click="displayNoneOffcanvas()"></button>
                         </div>
                         <div class="offcanvas-body">
                             <form action="">
@@ -104,6 +104,12 @@ export default {
         },
         showOffcanvasMenu() {
             this.showMenu ? this.showMenu = false : this.showMenu = true;
+        },
+        removeDisplayNoneOffcanvas(){
+            document.querySelector('.offcanvas-body').classList.remove('d-none');
+        },
+        displayNoneOffcanvas(){
+            document.querySelector('.offcanvas-body').classList.add('d-none');
         }
     },
 }
