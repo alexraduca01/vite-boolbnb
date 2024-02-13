@@ -4,25 +4,24 @@
 
 <script>
 import tt from '@tomtom-international/web-sdk-maps';
+import {store} from '../store.js';
     export default {
         name: 'AppMap',
         data(){
             return{
-                marker: null
+                store
             }
         },
         methods: {
             makeMap(){
-                let center = [4, 44.5]
-                let markerPos = [4, 44.4]
                 const map = tt.map({
                     key: '2HI9GWKpWiwAq3zKIGlnZVdmoLe7u7xs',
                     container: 'map',
-                    center: center,
+                    center: store.center,
                     zoom:10,
                     
                 })
-                const marker = new tt.Marker().setLngLat(center).addTo(map);
+                const marker = new tt.Marker().setLngLat(store.center).addTo(map);
             },
         },
         mounted(){
@@ -33,7 +32,8 @@ import tt from '@tomtom-international/web-sdk-maps';
 
 <style lang="scss" scoped>
 #map {
+    aspect-ratio: 21 / 9;
     width: 100%;
-    height: 100vh;
+    max-height: 100%;
 }
 </style>
