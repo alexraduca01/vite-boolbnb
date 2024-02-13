@@ -1,6 +1,6 @@
 <template>
-    <footer class="bg-body-tertiary  ">
-            <section class="py-5 container">
+    <footer class="bg-body-tertiary w-100 py-3 ">
+            <section class=" container">
                <div class="row">
                 <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
                   <h6 class="text-uppercase">Assistenza</h6>
@@ -29,7 +29,7 @@
                 <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
                   <h6 class="text-uppercase">Ospitare</h6>
 
-                  <ul class="list-unstyled mb-0 text-whit">
+                  <ul class="list-unstyled mb-0">
                     <li>
                       <a class="text-body" href="#!">Apri un BoolBnb</a>
                     </li>
@@ -74,19 +74,19 @@
               </div>
             </section>               
 
-             <section class="">
-                   <div class="row d-flex justify-content-between">
-                            <hr>
-                        <div class=" col-lg-6 col-md-6 mb-12 ms-2 d-flex">
-                                <ul class="d-flex list-unstyled p-0">
-                                    <li><a class="text-reset fw-bold" href="#!"> © 2024 Copyright:BoolBnb.com |</a></li>
-                                    <li><a class="text-body" href="#">Privacy |</a></li>
-                                    <li><a class="text-body" href="#">Termini |</a></li>
-                                    <li><a class="text-body" href="#">Mappa del sito |</a></li>
-                                    <li><a class="text-body" href="#">Dettagli del sito</a></li>
-                                </ul>
+             <section class="container mt-4 p-0">
+                   <div class="row d-flex justify-content-around align-items-center">
+                            <hr class="w-100">
+                        <div class=" col-lg-8 col-md-8 mb-2 mt-3 d-flex">
+                            <ul class="d-flex list-unstyled p-0">
+                                <li><a class="text-body fw-bold" href="#!"> © 2024 Copyright:BoolBnb.com</a></li>
+                                <li><a class="text-body d-none d-md-flex" href="#">Privacy</a></li>
+                                <li><a class="text-body d-none d-md-flex" href="#">Termini</a></li>
+                                <li><a class="text-body d-none d-md-flex" href="#">Mappa del sito</a></li>
+                                <li><a class="text-body d-none d-md-flex" href="#">Dettagli del sito</a></li>
+                            </ul>
                         </div>
-                        <div class="col-lg-3 col-md-6 mb-12">
+                        <div class="col-lg-4 col-md-8 mb-2 d-flex justify-content-end">
                                 <a data-mdb-ripple-init class="btn btn-outline btn-floating m-1" href="#!" role="button"
                                 ><i class="fab fa-facebook-f"></i
                               ></a>
@@ -111,7 +111,7 @@
                                 ><i class="fab fa-github"></i
                               ></a>
                         </div>
-                  </div>
+                   </div>
               </section>
         </footer>
 </template>
@@ -124,7 +124,10 @@
 
 <style lang="scss" scoped>
 a{
-text-decoration: none;
+   text-decoration: none;
+}
+a:hover{
+    text-decoration: underline;
 }
 li{
     padding: 10px;
@@ -132,4 +135,5 @@ li{
 h6{
     padding: 10px;
 }
+
 </style>
