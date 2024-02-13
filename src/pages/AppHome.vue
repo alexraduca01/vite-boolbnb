@@ -1,5 +1,5 @@
 <template>
-    <AppHeader />
+    <AppHeader/>
     <div class="h-100 bg-rich-black">
         <div class="container py-3">
             <div class="row">
@@ -48,6 +48,7 @@ import AppHeader from '../components/AppHeader.vue'
             return {
                 store,
                 searchFlag: false,
+                userInput: '',
             }
         },
         methods:{
@@ -59,9 +60,9 @@ import AppHeader from '../components/AppHeader.vue'
             },
             postVisuals(apartmentSlug){
                 axios.post(store.viewsUrl + apartmentSlug + store.viewsEndPoint).then((res) => {
-                    console.log(res.data);
+                    // console.log(res.data);
                 })
-            }
+            },
         },
         created(){
             this.getApartments();
