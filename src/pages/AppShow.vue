@@ -1,5 +1,5 @@
 <template>
-    <div class="w-100 bg-prussian-blue">
+    <div class="w-100 bg-rich-black">
         <div class="container">
             <div class="row">
             <div class="col-sm-12 text-white">
@@ -19,11 +19,11 @@
                     <span><i class="fa-solid fa-bath"></i> Bathrooms: {{ apartment.bathrooms }}</span>
                 </div>
                 <h6>Services</h6>
-                <!-- <div v-for="service in apartment.service">
+                <div >
                     <ul>
-                        <li>{{ service }}</li>
+                        <li v-for="service in services">{{ service.name }}</li>
                     </ul>
-                </div> -->
+                </div>
                 <div>
                     <h4>Dove ti troverai</h4>
                     <div class="row">
@@ -94,6 +94,7 @@ import { store } from '../store.js';
             return {
                 store,
                 apartment: [],
+                services: [],
                 showMenu: false,
                 name: '',
                 surname: '',
@@ -110,6 +111,8 @@ import { store } from '../store.js';
                     this.apartment = res.data;
                     lat = this.apartment.lat
                     lon = this.apartment.lon
+                    this.services = this.apartment.services
+                    console.log(this.apartment);
                 })
                 const mapTime = setTimeout(()=>{
                     this.makeMap(lon, lat);
