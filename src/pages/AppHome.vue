@@ -1,6 +1,6 @@
 <template>
     <AppHeader/>
-    <div class="h-100 bg-rich-black">
+    <div class="h-100 bg-prussian-blue">
         <div class="container py-3">
             <div class="row">
                 <router-link v-for="item in store.apartments" @click="postVisuals(item.slug)" class="col-sm-6 col-md-4 col-lg-3 text-white mb-4 text-decoration-none" :to="{name: 'show', params: { slug: item.slug}}">
@@ -34,15 +34,18 @@
             </div>
         </div>
     </div>
+    <AppFooter/>
 </template>
 
 <script>
 import axios from 'axios';
 import { store } from '../store.js'
 import AppHeader from '../components/AppHeader.vue'
+import AppFooter from '../components/AppFooter.vue';
     export default {
         components: {
             AppHeader,
+            AppFooter
         },
         data(){
             return {
