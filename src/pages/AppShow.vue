@@ -11,17 +11,27 @@
             </div>
             </div>
         </div>
-            <div class="">
-                <img :src="store.imgBasePath + apartment.cover_img" alt="" class="w-100">
-            </div>
+        <main>
             <div class="container">
+                <div id="gallery" class=" photos-grid-container gallery">
+                <div class="main-photo  img-box h-100 w-100">
+                    <a href=" " :src="store.imgBasePath + apartment.cover_img " class="glightbox" data-glightbox="type: image"><img :src="store.imgBasePath + apartment.cover_img" alt="" class="h-100 w-100 "></a>
+                </div>
+                <div>
+                    <div class="sub">
+                    <div class="img-box" v-for="image in apartment.images"><a href=""><img :src="store.imgBasePath + image.url " alt=""></a></div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </main>            <div class="container">
             <div class="row">
             <div class="col-sm-12  text-white">
                 <div class="pt-3">
-                    <h2 class="text-uppercase">{{ apartment.title}}</h2>
+                    <h2 class="">{{ apartment.title}}</h2>
                 </div>
                 <div class="d-flex w-75 py-1">
-                    <div class="fs-3">
+                    <div class="fs-5">
                         <span class="verticalmiddle"> Host: <span class="fw-bold">{{ apartment.user?.name + ' ' + apartment.user?.surname }}</span></span>
                     </div>
                 </div>
@@ -183,6 +193,110 @@ import { store } from '../store.js';
     width: 100%;
     max-height: 100%;
 }
+
+.photos-grid-container {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-gap: 0;
+  align-items: start;
+
+  @media (max-width: 580px) {
+    grid-template-columns: 1fr;
+  }
+
+  .img-box {
+    position: relative;
+  }
+
+  .img-box:hover .transparent-box {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+
+  .img-box:hover .caption {
+    transform: translateY(-5px);
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+    height: auto;
+  }
+
+  .caption {
+    color: white;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    font-size: 1.5rem;
+  }
+
+  .transparent-box {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .main-photo {
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  .sub {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 0em;
+
+    &:nth-child(0) {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    &:nth-child(1) {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    &:nth-child(2) {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    &:nth-child(3) {
+      grid-column: 2;
+      grid-row: 2;
+    }
+  }
+}
+
+//https://www.nomensa.com/blog/how-improve-web-accessibility-hiding-elements
+.hide-element {
+  border: 0;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+@media screen and (min-width: 1280px) {
+  //HD Screens
+  .container {
+    margin: 0 auto;
+    width: 1250px;
+  }
+}
+
 
 .verticalmiddle {
     vertical-align: middle;
