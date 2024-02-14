@@ -14,7 +14,7 @@
                     <div class="input-group flex-nowrap">
                         <span style="transform: translate(27px, 6px); z-index: 1000;" id="addon-wrapping"><i
                                 class="fa-solid text-black fa-magnifying-glass"></i></span>
-                        <input type="text" @keyup.enter="searchApartments()" v-model="userInput"
+                        <input type="text" @keyup="searchApartments()" v-model="userInput"
                             class="form-control ps-5 rounded-pill" placeholder="Search" aria-label="Username"
                             aria-describedby="addon-wrapping">
                     </div>

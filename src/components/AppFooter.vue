@@ -106,6 +106,9 @@
 </script>
 
 <style lang="scss" scoped>
+footer {
+  height: 1200px;
+}
 a{
    text-decoration: none;
 }
@@ -119,4 +122,9 @@ h6{
     padding: 10px;
 }
 
+@media screen and (min-width: 575px) {
+  footer {
+    height: 500px;
+  }
+}
 </style>
