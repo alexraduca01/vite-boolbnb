@@ -34,16 +34,19 @@
             </div>
         </div>
     </div>
+    <AppFooter/>
 </template>
 
 <script>
 import axios from 'axios';
 import { store } from '../store.js'
 import AppHeader from '../components/AppHeader.vue'
+import AppFooter from '@/components/AppFooter.vue';
     export default {
         components: {
-            AppHeader,
-        },
+    AppHeader,
+    AppFooter
+},
         data(){
             return {
                 store,
