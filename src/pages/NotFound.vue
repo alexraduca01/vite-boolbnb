@@ -1,6 +1,6 @@
 <template>
 <section class="h-100 bg-gray">
-    <div class="container">
+    <div class="container" style="margin-top: 22vh;">
         <div class="row d-flex justify-content-center align-items-center">
             <div class="col-lg-4 col-md-4 mb-3">
                 <h2 class="mt-5 p-0 mb-5">Oops!</h2>
