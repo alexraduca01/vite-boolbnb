@@ -1,7 +1,7 @@
 <template>
     <div class="w-100 bg-prussian-blue">
         <div class="container">
-        <div class="row">
+            <div class="row">
             <div class="col-sm-12 text-white">
                 <div>
                     <img :src="store.imgBasePath + apartment.cover_img" alt="" class="w-100">
@@ -32,11 +32,39 @@
                         </div>
                     </div>
                 </div>
-                <div>
-                    <h4>Nome Host</h4>
-                    <span class="btn btn-primary bg-light text-dark">Contatta l'host</span>
+                <div class="d-flex justify-content-between py-4">
+                    <div>
+                        <h4 class=""> Host Name: <span class="text-danger">{{ apartment.user?.name + ' ' + apartment.user?.surname }}</span></h4>
+                    </div>
+                    <div>
+                        <span class="btn btn-primary bg-light text-dark">Contatta l'host</span>
+                    </div>
                 </div>
             </div>
+            <form @submit.prevent="submitForm()" class="text-white fs-3">
+            <div class="mb-3">
+                <label for="name" class="form-label fs-5">Name</label>
+                <input type="text" class="form-control" id="name" aria-describedby="nameHelp" v-model="name">
+            </div>
+            <div class="mb-3">
+                <label for="name" class="form-label fs-5">Surname</label>
+                <input type="text" class="form-control" id="surname" aria-describedby="nameHelp" v-model="surname">
+            </div>
+            <div class="mb-3">
+                <label for="name" class="form-label fs-5">Phone Number</label>
+                <input type="text" class="form-control" id="phonenumber" aria-describedby="nameHelp" v-model="phonenumber">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label fs-5">Email address</label>
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" v-model="email">
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label fs-5">Your Message</label>
+                <textarea type="text" class="form-control" id="message" aria-describedby="message" v-model="message"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn btn-info mx-3 bg-light">Reset</button>
+        </form>
         </div>
     </div>  
     </div>
