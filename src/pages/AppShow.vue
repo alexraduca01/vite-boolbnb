@@ -20,26 +20,29 @@
                 <div class="pt-3">
                     <h2 class="">{{ apartment.title}}</h2>
                 </div>
-                <div class="">
-                    <h6 class=""> Host Name: <span class="text-danger">{{ apartment.user?.name + ' ' + apartment.user?.surname }}</span></h6>
+                <div class="d-flex w-75 justify-content-between pt-3 align-items-center">
+                    <div>
+                        <img class="bg-black rounded-circle w-25" src="/public/images/logo.png" alt="">
+                    </div>
+                    <span class="d-flex"> Host Name: <span class="text-danger">{{ apartment.user?.name + ' ' + apartment.user?.surname }}</span></span>
                 </div>
-                <h5 class="">What you will find:</h5>
+                <h5 class="pt-4">What you will find:</h5>
                 <div class="d-flex flex-column">
-                    <span><i class="fa-solid fa-building"></i> Rooms: {{apartment.rooms}}</span>
-                    <span><i class="fa-solid fa-bed"></i> Bedrooms: {{ apartment.beds }}</span>
-                    <span><i class="fa-solid fa-bath"></i> Bathrooms: {{ apartment.bathrooms }}</span>
+                    <span class="fs-5"><i class="fa-solid fa-building"></i> Rooms: {{apartment.rooms}}</span>
+                    <span class="fs-5"><i class="fa-solid fa-bed"></i> Bedrooms: {{ apartment.beds }}</span>
+                    <span class="fs-5"><i class="fa-solid fa-bath"></i> Bathrooms: {{ apartment.bathrooms }}</span>
                 </div>
-                <h6>Services</h6>
+                <h5 class="pt-4">Services:</h5>
                 <div >
-                    <ul>
-                        <li v-for="service in services">{{ service.name }}</li>
+                    <ul class="list-unstyled d-flex flex-column align-content-center gap-1">
+                        <li v-for="service in services" class="fs-5"><i :class="service.icon" class=""></i> {{ service.name }}</li>
                     </ul>
                 </div>
                 <div>
-                    <h4>Dove ti troverai</h4>
+                    <h4>Location:</h4>
                     <div class="row">
                         <div class="col-sm-12 rounded-top">
-                            <div id="map" class="rounded-top"></div>
+                            <div id="map" class="rounded"></div>
                         </div>
                     </div>
                 </div>
