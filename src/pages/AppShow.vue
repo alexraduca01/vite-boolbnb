@@ -49,29 +49,28 @@
             <div class="offcanvas offcanvas-bottom" :class="showMenu ? 'show' : ''" tabindex="-1"
                 :style="{ visibility: showMenu ? 'visible' : 'hidden' }">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="">Offcanvas with backdrop</h5>
                     <button type="button" class="btn-close text-reset" @click.prevent="showOffcanvasMenu()"></button>
                 </div>
                 <div class="offcanvas-body">
                     <form @submit.prevent="submitForm()" class="text-white fs-3">
                         <div class="mb-3">
-                            <label for="name" class="form-label fs-5 text-black">Name</label>
+                            <label for="name" class="form-label fs-6 text-black">Name</label>
                             <input type="text" class="form-control" id="name" aria-describedby="nameHelp" v-model="name">
                         </div>
                         <div class="mb-3">
-                            <label for="name" class="form-label fs-5 text-black">Surname</label>
+                            <label for="name" class="form-label fs-6 text-black">Surname</label>
                             <input type="text" class="form-control" id="surname" aria-describedby="nameHelp" v-model="surname">
                         </div>
                         <div class="mb-3">
-                            <label for="name" class="form-label fs-5 text-black">Phone Number</label>
+                            <label for="name" class="form-label fs-6 text-black">Phone Number</label>
                             <input type="text" class="form-control" id="phonenumber" aria-describedby="nameHelp" v-model="phonenumber">
                         </div>
                         <div class="mb-3">
-                            <label for="email" class="form-label fs-5 text-black">Email address</label>
+                            <label for="email" class="form-label fs-6 text-black">Email address</label>
                             <input type="email" class="form-control" id="email" aria-describedby="emailHelp" v-model="email">
                         </div>
                         <div class="mb-3">
-                            <label for="message" class="form-label fs-5">Your Message</label>
+                            <label for="message" class="form-label fs-6 text-black">Your Message</label>
                             <textarea type="text" class="form-control" id="message" aria-describedby="message" v-model="message"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -143,5 +142,12 @@ import { store } from '../store.js';
     aspect-ratio: 21 / 9;
     width: 100%;
     max-height: 100%;
+}
+
+@media screen and (max-width: 575px) {
+    .offcanvas.offcanvas-bottom {
+        width: 100% !important;
+        height: 100% !important;
+    }
 }
 </style>
