@@ -36,35 +36,50 @@
                     <div>
                         <h4 class=""> Host Name: <span class="text-danger">{{ apartment.user?.name + ' ' + apartment.user?.surname }}</span></h4>
                     </div>
-                    <div>
-                        <span class="btn btn-primary bg-light text-dark">Contatta l'host</span>
-                    </div>
                 </div>
             </div>
-            <form @submit.prevent="submitForm()" class="text-white fs-3">
-            <div class="mb-3">
-                <label for="name" class="form-label fs-5">Name</label>
-                <input type="text" class="form-control" id="name" aria-describedby="nameHelp" v-model="name">
+            <div>
+            <div class="container">
+                <span class="float-start">
+                    <button class="btn btn-primary bg-light text-dark" type="button" @click.prevent="showOffcanvasMenu()">
+                        Contact Host
+                    </button>
+                </span>
             </div>
-            <div class="mb-3">
-                <label for="name" class="form-label fs-5">Surname</label>
-                <input type="text" class="form-control" id="surname" aria-describedby="nameHelp" v-model="surname">
+            <div class="offcanvas offcanvas-bottom" :class="showMenu ? 'show' : ''" tabindex="-1"
+                :style="{ visibility: showMenu ? 'visible' : 'hidden' }">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="">Offcanvas with backdrop</h5>
+                    <button type="button" class="btn-close text-reset" @click.prevent="showOffcanvasMenu()"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <form @submit.prevent="submitForm()" class="text-white fs-3">
+                        <div class="mb-3">
+                            <label for="name" class="form-label fs-5 text-black">Name</label>
+                            <input type="text" class="form-control" id="name" aria-describedby="nameHelp" v-model="name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label fs-5 text-black">Surname</label>
+                            <input type="text" class="form-control" id="surname" aria-describedby="nameHelp" v-model="surname">
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label fs-5 text-black">Phone Number</label>
+                            <input type="text" class="form-control" id="phonenumber" aria-describedby="nameHelp" v-model="phonenumber">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label fs-5 text-black">Email address</label>
+                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" v-model="email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label fs-5">Your Message</label>
+                            <textarea type="text" class="form-control" id="message" aria-describedby="message" v-model="message"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="reset" class="btn btn-info mx-3 bg-light">Reset</button>
+                    </form>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="name" class="form-label fs-5">Phone Number</label>
-                <input type="text" class="form-control" id="phonenumber" aria-describedby="nameHelp" v-model="phonenumber">
             </div>
-            <div class="mb-3">
-                <label for="email" class="form-label fs-5">Email address</label>
-                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" v-model="email">
-            </div>
-            <div class="mb-3">
-                <label for="message" class="form-label fs-5">Your Message</label>
-                <textarea type="text" class="form-control" id="message" aria-describedby="message" v-model="message"></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-            <button type="reset" class="btn btn-info mx-3 bg-light">Reset</button>
-        </form>
         </div>
     </div>  
     </div>
@@ -80,6 +95,7 @@ import { store } from '../store.js';
             return {
                 store,
                 apartment: [],
+                showMenu: false,
                 // lat: null,
                 // lon: null,
             }
@@ -110,6 +126,9 @@ import { store } from '../store.js';
                 })
                 const marker = new tt.Marker().setLngLat(center).addTo(map);
             }, 
+            showOffcanvasMenu(){
+            this.showMenu ? this.showMenu = false : this.showMenu = true;
+            }
         },
         mounted(){
             this.getApartments();
