@@ -7,4 +7,5 @@ export const store = reactive ({
     viewsUrl: 'http://localhost:8000/api/apartments/',
     viewsEndPoint: '/views',
     apartments: [],
+    center: [],
 })
