@@ -9,14 +9,14 @@
                 <div class="pt-3">
                     <h2 class="">{{ apartment.title}}</h2>
                 </div>
-                <div class="py-2">
+                <div class="">
                     <h6 class=""> Host Name: <span class="text-danger">{{ apartment.user?.name + ' ' + apartment.user?.surname }}</span></h6>
                 </div>
-                <h5 class="py-2">Cosa troverai:</h5>
-                <div>
-                    <p><i class="fa-solid fa-building"></i> Rooms: {{apartment.rooms}}</p>
-                    <p><i class="fa-solid fa-bed"></i> Bedrooms: {{ apartment.beds }}</p>
-                    <p><i class="fa-solid fa-bath"></i> Bathrooms: {{ apartment.bathrooms }}</p>
+                <h5 class="">What you will find:</h5>
+                <div class="d-flex flex-column">
+                    <span><i class="fa-solid fa-building"></i> Rooms: {{apartment.rooms}}</span>
+                    <span><i class="fa-solid fa-bed"></i> Bedrooms: {{ apartment.beds }}</span>
+                    <span><i class="fa-solid fa-bath"></i> Bathrooms: {{ apartment.bathrooms }}</span>
                 </div>
                 <h6>Services</h6>
                 <!-- <div v-for="service in apartment.service">
@@ -27,8 +27,8 @@
                 <div>
                     <h4>Dove ti troverai</h4>
                     <div class="row">
-                        <div class="col-sm-12">
-                            <div id="map"></div>
+                        <div class="col-sm-12 rounded-top">
+                            <div id="map" class="rounded-top"></div>
                         </div>
                     </div>
                 </div>
