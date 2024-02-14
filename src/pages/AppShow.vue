@@ -1,5 +1,5 @@
 <template>
-    <div class="w-100 bg-rich-black">
+    <div class="w-100 bg-prussian-blue">
         <div class="container">
             <div class="row">
             <div class="col-sm-12 text-white">
@@ -81,15 +81,20 @@
             </div>
         </div>
     </div>  
+    <AppFooter/>
     </div>
 </template>
 
 <script>
+import AppFooter from '../components/AppFooter.vue';
 import tt from '@tomtom-international/web-sdk-maps';
 import axios from 'axios';
 import { store } from '../store.js';
     export default {
         name: 'AppShow',
+        components: {
+            AppFooter
+        },
         data(){
             return {
                 store,
