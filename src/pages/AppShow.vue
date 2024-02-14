@@ -13,18 +13,28 @@
         </div>
         <main>
             <div class="container">
-                <div id="gallery" class=" photos-grid-container gallery">
-                <div class="main-photo  img-box h-100 w-100">
-                    <a href=" " :src="store.imgBasePath + apartment.cover_img " class="glightbox" data-glightbox="type: image"><img :src="store.imgBasePath + apartment.cover_img" alt="" class="h-100 w-100 "></a>
-                </div>
-                <div>
-                    <div class="sub">
-                    <div class="img-box" v-for="image in apartment.images"><a href=""><img :src="store.imgBasePath + image.url " alt=""></a></div>
+                <div id="gallery" class=" photos-grid-container gallery" >
+                    <div class="main-photo img-box h-100 w-100" @click="showimage()">
+                        <img :src="store.imgBasePath + apartment.cover_img" alt="" class="h-100 w-100">
+                    </div>
+                    <div>
+                        <div class="sub">
+                        <div class="img-box" v-for="image in apartment.images" @click="showimage()"><img :src="store.imgBasePath + image.url " alt=""></div>
+                        </div>
                     </div>
                 </div>
+                <div class="transparent-box">
+                <div class="caption">
+                  +3
                 </div>
+              </div>
             </div>
-        </main>            <div class="container">
+            <div class="info d-flex justify-content-center align-content-center align-items-center" v-if="appear" @click="closeimage()">
+                <img class="imgsize imgtransition" :src="store.imgBasePath + apartment.cover_img" alt="">
+                <!-- <img class="imgsize imgtransition" :src="store.imgBasePath + apartment.images.url" alt=""> -->
+            </div>
+        </main> 
+           <div class="container">
             <div class="row">
             <div class="col-sm-12  text-white">
                 <div class="pt-3">
@@ -64,6 +74,14 @@
                     </button>
                 </span>
             </div>
+            <div class="text-white my-5 d-flex flex-column align-content-center justify-content-center align-items-center">
+                <div py-2>
+                    <h1>Chi siamo</h1>
+                </div>
+                <div>
+                    <p class="fs-5 text-center">BoolBnb è stata fondata nel 2007, quando due host decisero di accogliere per la prima volta tre ospiti nella loro casa di San Francisco. Da allora, questa community è cresciuta e oggi conta oltre 4 milioni di host, che a loro volta hanno ospitato più di 1,5 miliardi di persone in quasi tutti i paesi del mondo. Ogni giorno, gli host offrono spazi unici ed Esperienze, che consentono a ospiti e partecipanti di interagire con le comunità locali in un modo più genuino</p>
+                </div>
+            </div>
             <div class="offcanvas offcanvas-bottom" :class="showMenu ? 'show' : ''" tabindex="-1"
                 :style="{ visibility: showMenu ? 'visible' : 'hidden' }">
                 <div class="offcanvas-header">
@@ -89,7 +107,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="message" class="form-label fs-6 text-black">Your Message</label>
-                            <textarea type="text" class="form-control" id="body" name="body" aria-describedby="body" v-model="message"></textarea>
+                            <textarea type="text" class="form-control" id="body" name="body" aria-describedby="body" v-model="body"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Send</button>
                         <button type="reset" class="btn btn-info mx-3 bg-light">Reset</button>
@@ -123,7 +141,8 @@ import { store } from '../store.js';
                 surname: '',
                 phone_number: '',
                 email: '',
-                body: ''
+                body: '',
+                appear: false
             }
         },
         methods:{
@@ -177,6 +196,17 @@ import { store } from '../store.js';
             },
             showOffcanvasMenu(){
             this.showMenu ? this.showMenu = false : this.showMenu = true;
+            },
+            showimage(){
+                if(!this.appear){
+                    this.appear = true;
+                    console.log(this.appear);
+                }
+            },
+            closeimage(){
+                if(this.appear){
+                    this.appear = false;
+                }
             }
         },
         mounted(){
@@ -301,6 +331,26 @@ import { store } from '../store.js';
 .verticalmiddle {
     vertical-align: middle;
     
+}
+
+.info {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 10000;
+    background-color: rgba(0, 0, 0, 0.6);
+    transition: background-color 0.3s ease;
+
+}
+
+.imgtransition{
+    transition: background-color 0.5s ease;
+}
+
+.imgsize{
+    width: 1180px;
 }
 
 @media screen and (max-width: 575px) {
