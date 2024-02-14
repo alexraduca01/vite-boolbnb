@@ -24,7 +24,7 @@
                 <div class="col-1">
                     <div class="container">
                         <span class="float-start">
-                            <span><i class="fa-solid fa-filter" @click.prevent="showOffcanvasMenu()"
+                            <span><i class="fa-solid fa-filter" @click.prevent="showOffcanvasMenu(), addOverflowHidden()"
                                     :disabled="filterDisabled"></i></span>
                         </span>
                     </div>
@@ -34,7 +34,7 @@
                         <div class="offcanvas-header">
                             <h5 class="offcanvas-title" id="">Filtri</h5>
                             <button type="button" class="btn-close text-reset"
-                                @click.prevent="showOffcanvasMenu()"></button>
+                                @click.prevent="showOffcanvasMenu(), removeOverflowHidden()"></button>
                         </div>
                         <div class="offcanvas-body">
                             <form action="">
@@ -58,15 +58,15 @@
                                 <div id="form-wrapper" class="mt-5">
                                     <h3 class="fw-bold">Kilometers</h3>
                                     <div id="kilometers-amount-slider">
-                                        <input type="radio" name="kilometers-amount" id="1" value="1" required>
+                                        <input type="radio" name="kilometers-amount" id="1" value="10" required>
                                         <label for="1" data-kilometers-amount="10km"></label>
-                                        <input type="radio" name="kilometers-amount" id="2" value="2" required>
-                                        <label for="2" data-kilometers-amount="20km"></label>
-                                        <input type="radio" name="kilometers-amount" id="3" value="3" required>
+                                        <input type="radio" name="kilometers-amount" id="2" value="20" required>
+                                        <label for="2" checked data-kilometers-amount="20km"></label>
+                                        <input type="radio" name="kilometers-amount" id="3" value="30" required>
                                         <label for="3" data-kilometers-amount="30km"></label>
-                                        <input type="radio" name="kilometers-amount" id="4" value="4" required>
+                                        <input type="radio" name="kilometers-amount" id="4" value="40" required>
                                         <label for="4" data-kilometers-amount="40km"></label>
-                                        <input type="radio" name="kilometers-amount" id="5" value="5" required>
+                                        <input type="radio" name="kilometers-amount" id="5" value="50" required>
                                         <label for="5" data-kilometers-amount="50km"></label>
                                         <div id="kilometers-amount-pos"></div>
                                     </div>
@@ -132,6 +132,12 @@ export default {
             this.filterOpen = true;
             this.showMenu ? this.showMenu = false : this.showMenu = true;
         },
+        addOverflowHidden() {
+            document.querySelector('body').classList.add('overflow-hidden');
+        },
+        removeOverflowHidden() {
+            document.querySelector('body').classList.remove('overflow-hidden');
+        }
     },
     created() {
         this.getServices();
@@ -355,6 +361,9 @@ form {
         opacity: 1;
         margin-right: 12px;
     }
+}
+.overflow-hidden {
+    overflow: hidden;
 }
 
 @media screen and (max-width: 575px) {
