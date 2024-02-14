@@ -1,9 +1,20 @@
 <template>
     <div class="w-100 bg-prussian-blue">
-        <div class="container">
+        <div class="bg-rich-black">
+            <div class="container">   
+            <div class="row bg-rich-black py-2">
+            <div class="col-sm-12">
+                <router-link to="/">
+                    <img src="/public/images/logo.png" alt="" style="width: 100px;">
+                </router-link>
+            </div>
+            </div>
+            </div>
+        </div>
+            <div class="container">
             <div class="row">
-            <div class="col-sm-12 text-white">
-                <div>
+            <div class="col-sm-12 p-0 text-white">
+                <div class="">
                     <img :src="store.imgBasePath + apartment.cover_img" alt="" class="w-100">
                 </div>
                 <div class="pt-3">
@@ -52,28 +63,28 @@
                     <button type="button" class="btn-close text-reset" @click.prevent="showOffcanvasMenu()"></button>
                 </div>
                 <div class="offcanvas-body">
-                    <form @submit.prevent="submitForm()" class="text-white fs-3">
+                    <form @submit.prevent="contactForm()" class="text-white fs-3">
                         <div class="mb-3">
                             <label for="name" class="form-label fs-6 text-black">Name</label>
-                            <input type="text" class="form-control" id="name" aria-describedby="nameHelp" v-model="name">
+                            <input type="text" class="form-control" id="name" name="name" aria-describedby="nameHelp" v-model="name">
                         </div>
                         <div class="mb-3">
                             <label for="name" class="form-label fs-6 text-black">Surname</label>
-                            <input type="text" class="form-control" id="surname" aria-describedby="nameHelp" v-model="surname">
+                            <input type="text" class="form-control" id="surname" name="surname" aria-describedby="nameHelp" v-model="surname">
                         </div>
                         <div class="mb-3">
                             <label for="name" class="form-label fs-6 text-black">Phone Number</label>
-                            <input type="text" class="form-control" id="phonenumber" aria-describedby="nameHelp" v-model="phonenumber">
+                            <input type="text" class="form-control" id="phone_number" name="phone_number" aria-describedby="nameHelp" v-model="phone_number">
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label fs-6 text-black">Email address</label>
-                            <input type="email" class="form-control" id="email" aria-describedby="emailHelp" v-model="email">
+                            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" v-model="email">
                         </div>
                         <div class="mb-3">
                             <label for="message" class="form-label fs-6 text-black">Your Message</label>
-                            <textarea type="text" class="form-control" id="message" aria-describedby="message" v-model="message"></textarea>
+                            <textarea type="text" class="form-control" id="body" name="body" aria-describedby="body" v-model="message"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="submit" class="btn btn-primary">Send</button>
                         <button type="reset" class="btn btn-info mx-3 bg-light">Reset</button>
                     </form>
                 </div>
@@ -103,9 +114,9 @@ import { store } from '../store.js';
                 showMenu: false,
                 name: '',
                 surname: '',
-                phonenumber: '',
+                phone_number: '',
                 email: '',
-                message: ''
+                body: ''
             }
         },
         methods:{
@@ -140,19 +151,19 @@ import { store } from '../store.js';
                 const formData = {
                     name: this.name,
                     surname: this.surname,
-                    phonenumber: this.phonenumber,
+                    phone_number: this.phonenumber,
                     email: this.email,
-                    message: this.message
+                    body: this.message
                 }
                 axios
-                .post(store.apiUrl + 'contacts', this.formData)
+                .post(`${this.store.apiUrl}apartments/${this.$route.params.slug}/message`, formData)
                 .then((res)=>{
                     console.log(res.data);
                     this.name = '';
                     this.surname = '';
-                    this.phonenumber = '';
+                    this.phone_number = '';
                     this.email = '';
-                    this.message = '';
+                    this.body = '';
                 }).catch((err)=>{
                     console.log(err);
                 })
