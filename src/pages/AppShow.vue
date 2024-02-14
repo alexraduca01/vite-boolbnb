@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div>
-            <div class="container">
+            <div>
                 <span class="float-start">
                     <button class="btn btn-primary bg-light text-dark" type="button" @click.prevent="showOffcanvasMenu()">
                         Contact Host
@@ -95,8 +95,11 @@ import { store } from '../store.js';
                 store,
                 apartment: [],
                 showMenu: false,
-                // lat: null,
-                // lon: null,
+                name: '',
+                surname: '',
+                phonenumber: '',
+                email: '',
+                message: ''
             }
         },
         methods:{
@@ -125,6 +128,27 @@ import { store } from '../store.js';
                 })
                 const marker = new tt.Marker().setLngLat(center).addTo(map);
             }, 
+            contactForm(){
+                const formData = {
+                    name: this.name,
+                    surname: this.surname,
+                    phonenumber: this.phonenumber,
+                    email: this.email,
+                    message: this.message
+                }
+                axios
+                .post(store.apiUrl + 'contacts', this.formData)
+                .then((res)=>{
+                    console.log(res.data);
+                    this.name = '';
+                    this.surname = '';
+                    this.phonenumber = '';
+                    this.email = '';
+                    this.message = '';
+                }).catch((err)=>{
+                    console.log(err);
+                })
+            },
             showOffcanvasMenu(){
             this.showMenu ? this.showMenu = false : this.showMenu = true;
             }
