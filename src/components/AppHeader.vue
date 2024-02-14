@@ -24,7 +24,7 @@
                 <div class="col-1">
                     <div class="container">
                         <span class="float-start">
-                            <span><i class="fa-solid fa-filter" @click.prevent="showOffcanvasMenu()"
+                            <span><i class="fa-solid fa-filter" @click.prevent="showOffcanvasMenu(), addOverflowHidden()"
                                     :disabled="filterDisabled"></i></span>
                         </span>
                     </div>
@@ -34,7 +34,7 @@
                         <div class="offcanvas-header">
                             <h5 class="offcanvas-title" id="">Filtri</h5>
                             <button type="button" class="btn-close text-reset"
-                                @click.prevent="showOffcanvasMenu()"></button>
+                                @click.prevent="showOffcanvasMenu(), removeOverflowHidden()"></button>
                         </div>
                         <div class="offcanvas-body">
                             <form action="">
@@ -58,15 +58,15 @@
                                 <div id="form-wrapper" class="mt-5">
                                     <h3 class="fw-bold">Kilometers</h3>
                                     <div id="kilometers-amount-slider">
-                                        <input type="radio" name="kilometers-amount" id="1" value="1" required>
+                                        <input type="radio" name="kilometers-amount" id="1" value="10" required>
                                         <label for="1" data-kilometers-amount="10km"></label>
-                                        <input type="radio" name="kilometers-amount" id="2" value="2" required>
-                                        <label for="2" data-kilometers-amount="20km"></label>
-                                        <input type="radio" name="kilometers-amount" id="3" value="3" required>
+                                        <input type="radio" name="kilometers-amount" id="2" value="20" required>
+                                        <label for="2" checked data-kilometers-amount="20km"></label>
+                                        <input type="radio" name="kilometers-amount" id="3" value="30" required>
                                         <label for="3" data-kilometers-amount="30km"></label>
-                                        <input type="radio" name="kilometers-amount" id="4" value="4" required>
+                                        <input type="radio" name="kilometers-amount" id="4" value="40" required>
                                         <label for="4" data-kilometers-amount="40km"></label>
-                                        <input type="radio" name="kilometers-amount" id="5" value="5" required>
+                                        <input type="radio" name="kilometers-amount" id="5" value="50" required>
                                         <label for="5" data-kilometers-amount="50km"></label>
                                         <div id="kilometers-amount-pos"></div>
                                     </div>
@@ -76,22 +76,15 @@
                                 <div>
                                     <h3 class="fw-bold mt-5">Services</h3>
                                     <ul class="list-unstyled">
-                                        <li>
-                                            <div class="checkbox-wrapper-65">
-                                                <label for="cbk1-65">
-                                                    <input type="checkbox" id="cbk1-65">
-                                                    <span class="cbx">
-                                                        <svg width="12px" height="11px" viewBox="0 0 12 11">
-                                                            <polyline points="1 6.29411765 4.5 10 11 1"></polyline>
-                                                        </svg>
-                                                    </span>
-                                                    <span>Kitchen</span>
-                                                </label>
+                                        <li class="text-capitalize" v-for="service in services">
+                                            <div class="form-check form-switch d-flex flex-row-reverse justify-content-between p-0">
+                                                <input class="form-check-input" type="checkbox" role="switch"
+                                                    id="flexSwitchCheckDefault">
+                                                <label class="form-check-label" for="flexSwitchCheckDefault"><i :class="service.icon" class="me-2"></i>{{ service.name }}</label>
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
-
                             </form>
                         </div>
                     </div>
@@ -115,6 +108,7 @@ export default {
         return {
             store,
             userInput: '',
+            services: [],
             showMenu: false,
             filterDisabled: false,
             filterOpen: false
@@ -127,12 +121,27 @@ export default {
                 store.apartments = res.data;
             })
         },
+        getServices() {
+            axios.get(store.apiUrl + 'services').then((res) => {
+                this.services = res.data;
+                console.log(this.services);
+            })
+        },
         showOffcanvasMenu() {
             this.filterDisabled = true;
             this.filterOpen = true;
             this.showMenu ? this.showMenu = false : this.showMenu = true;
         },
+        addOverflowHidden() {
+            document.querySelector('body').classList.add('overflow-hidden');
+        },
+        removeOverflowHidden() {
+            document.querySelector('body').classList.remove('overflow-hidden');
+        }
     },
+    created() {
+        this.getServices();
+    }
 }
 </script>
 
@@ -353,59 +362,9 @@ form {
         margin-right: 12px;
     }
 }
-.checkbox-wrapper-65 *,
-  .checkbox-wrapper-65 ::after,
-  .checkbox-wrapper-65 ::before {
-    box-sizing: border-box;
-  }
-  .checkbox-wrapper-65 .cbx {
-    position: relative;
-    display: block;
-    float: left;
-    width: 18px;
-    height: 18px;
-    border-radius: 4px;
-    background-color: #606062;
-    background-image: linear-gradient(#474749, #606062);
-    box-shadow: inset 0 1px 1px rgba(255,255,255,0.15), inset 0 -1px 1px rgba(0,0,0,0.15);
-    transition: all 0.15s ease;
-  }
-  .checkbox-wrapper-65 .cbx svg {
-    position: absolute;
-    top: 3px;
-    left: 3px;
-    fill: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke: #fff;
-    stroke-width: 2;
-    stroke-dasharray: 17;
-    stroke-dashoffset: 17;
-    transform: translate3d(0, 0, 0);
-  }
-  .checkbox-wrapper-65 .cbx + span {
-    float: left;
-    margin-left: 6px;
-  }
-  .checkbox-wrapper-65 {
-    user-select: none;
-  }
-  .checkbox-wrapper-65 label {
-    display: inline-block;
-    cursor: pointer;
-  }
-  .checkbox-wrapper-65 input[type="checkbox"] {
-    display: none;
-    visibility: hidden;
-  }
-  .checkbox-wrapper-65 input[type="checkbox"]:checked + .cbx {
-    background-color: #606062;
-    background-image: linear-gradient(#255cd2, #1d52c1);
-  }
-  .checkbox-wrapper-65 input[type="checkbox"]:checked + .cbx svg {
-    stroke-dashoffset: 0;
-    transition: all 0.15s ease;
-  }
+.overflow-hidden {
+    overflow: hidden;
+}
 
 @media screen and (max-width: 575px) {
     .offcanvas.offcanvas-end {
