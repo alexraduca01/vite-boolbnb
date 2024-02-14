@@ -68,6 +68,7 @@ import AppFooter from '../components/AppFooter.vue';
                     // console.log(res.data);
                 })
             },
+            
         },
         created(){
             this.getApartments();

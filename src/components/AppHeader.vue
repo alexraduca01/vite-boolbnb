@@ -11,12 +11,14 @@
 
                 <!-- Search Bar  -->
                 <div class="col-7">
-                    <div class="input-group flex-nowrap">
-                        <span style="transform: translate(27px, 6px); z-index: 1000;" id="addon-wrapping"><i
-                                class="fa-solid text-black fa-magnifying-glass"></i></span>
-                        <input type="text" @keyup="searchApartments()" v-model="userInput"
-                            class="form-control ps-5 rounded-pill" placeholder="Search" aria-label="Username"
-                            aria-describedby="addon-wrapping">
+                    <div class="input-group w-100 flex-nowrap">
+                        <span style="transform: translate(27px, 6px); z-index: 1000;" id="addon-wrapping"><i class="fa-solid text-black fa-magnifying-glass"></i></span>
+                        <form class="my-form" autocomplete="off">
+                            <input type="text" @input="autocomplete()" @keyup.enter="searchApartments()" list="addressList" v-model="userInput" class="form-control w-100 ps-5 rounded-pill" placeholder="Search" aria-label="Username" aria-describedby="addon-wrapping">
+                            <datalist id="addressList">
+                                <option v-for="result in addressResults" :value="result.address">{{ result.address }}</option>
+                            </datalist>
+                        </form>
                     </div>
                 </div>
 
@@ -58,15 +60,15 @@
                                 <div id="form-wrapper" class="mt-5">
                                     <h3 class="fw-bold">Kilometers</h3>
                                     <div id="kilometers-amount-slider">
-                                        <input type="radio" name="kilometers-amount" id="1" value="10" required>
+                                        <input type="radio" name="kilometers-amount" id="1" value="10">
                                         <label for="1" data-kilometers-amount="10km"></label>
-                                        <input type="radio" name="kilometers-amount" id="2" value="20" required>
+                                        <input type="radio" name="kilometers-amount" id="2" value="20" checked>
                                         <label for="2" checked data-kilometers-amount="20km"></label>
-                                        <input type="radio" name="kilometers-amount" id="3" value="30" required>
+                                        <input type="radio" name="kilometers-amount" id="3" value="30">
                                         <label for="3" data-kilometers-amount="30km"></label>
-                                        <input type="radio" name="kilometers-amount" id="4" value="40" required>
+                                        <input type="radio" name="kilometers-amount" id="4" value="40">
                                         <label for="4" data-kilometers-amount="40km"></label>
-                                        <input type="radio" name="kilometers-amount" id="5" value="50" required>
+                                        <input type="radio" name="kilometers-amount" id="5" value="50">
                                         <label for="5" data-kilometers-amount="50km"></label>
                                         <div id="kilometers-amount-pos"></div>
                                     </div>
@@ -108,6 +110,7 @@ export default {
         return {
             store,
             userInput: '',
+            addressResults: [],
             services: [],
             showMenu: false,
             filterDisabled: false,
@@ -137,6 +140,16 @@ export default {
         },
         removeOverflowHidden() {
             document.querySelector('body').classList.remove('overflow-hidden');
+        },
+        autocomplete(){
+            if (this.userInput.length > 0) {
+                axios.get(store.searchUrl + this.userInput )
+                .then(response => {
+                    console.log(response.data);
+                    this.addressResults = response.data;
+                })
+                .catch(error => console.error('Si è verificato un errore durante il recupero dei dati:', error));
+            }
         }
     },
     created() {
@@ -149,6 +162,10 @@ export default {
 @use '../assets/style/main.scss' as *;
 
 $number-of-options: 5;
+
+.my-form {
+    max-width: none!important;
+}
 
 #form-wrapper {
     width: 100%;
