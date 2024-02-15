@@ -10,20 +10,20 @@
                 </div>
 
                 <!-- Search Bar  -->
-                <form class="my-form col-8 d-flex justify-content-between gap-5" autocomplete="off">
+                <form class="my-form col-8 d-flex justify-content-between gap-5" @submit.prevent autocomplete="off">
 
                     <div class="input-group flex-nowrap ms-0">
                         <span style="transform: translate(27px, 6px); z-index: 1000;" id="addon-wrapping"><i
                                 class="fa-solid text-black fa-magnifying-glass"></i></span>
 
-                        <input type="text" @input="autocomplete()" @keyup.enter="searchApartments()" list="addressList"
+                        <input type="text" @input="autocomplete()" @keyup.enter.prevent="searchApartments()" list="addressList"
                             v-model="userInput" class="form-control ps-5 rounded-pill" placeholder="Search"
                             aria-label="Username" aria-describedby="addon-wrapping">
                         <datalist id="addressList">
-                            <option v-for="result in addressResults" :value="result.address">{{ result.address }}
+                            <option v-for="result in addressResults" :value="result.address">
+                                {{ result.address }}
                             </option>
                         </datalist>
-
                     </div>
 
 
@@ -41,7 +41,7 @@
                         <div class="offcanvas-header">
                             <h5 class="offcanvas-title" id="">Filtri</h5>
                             <button type="button" class="btn-close text-reset"
-                                @click.prevent="showOffcanvasMenu(), removeOverflowHidden()"></button>
+                                @click.prevent="showOffcanvasMenu(), addOverflowHidden()"></button>
                         </div>
                         <div class="offcanvas-body">
 
@@ -153,9 +153,6 @@ export default {
                 this.overflow = false;
             }
             
-        },
-        removeOverflowHidden() {
-            document.querySelector('body').classList.remove('overflow-hidden');
         },
         autocomplete() {
             if (this.userInput.length > 0) {
