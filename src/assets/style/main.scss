@@ -9,6 +9,10 @@ $fa-font-path: '../webfonts';
 
 @import 'bootstrap/scss/bootstrap';
 
+body {
+    font-family: "Raleway", sans-serif;
+}
+
 .text-rich-black {
     color: var(--rich-black);
 }

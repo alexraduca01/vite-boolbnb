@@ -182,7 +182,7 @@ import { store } from '../store.js';
                 const formData = {
                     name: this.name,
                     surname: this.surname,
-                    phone_number: this.phonenumber,
+                    phone_number: this.phone_number,
                     email: this.email,
                     body: this.message
                 }
