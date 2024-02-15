@@ -33,6 +33,11 @@
                 <img class="imgsize imgtransition" :src="store.imgBasePath + apartment.cover_img" alt="">
                 <!-- <img class="imgsize imgtransition" :src="store.imgBasePath + apartment.images.url" alt=""> -->
             </div>
+            <!-- <div v-for="image in apartment.images">
+                <div class="info d-flex justify-content-center align-content-center align-items-center" v-if="appear" @click="closeimage()">
+                    <img class="imgsize imgtransition" :src="store.imgBasePath + image.url" alt="">
+                </div>
+            </div> -->
         </main> 
            <div class="container">
             <div class="row">
