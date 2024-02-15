@@ -1,5 +1,5 @@
 <template>
-    <div class="w-100 bg-prussian-blue">
+    <div class="w-100 bg-prussian-blue showcontainer">
         <div class="bg-rich-black">
             <div class="container">   
             <div class="row bg-rich-black py-2">
@@ -38,6 +38,15 @@
                     <img class="imgsize imgtransition" :src="store.imgBasePath + image.url" alt="">
                 </div>
             </div> -->
+
+
+            <!-- Swiper images -->
+            <swiper :navigation="true" :modules="modules" class="mySwiper">
+                <swiper-slide class="img-box"><img :src="store.imgBasePath + apartment.cover_img" alt="" class="h-100 w-100"></swiper-slide>
+                <swiper-slide class="img-box" v-for="image in apartment.images"><img :src="store.imgBasePath + image.url " alt=""></swiper-slide>
+            </swiper>
+
+
         </main> 
            <div class="container">
             <div class="row">
@@ -129,12 +138,18 @@
 <script>
 import AppFooter from '../components/AppFooter.vue';
 import tt from '@tomtom-international/web-sdk-maps';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { Navigation } from 'swiper/modules';
 import axios from 'axios';
 import { store } from '../store.js';
     export default {
         name: 'AppShow',
         components: {
-            AppFooter
+            AppFooter,
+            Swiper,
+            SwiperSlide,
         },
         data(){
             return {
@@ -147,7 +162,8 @@ import { store } from '../store.js';
                 phone_number: '',
                 email: '',
                 body: '',
-                appear: false
+                appear: false,
+                modules: [Navigation],
             }
         },
         methods:{
@@ -311,6 +327,10 @@ import { store } from '../store.js';
   }
 }
 
+.showcontainer{
+    padding-bottom: 90px;
+}
+
 //https://www.nomensa.com/blog/how-improve-web-accessibility-hiding-elements
 .hide-element {
   border: 0;
@@ -332,6 +352,12 @@ import { store } from '../store.js';
   }
 }
 
+@media screen and (min-width: 576px) {
+    .showcontainer{
+        padding-bottom: 500px;
+        min-height: 100vh;
+    }
+}
 
 .verticalmiddle {
     vertical-align: middle;
@@ -349,6 +375,31 @@ import { store } from '../store.js';
     transition: background-color 0.3s ease;
 
 }
+
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 
 .imgtransition{
     transition: background-color 0.5s ease;
