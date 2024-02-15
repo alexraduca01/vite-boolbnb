@@ -10,22 +10,29 @@
                 </div>
 
                 <!-- Search Bar  -->
-                <div class="col-7">
-                    <div class="input-group flex-nowrap">
+                <form class="my-form col-8 d-flex justify-content-between gap-5" @submit.prevent autocomplete="off">
+
+                    <div class="input-group flex-nowrap ms-0">
                         <span style="transform: translate(27px, 6px); z-index: 1000;" id="addon-wrapping"><i
                                 class="fa-solid text-black fa-magnifying-glass"></i></span>
-                        <input type="text" @keyup="searchApartments()" v-model="userInput"
-                            class="form-control ps-5 rounded-pill" placeholder="Search" aria-label="Username"
-                            aria-describedby="addon-wrapping">
-                    </div>
-                </div>
 
-                <!-- Filter -->
-                <div class="col-1">
-                    <div class="container">
-                        <span class="float-start">
+                        <input type="text" @input="autocomplete()" @keyup.enter.prevent="searchApartments()" list="addressList"
+                            v-model="userInput" class="form-control ps-5 rounded-pill" placeholder="Search"
+                            aria-label="Username" aria-describedby="addon-wrapping">
+                        <datalist id="addressList">
+                            <option v-for="result in addressResults" :value="result.address">
+                                {{ result.address }}
+                            </option>
+                        </datalist>
+                    </div>
+
+
+                    <!-- Filter -->
+
+                    <div>
+                        <span>
                             <span><i class="fa-solid fa-filter" @click.prevent="showOffcanvasMenu(), addOverflowHidden()"
-                                    :disabled="filterDisabled"></i></span>
+                                    :disabled="filterDisabled" style="transform: translateY(8px);"></i></span>
                         </span>
                     </div>
                     <div v-if="filterOpen && filterDisabled && showMenu" class="offcanvas offcanvas-end"
@@ -34,61 +41,64 @@
                         <div class="offcanvas-header">
                             <h5 class="offcanvas-title" id="">Filtri</h5>
                             <button type="button" class="btn-close text-reset"
-                                @click.prevent="showOffcanvasMenu(), removeOverflowHidden()"></button>
+                                @click.prevent="showOffcanvasMenu(), addOverflowHidden()"></button>
                         </div>
                         <div class="offcanvas-body">
-                            <form action="">
-                                <!-- Stanze -->
-                                <div class="d-flex gap-4">
-                                    <div>
-                                        <h3 class="fw-bold">Rooms</h3>
-                                        <select name="rooms" id=""></select>
-                                    </div>
-                                    <div>
-                                        <h3 class="fw-bold">Beds</h3>
-                                        <select name="rooms" id=""></select>
-                                    </div>
-                                    <div>
-                                        <h3 class="fw-bold">Bathrooms</h3>
-                                        <select name="rooms" id=""></select>
-                                    </div>
-                                </div>
 
-                                <!-- Chilometri -->
-                                <div id="form-wrapper" class="mt-5">
-                                    <h3 class="fw-bold">Kilometers</h3>
-                                    <div id="kilometers-amount-slider">
-                                        <input type="radio" name="kilometers-amount" id="1" value="10" required>
-                                        <label for="1" data-kilometers-amount="10km"></label>
-                                        <input type="radio" name="kilometers-amount" id="2" value="20" required>
-                                        <label for="2" checked data-kilometers-amount="20km"></label>
-                                        <input type="radio" name="kilometers-amount" id="3" value="30" required>
-                                        <label for="3" data-kilometers-amount="30km"></label>
-                                        <input type="radio" name="kilometers-amount" id="4" value="40" required>
-                                        <label for="4" data-kilometers-amount="40km"></label>
-                                        <input type="radio" name="kilometers-amount" id="5" value="50" required>
-                                        <label for="5" data-kilometers-amount="50km"></label>
-                                        <div id="kilometers-amount-pos"></div>
-                                    </div>
-                                </div>
-
-                                <!-- Servizi -->
+                            <!-- Stanze -->
+                            <div class="d-flex gap-4">
                                 <div>
-                                    <h3 class="fw-bold mt-5">Services</h3>
-                                    <ul class="list-unstyled">
-                                        <li class="text-capitalize" v-for="service in services">
-                                            <div class="form-check form-switch d-flex flex-row-reverse justify-content-between p-0">
-                                                <input class="form-check-input" type="checkbox" role="switch"
-                                                    id="flexSwitchCheckDefault">
-                                                <label class="form-check-label" for="flexSwitchCheckDefault"><i :class="service.icon" class="me-2"></i>{{ service.name }}</label>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                    <h3 class="fw-bold">Rooms</h3>
+                                    <select name="rooms" id=""></select>
                                 </div>
-                            </form>
+                                <div>
+                                    <h3 class="fw-bold">Beds</h3>
+                                    <select name="rooms" id=""></select>
+                                </div>
+                                <div>
+                                    <h3 class="fw-bold">Bathrooms</h3>
+                                    <select name="rooms" id=""></select>
+                                </div>
+                            </div>
+
+                            <!-- Chilometri -->
+                            <div id="form-wrapper" class="mt-5">
+                                <h3 class="fw-bold">Kilometers</h3>
+                                <div id="kilometers-amount-slider">
+                                    <input type="radio" name="kilometers-amount" id="1" value="10">
+                                    <label for="1" data-kilometers-amount="10km"></label>
+                                    <input type="radio" name="kilometers-amount" id="2" value="20" checked>
+                                    <label for="2" checked data-kilometers-amount="20km"></label>
+                                    <input type="radio" name="kilometers-amount" id="3" value="30">
+                                    <label for="3" data-kilometers-amount="30km"></label>
+                                    <input type="radio" name="kilometers-amount" id="4" value="40">
+                                    <label for="4" data-kilometers-amount="40km"></label>
+                                    <input type="radio" name="kilometers-amount" id="5" value="50">
+                                    <label for="5" data-kilometers-amount="50km"></label>
+                                    <div id="kilometers-amount-pos"></div>
+                                </div>
+                            </div>
+
+                            <!-- Servizi -->
+                            <div>
+                                <h3 class="fw-bold mt-5">Services</h3>
+                                <ul class="list-unstyled">
+                                    <li class="text-capitalize" v-for="service in services">
+                                        <div
+                                            class="form-check form-switch d-flex flex-row-reverse justify-content-between p-0">
+                                            <input class="form-check-input" type="checkbox" role="switch"
+                                                id="flexSwitchCheckDefault">
+                                            <label class="form-check-label" for="flexSwitchCheckDefault"><i
+                                                    :class="service.icon" class="me-2"></i>{{ service.name }}</label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
                         </div>
                     </div>
-                </div>
+
+                </form>
 
                 <!-- Login -->
                 <div class="col-2">
@@ -108,10 +118,12 @@ export default {
         return {
             store,
             userInput: '',
+            addressResults: [],
             services: [],
             showMenu: false,
             filterDisabled: false,
-            filterOpen: false
+            filterOpen: false,
+            overflow: false,
         }
     },
     methods: {
@@ -133,10 +145,24 @@ export default {
             this.showMenu ? this.showMenu = false : this.showMenu = true;
         },
         addOverflowHidden() {
-            document.querySelector('body').classList.add('overflow-hidden');
+            if(this.overflow == false){
+                document.querySelector('body').classList.add('overflow-hidden');
+                this.overflow = true;
+            } else {
+                document.querySelector('body').classList.remove('overflow-hidden');
+                this.overflow = false;
+            }
+            
         },
-        removeOverflowHidden() {
-            document.querySelector('body').classList.remove('overflow-hidden');
+        autocomplete() {
+            if (this.userInput.length > 0) {
+                axios.get(store.searchUrl + this.userInput)
+                    .then(response => {
+                        console.log(response.data);
+                        this.addressResults = response.data;
+                    })
+                    .catch(error => console.error('Si è verificato un errore durante il recupero dei dati:', error));
+            }
         }
     },
     created() {
@@ -149,6 +175,10 @@ export default {
 @use '../assets/style/main.scss' as *;
 
 $number-of-options: 5;
+
+.my-form {
+    max-width: none;
+}
 
 #form-wrapper {
     width: 100%;
@@ -362,6 +392,7 @@ form {
         margin-right: 12px;
     }
 }
+
 .overflow-hidden {
     overflow: hidden;
 }

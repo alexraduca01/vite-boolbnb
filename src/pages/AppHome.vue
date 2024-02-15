@@ -14,7 +14,7 @@
                                     <h5 class="m-0">{{ item.title }}</h5>
                                     <span style="font-size: 0.7rem;">{{ item.address }}</span>
                                 </div>
-                                <h6>Offerta da: {{ item.user.name }}</h6>
+                                <h6>Offered by: {{ item.user.name }}</h6>
                                 <div class="d-flex flex-column gap-1">
                                     <div class="d-flex gap-2">
                                         <i class="fa-solid fa-couch"></i>
@@ -68,6 +68,7 @@ import AppFooter from '../components/AppFooter.vue';
                     // console.log(res.data);
                 })
             },
+            
         },
         created(){
             this.getApartments();
