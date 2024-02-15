@@ -352,15 +352,19 @@ import { store } from '../store.js';
         padding-bottom: 500px;
         min-height: 100vh;
     };
-    #myswiper{
+}
+
+@media screen and (max-width: 767px) {
+    #gallery{
         display: none;
     }
 }
 
-@media screen and (max-width: 575px) {
-    #gallery{
+@media screen and (min-width: 768px) {
+    #myswiper{
         display: none;
     }
+    
 }
 
 .verticalmiddle {
