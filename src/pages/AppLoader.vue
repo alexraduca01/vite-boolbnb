@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <img src="/public/images/home-gif.gif" alt="loader-logo">
+    <div class="container d-flex flex-column p-0">
+        <img  src="/public/images/house-gif.gif" alt="loader-logo">
     </div>
 </template>
 
@@ -23,6 +23,7 @@ div {
     align-items: center;
 }
 img{
-    width: 500px;
+   width: 400px;
 }
+
 </style>
