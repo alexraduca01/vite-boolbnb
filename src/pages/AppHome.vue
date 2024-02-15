@@ -3,7 +3,10 @@
         <AppHeader/>
         <div class="h-100 bg-prussian-blue home-container">
             <div class="container py-3">
-                <div class="row">
+                <div v-if="store.apartments.length == 0">
+                    <h1 class="text-white">No results</h1>
+                </div>
+                <div class="row" v-else>
                     <router-link v-for="item in store.apartments" @click="postVisuals(item.slug)" class="col-sm-6 col-md-4 col-lg-3 text-white mb-4 text-decoration-none" :to="{name: 'show', params: { slug: item.slug}}">
                         <div v-if="!searchFlag">
                             <div>
@@ -14,7 +17,7 @@
                                     <h5 class="m-0">{{ item.title }}</h5>
                                     <span style="font-size: 0.7rem;">{{ item.address }}</span>
                                 </div>
-                                <h6>Offerta da: {{ item.user.name }}</h6>
+                                <h6>Offered by: {{ item.user.name }}</h6>
                                 <div class="d-flex flex-column gap-1">
                                     <div class="d-flex gap-2">
                                         <i class="fa-solid fa-couch"></i>
@@ -68,6 +71,7 @@ import AppFooter from '../components/AppFooter.vue';
                     // console.log(res.data);
                 })
             },
+            
         },
         created(){
             this.getApartments();
@@ -88,9 +92,15 @@ import AppFooter from '../components/AppFooter.vue';
     border-radius: 15px;
 }
 
-@media screen and (min-width: 576px){
+@media screen and (min-width: 768px){
     .home-container{
-        padding-bottom: 500px;
+        padding-bottom: 920px;
+    }
+}
+
+@media screen and (min-width: 992px){
+    .home-container{
+        padding-bottom: 520px;
         min-height: 100vh;
     }
 }

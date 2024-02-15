@@ -11,51 +11,81 @@
             </div>
             </div>
         </div>
+        <main>
             <div class="container">
-            <div class="row">
-            <div class="col-sm-12 p-0 text-white">
-                <div class="">
-                    <img :src="store.imgBasePath + apartment.cover_img" alt="" class="w-100">
-                </div>
-                <div class="pt-3">
-                    <h2 class="">{{ apartment.title}}</h2>
-                </div>
-                <div class="">
-                    <h6 class=""> Host Name: <span class="text-danger">{{ apartment.user?.name + ' ' + apartment.user?.surname }}</span></h6>
-                </div>
-                <h5 class="">What you will find:</h5>
-                <div class="d-flex flex-column">
-                    <span><i class="fa-solid fa-building"></i> Rooms: {{apartment.rooms}}</span>
-                    <span><i class="fa-solid fa-bed"></i> Bedrooms: {{ apartment.beds }}</span>
-                    <span><i class="fa-solid fa-bath"></i> Bathrooms: {{ apartment.bathrooms }}</span>
-                </div>
-                <h6>Services</h6>
-                <div >
-                    <ul>
-                        <li v-for="service in services">{{ service.name }}</li>
-                    </ul>
-                </div>
-                <div>
-                    <h4>Dove ti troverai</h4>
-                    <div class="row">
-                        <div class="col-sm-12 rounded-top">
-                            <div id="map" class="rounded-top"></div>
+                <div id="gallery" class=" photos-grid-container gallery" >
+                    <div class="main-photo img-box h-100 w-100" @click="showimage()">
+                        <img :src="store.imgBasePath + apartment.cover_img" alt="" class="h-100 w-100">
+                    </div>
+                    <div>
+                        <div class="sub">
+                        <div class="img-box" v-for="image in apartment.images" @click="showimage()"><img :src="store.imgBasePath + image.url " alt=""></div>
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-between py-4">
-                    <div>
-                        <h4 class=""> Host Name: <span class="text-danger">{{ apartment.user?.name + ' ' + apartment.user?.surname }}</span></h4>
+                <div class="transparent-box">
+                <div class="caption">
+                  +3
+                </div>
+              </div>
+            </div>
+            <div class="info d-flex justify-content-center align-content-center align-items-center" v-if="appear" @click="closeimage()">
+                <img class="imgsize imgtransition" :src="store.imgBasePath + apartment.cover_img" alt="">
+                <!-- <img class="imgsize imgtransition" :src="store.imgBasePath + apartment.images.url" alt=""> -->
+            </div>
+            <!-- <div v-for="image in apartment.images">
+                <div class="info d-flex justify-content-center align-content-center align-items-center" v-if="appear" @click="closeimage()">
+                    <img class="imgsize imgtransition" :src="store.imgBasePath + image.url" alt="">
+                </div>
+            </div> -->
+        </main> 
+           <div class="container">
+            <div class="row">
+            <div class="col-sm-12  text-white">
+                <div class="pt-3">
+                    <h2 class="">{{ apartment.title}}</h2>
+                </div>
+                <div class="d-flex w-75 py-1">
+                    <div class="fs-5">
+                        <span class="verticalmiddle"> Host: <span class="fw-bold">{{ apartment.user?.name + ' ' + apartment.user?.surname }}</span></span>
+                    </div>
+                </div>
+                <h3 class="pt-4">What you will find:</h3>
+                <div class="d-flex gap-4">
+                    <span class="fs-5 py-1"><i class="fa-solid fa-building"></i> Rooms: {{apartment.rooms}}</span>
+                    <span class="fs-5 py-1"><i class="fa-solid fa-bed fs-6"></i> Bedrooms: {{ apartment.beds }}</span>
+                    <span class="fs-5 py-1"><i class="fa-solid fa-bath"></i> Bathrooms: {{ apartment.bathrooms }}</span>
+                </div>
+                <h3 class="pt-4">Services:</h3>
+                <div >
+                    <ul class="list-unstyled d-flex flex-column align-content-center">
+                        <li v-for="service in services" class="py-1 fs-5 text-capitalize"><i :class="service.icon" class="pe-3"></i> {{ service.name }}</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="py-2 text-uppercase">Location:</h3>
+                    <div class="row">
+                        <div class="col-sm-12 rounded-top">
+                            <div id="map" class="rounded"></div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div>
-            <div>
-                <span class="float-start">
+            <div class="py-4 ">
+                <span class="mb-4 float-start">
                     <button class="btn btn-primary bg-light text-dark" type="button" @click.prevent="showOffcanvasMenu()">
                         Contact Host
                     </button>
                 </span>
+            </div>
+            <div class="text-white my-5 d-flex flex-column align-content-center justify-content-center align-items-center">
+                <div py-2>
+                    <h1>Chi siamo</h1>
+                </div>
+                <div>
+                    <p class="fs-5 text-center">BoolBnb è stata fondata nel 2007, quando due host decisero di accogliere per la prima volta tre ospiti nella loro casa di San Francisco. Da allora, questa community è cresciuta e oggi conta oltre 4 milioni di host, che a loro volta hanno ospitato più di 1,5 miliardi di persone in quasi tutti i paesi del mondo. Ogni giorno, gli host offrono spazi unici ed Esperienze, che consentono a ospiti e partecipanti di interagire con le comunità locali in un modo più genuino</p>
+                </div>
             </div>
             <div class="offcanvas offcanvas-bottom" :class="showMenu ? 'show' : ''" tabindex="-1"
                 :style="{ visibility: showMenu ? 'visible' : 'hidden' }">
@@ -82,7 +112,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="message" class="form-label fs-6 text-black">Your Message</label>
-                            <textarea type="text" class="form-control" id="body" name="body" aria-describedby="body" v-model="message"></textarea>
+                            <textarea type="text" class="form-control" id="body" name="body" aria-describedby="body" v-model="body"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Send</button>
                         <button type="reset" class="btn btn-info mx-3 bg-light">Reset</button>
@@ -116,7 +146,8 @@ import { store } from '../store.js';
                 surname: '',
                 phone_number: '',
                 email: '',
-                body: ''
+                body: '',
+                appear: false
             }
         },
         methods:{
@@ -170,6 +201,17 @@ import { store } from '../store.js';
             },
             showOffcanvasMenu(){
             this.showMenu ? this.showMenu = false : this.showMenu = true;
+            },
+            showimage(){
+                if(!this.appear){
+                    this.appear = true;
+                    console.log(this.appear);
+                }
+            },
+            closeimage(){
+                if(this.appear){
+                    this.appear = false;
+                }
             }
         },
         mounted(){
@@ -185,6 +227,135 @@ import { store } from '../store.js';
     aspect-ratio: 21 / 9;
     width: 100%;
     max-height: 100%;
+}
+
+.photos-grid-container {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-gap: 0;
+  align-items: start;
+
+  @media (max-width: 580px) {
+    grid-template-columns: 1fr;
+  }
+
+  .img-box {
+    position: relative;
+  }
+
+  .img-box:hover .transparent-box {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+
+  .img-box:hover .caption {
+    transform: translateY(-5px);
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+    height: auto;
+  }
+
+  .caption {
+    color: white;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    font-size: 1.5rem;
+  }
+
+  .transparent-box {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .main-photo {
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  .sub {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 0em;
+
+    &:nth-child(0) {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    &:nth-child(1) {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    &:nth-child(2) {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    &:nth-child(3) {
+      grid-column: 2;
+      grid-row: 2;
+    }
+  }
+}
+
+//https://www.nomensa.com/blog/how-improve-web-accessibility-hiding-elements
+.hide-element {
+  border: 0;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+@media screen and (min-width: 1280px) {
+  //HD Screens
+  .container {
+    margin: 0 auto;
+    width: 1250px;
+  }
+}
+
+
+.verticalmiddle {
+    vertical-align: middle;
+    
+}
+
+.info {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 10000;
+    background-color: rgba(0, 0, 0, 0.6);
+    transition: background-color 0.3s ease;
+
+}
+
+.imgtransition{
+    transition: background-color 0.5s ease;
+}
+
+.imgsize{
+    width: 1180px;
 }
 
 @media screen and (max-width: 575px) {
