@@ -4,7 +4,7 @@
             <div class="row justify-content-between align-items-center m-0">
                 <!-- Logo -->
                 <div class="col-2">
-                    <router-link to="/">
+                    <router-link to="/" @click="getApartments(), userInput = ''">
                         <img src="/public/images/logo.png" alt="" style="width: 100px;">
                     </router-link>
                 </div>
@@ -41,7 +41,7 @@
                         <div class="offcanvas-header">
                             <h5 class="offcanvas-title" id="">Filtri</h5>
                             <button type="button" class="btn-close btn-close-white text-reset"
-                                @click.prevent="showOffcanvasMenu()"></button>
+                                @click.prevent="showOffcanvasMenu(), clearFilters()"></button>
                         </div>
                         <div class="offcanvas-body d-flex flex-column gap-2 gap-lg-5 bg-rich-black">
 
@@ -132,6 +132,18 @@ export default {
         }
     },
     methods: {
+        clearFilters(){
+            this.rooms = null;
+            this.beds = null;
+            this.bathrooms = null;
+            this.radiusInput = '';
+            this.selectedServices = [];
+        },
+        getApartments(){
+            axios.get(store.apiUrl + 'apartments').then((res) => {
+                store.apartments = res.data
+            })
+        },
         searchApartments() {
             let url = store.searchUrl;
             
