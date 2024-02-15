@@ -35,15 +35,15 @@
                                     :disabled="filterDisabled" style="transform: translateY(8px);"></i></span>
                         </span>
                     </div>
-                    <div v-if="filterOpen && filterDisabled && showMenu" class="offcanvas offcanvas-end"
+                    <div v-if="filterOpen && filterDisabled && showMenu" class="offcanvas offcanvas-end text-white bg-rich-black"
                         :class="showMenu ? 'show' : ''" tabindex="-1"
-                        :style="{ visibility: showMenu ? 'visible' : 'hidden' }" style="z-index: 5000; position: fixed; height: 100vh;">
+                        :style="{ visibility: showMenu ? 'visible' : 'hidden' }" style="z-index: 5000; position: fixed; height: 100vh; box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);">
                         <div class="offcanvas-header">
                             <h5 class="offcanvas-title" id="">Filtri</h5>
-                            <button type="button" class="btn-close text-reset"
+                            <button type="button" class="btn-close btn-close-white text-reset"
                                 @click.prevent="showOffcanvasMenu()"></button>
                         </div>
-                        <div class="offcanvas-body d-flex flex-column gap-5">
+                        <div class="offcanvas-body d-flex flex-column gap-5 bg-rich-black">
 
                             <!-- Stanze -->
                             <div class="d-flex gap-4 justify-content-between align-items-center ">
@@ -247,7 +247,7 @@ form {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: #000;
+            background: white;
         }
 
         input,
@@ -287,8 +287,8 @@ form {
                 transform: translate(-50%, -50%);
                 width: 30px;
                 height: 30px;
-                border: 2px solid #000;
-                background: #fff;
+                border: 2px solid white;
+                background: #000;
                 border-radius: 50%;
                 pointer-events: none;
                 user-select: none;
@@ -334,11 +334,11 @@ form {
             top: 50%;
             width: 12px;
             height: 12px;
-            background: #000;
+            background: white;
             border-radius: 50%;
             transition: all 0.15s ease-in-out;
             transform: translate(-50%, -50%);
-            border: 2px solid #fff;
+            border: 2px solid #000;
             opacity: 0;
             z-index: 2;
         }
@@ -370,8 +370,8 @@ form {
         font-family: inherit;
         font-size: 24px;
         font-weight: 600;
-        background: #fff;
-        border: 2px solid #000;
+        background: #000;
+        border: 2px solid white;
         border-radius: 8px;
         outline: 0;
         user-select: none;
