@@ -122,7 +122,8 @@ export default {
             services: [],
             showMenu: false,
             filterDisabled: false,
-            filterOpen: false
+            filterOpen: false,
+            overflow: false,
         }
     },
     methods: {
@@ -144,7 +145,14 @@ export default {
             this.showMenu ? this.showMenu = false : this.showMenu = true;
         },
         addOverflowHidden() {
-            document.querySelector('body').classList.add('overflow-hidden');
+            if(this.overflow == false){
+                document.querySelector('body').classList.add('overflow-hidden');
+                this.overflow = true;
+            } else {
+                document.querySelector('body').classList.remove('overflow-hidden');
+                this.overflow = false;
+            }
+            
         },
         removeOverflowHidden() {
             document.querySelector('body').classList.remove('overflow-hidden');
