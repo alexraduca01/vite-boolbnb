@@ -1,14 +1,14 @@
 <template>
-    <div class="container">
-            <img  src="/public/images/house-gif.gif" alt="loader-logo">
-        <div class="loader">
-            <p>Loading your apartment  
-                <span class="dots"></span>
-                <span class="dots"></span>
-                <span class="dots"></span>
-            </p>
-          </div>
-        </div>
+        <div class=" bg-prussian-blue">
+                <img  src="/public/images/house-gif.gif" alt="loader-logo">
+            <div class="loader">
+                <p class="text-white">Loading your apartment  
+                    <span class="dots"></span>
+                    <span class="dots"></span>
+                    <span class="dots"></span>
+                </p>
+              </div>
+            </div>
 </template>
 
 <script>
@@ -31,6 +31,7 @@ div {
 }
 img{
    width: 400px;
+   background-color: #003459ff;
 }
 .loader {
     position: fixed;
@@ -68,7 +69,7 @@ img{
     width: 5px;
     height: 5px;
     margin: 0 5px;
-    background-color: #000;
+    background-color: #fff;
     border-radius: 50%;
     margin-top: 10px;
 }
