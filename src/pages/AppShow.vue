@@ -13,7 +13,7 @@
         </div>
         <main>
             <div class="container">
-                <div id="gallery" class=" photos-grid-container gallery" >
+                <div id="gallery" class=" photos-grid-container gallery">
                     <div class="main-photo img-box h-100 w-100" @click="showimage()">
                         <img :src="store.imgBasePath + apartment.cover_img" alt="" class="h-100 w-100">
                     </div>
@@ -23,11 +23,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="transparent-box">
-                <div class="caption">
-                  +3
-                </div>
-              </div>
             </div>
             <div class="info d-flex justify-content-center align-content-center align-items-center" v-if="appear" @click="closeimage()">
                 <img class="imgsize imgtransition" :src="store.imgBasePath + apartment.cover_img" alt="">
@@ -41,7 +36,7 @@
 
 
             <!-- Swiper images -->
-            <swiper :navigation="true" :modules="modules" class="mySwiper">
+            <swiper :navigation="true" :modules="modules" class="mySwiper" id="myswiper">
                 <swiper-slide class="img-box"><img :src="store.imgBasePath + apartment.cover_img" alt="" class="h-100 w-100"></swiper-slide>
                 <swiper-slide class="img-box" v-for="image in apartment.images"><img :src="store.imgBasePath + image.url " alt=""></swiper-slide>
             </swiper>
@@ -356,6 +351,15 @@ import { store } from '../store.js';
     .showcontainer{
         padding-bottom: 500px;
         min-height: 100vh;
+    };
+    #myswiper{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    #gallery{
+        display: none;
     }
 }
 
@@ -406,7 +410,7 @@ import { store } from '../store.js';
 }
 
 .imgsize{
-    width: 1180px;
+    width: 100%;
 }
 
 @media screen and (max-width: 575px) {
