@@ -20,8 +20,8 @@
                             v-model="userInput" class="form-control ps-5 rounded-pill" placeholder="Search"
                             aria-label="Username" aria-describedby="addon-wrapping">
                         <datalist id="addressList">
-                            <option v-for="result in addressResults" :value="result.address">
-                                {{ result.address }}
+                            <option v-for="item in addressResults" :value="item.address.freeformAddress">
+                                {{ item.address.freeformAddress }}
                             </option>
                         </datalist>
                     </div>
@@ -206,11 +206,11 @@ export default {
             
         },
         autocomplete() {
-            if (this.userInput.length > 0) {
-                axios.get(store.autocomplete + this.userInput)
+            if (this.userInput.length >= 5) {
+                axios.get(store.autocomplete + this.userInput + store.autocompleteEndPoint)
                     .then(response => {
                         console.log(response.data);
-                        this.addressResults = response.data;
+                        this.addressResults = response.data.results;
                     })
                     .catch(error => console.error('Si è verificato un errore durante il recupero dei dati:', error));
             }
