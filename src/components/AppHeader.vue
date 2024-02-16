@@ -4,13 +4,13 @@
             <div class="row justify-content-between align-items-center m-0">
                 <!-- Logo -->
                 <div class="col-2">
-                    <router-link to="/">
+                    <router-link to="/" @click="getApartments(), userInput = ''">
                         <img src="/public/images/logo.png" alt="" style="width: 100px;">
                     </router-link>
                 </div>
 
                 <!-- Search Bar  -->
-                <form class="my-form col-8 d-flex justify-content-between gap-5" @submit.prevent @keyup.enter="searchApartments()" autocomplete="off">
+                <form class="my-form col-8 d-flex justify-content-between gap-0 gap-lg-5" @submit.prevent @keyup.enter="searchApartments()" autocomplete="off">
 
                     <div class="input-group flex-nowrap ms-0">
                         <span @click="searchApartments()" style="transform: translate(27px, 6px); z-index: 1000; cursor: pointer;" id="addon-wrapping"><i
@@ -31,7 +31,7 @@
 
                     <div>
                         <span>
-                            <span><i class="fa-solid fa-filter" @click.prevent="showOffcanvasMenu()"
+                            <span><i class="fa-solid fa-filter" @click.prevent="showOffcanvasMenu(), clearFilters()"
                                     :disabled="filterDisabled" style="transform: translateY(8px);"></i></span>
                         </span>
                     </div>
@@ -41,9 +41,9 @@
                         <div class="offcanvas-header">
                             <h5 class="offcanvas-title" id="">Filtri</h5>
                             <button type="button" class="btn-close btn-close-white text-reset"
-                                @click.prevent="showOffcanvasMenu()"></button>
+                                @click.prevent="showOffcanvasMenu(), clearFilters()"></button>
                         </div>
-                        <div class="offcanvas-body d-flex flex-column gap-5 bg-rich-black">
+                        <div class="offcanvas-body d-flex flex-column gap-2 gap-lg-5 bg-rich-black">
 
                             <!-- Stanze -->
                             <div class="d-flex gap-4 justify-content-between align-items-center ">
@@ -85,7 +85,7 @@
                                 <ul class="list-unstyled">
                                     <li class="text-capitalize" v-for="service in services">
                                         <div
-                                            class="form-check form-switch d-flex flex-row-reverse justify-content-between p-0 mb-3">
+                                            class="form-check form-switch d-flex flex-row-reverse justify-content-between p-0 mb-1 mb-lg-3">
                                             <input class="form-check-input" type="checkbox" role="switch"
                                                 id="flexSwitchCheckDefault" v-model="selectedServices" :value="service.name">
                                             <label class="form-check-label" for="flexSwitchCheckDefault"><i
@@ -102,7 +102,7 @@
 
                 <!-- Login -->
                 <div class="col-2">
-                    <a href="http://localhost:8000">login</a>
+                    <a href="http://localhost:8000/login">login</a>
                 </div>
             </div>
         </div>
@@ -132,6 +132,18 @@ export default {
         }
     },
     methods: {
+        clearFilters(){
+            this.rooms = null;
+            this.beds = null;
+            this.bathrooms = null;
+            this.radiusInput = '';
+            this.selectedServices = [];
+        },
+        getApartments(){
+            axios.get(store.apiUrl + 'apartments').then((res) => {
+                store.apartments = res.data
+            })
+        },
         searchApartments() {
             let url = store.searchUrl;
             
