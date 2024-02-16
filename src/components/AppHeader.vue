@@ -31,7 +31,7 @@
 
                     <div>
                         <span>
-                            <span><i class="fa-solid fa-filter" @click.prevent="showOffcanvasMenu()"
+                            <span><i class="fa-solid fa-filter" @click.prevent="showOffcanvasMenu(), clearFilters()"
                                     :disabled="filterDisabled" style="transform: translateY(8px);"></i></span>
                         </span>
                     </div>
