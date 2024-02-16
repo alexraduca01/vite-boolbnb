@@ -102,7 +102,7 @@
 
                 <!-- Login -->
                 <div class="col-2">
-                    <a href="http://localhost:8000">login</a>
+                    <a href="http://localhost:8000/login">login</a>
                 </div>
             </div>
         </div>
