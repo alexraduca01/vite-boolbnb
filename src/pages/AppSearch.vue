@@ -1,6 +1,8 @@
 <template>
     <div>
-        <h1>Search</h1>
+        <ul>
+            <li v-for="item in store.apartments">{{ item.title }}</li>
+        </ul>
     </div>
 </template>
 
@@ -9,6 +11,11 @@ import axios from 'axios';
 import { store } from '../store.js'
     export default {
         name: 'AppSearch',
+        data() {
+            return{
+                store,
+            }
+        }
     }
 </script>
 
