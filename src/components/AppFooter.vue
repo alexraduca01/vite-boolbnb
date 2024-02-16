@@ -1,6 +1,6 @@
 <template>
     <footer class="bg-rich-black w-100 py-5 ">
-            <section class=" container">
+            <section class="container">
                <div class="row">
                 <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
                      <h6 class="text-uppercase text-white">Assistenza</h6>
@@ -122,9 +122,15 @@ h6{
     padding: 10px;
 }
 
-@media screen and (min-width: 575px) {
+@media screen and (min-width: 768px) {
   footer {
-    height: 500px;
+    height: 920px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  footer {
+    height: 520px;
   }
 }
 </style>
