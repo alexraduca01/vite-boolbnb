@@ -145,6 +145,7 @@ export default {
             })
         },
         searchApartments() {
+            // this.redirectTo('/search');
             let url = store.searchUrl;
             
             if(this.userInput == ''){
@@ -214,6 +215,9 @@ export default {
                     })
                     .catch(error => console.error('Si è verificato un errore durante il recupero dei dati:', error));
             }
+        },
+        redirectTo(url){
+            this.$router.push(url);
         }
     },
     created() {
