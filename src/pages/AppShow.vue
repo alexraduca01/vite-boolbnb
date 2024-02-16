@@ -76,7 +76,7 @@
         <div class="col-sm-12 text-white">
           <div class="pt-3">
             <h2 class="">{{ apartment.title }}</h2>
-            <p>{{ apartment.address }} <span>( {{ apartment.lat }}, {{ apartment.lon }} )</span></p>
+            <p>{{ apartment.address }}</p>
           </div>
           <div class="d-flex w-75 py-1">
             <div class="fs-5">
