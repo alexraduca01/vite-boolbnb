@@ -237,10 +237,10 @@
                     v-model="body"
                   ></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Send</button>
-                <button type="reset" class="btn btn-info mx-3 bg-light">
+                <button type="reset" class="btn btn-info bg-light">
                   Reset
                 </button>
+                <button type="submit" class="btn btn-primary mx-3">Send</button>
               </form>
             </div>
           </div>
