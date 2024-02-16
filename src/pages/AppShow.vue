@@ -1,7 +1,7 @@
 <template>
-  <div class="w-100 bg-prussian-blue showcontainer">
+  <div class="w-100 bg-prussian-blue showcontainer position-relative">
     <div class="bg-rich-black">
-      <div class="container nomargin">
+      <div class="container">
         <div class="row bg-rich-black py-2">
           <div class="col-sm-12">
             <router-link to="/" id="desktoplogo">
@@ -58,6 +58,7 @@
         class="mySwiper"
         id="myswiper"
         @click="showimage()"
+        :loop="true"
       >
         <swiper-slide class="img-box"
           ><img
@@ -70,7 +71,7 @@
         /></swiper-slide>
       </swiper>
     </main>
-    <div class="container nomargin">
+    <div class="container">
       <div class="row">
         <div class="col-sm-12 text-white">
           <div class="pt-3">
@@ -124,7 +125,7 @@
           <div class="centered">
             <h3 class="py-2 text-uppercase">Location:</h3>
             <div class="row">
-              <div class="col-sm-12 rounded-top">
+              <div class="col-12 rounded-top">
                 <div id="map" class="rounded"></div>
               </div>
             </div>
@@ -249,7 +250,7 @@
         </div>
       </div>
     </div>
-    <AppFooter />
+    <AppFooter style="position: absolute; bottom: 0;" />
   </div>
 </template>
 
@@ -361,6 +362,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+
+
 #map {
   aspect-ratio: 21 / 9;
   width: 100%;
@@ -450,7 +454,7 @@ export default {
 }
 
 .showcontainer {
-  padding-bottom: 90px;
+  padding-bottom: 1200px;
 }
 
 //https://www.nomensa.com/blog/how-improve-web-accessibility-hiding-elements
@@ -474,20 +478,12 @@ export default {
   }
 }
 
-@media screen and (min-width: 576px) {
-  .showcontainer {
-    padding-bottom: 500px;
-    min-height: 100vh;
-  }
-}
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 769px) {
   #gallery {
     display: none;
   }
-  .nomargin {
-    margin: 0 !important;
-  }
+
   .centered {
     text-align: center !important;
   }
@@ -497,6 +493,16 @@ export default {
   #myswiper {
     display: none;
   }
+  .showcontainer{
+    padding-bottom: 920px;
+  }
+}
+
+@media screen and (min-width: 992px){
+    .showcontainer{
+        padding-bottom: 520px;
+        min-height: 100vh;
+    }
 }
 
 .verticalmiddle {
