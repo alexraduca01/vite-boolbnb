@@ -75,6 +75,7 @@
         <div class="col-sm-12 text-white">
           <div class="pt-3">
             <h2 class="">{{ apartment.title }}</h2>
+            <p>{{ apartment.address }} <span>( {{ apartment.lat }}, {{ apartment.lon }} )</span></p>
           </div>
           <div class="d-flex w-75 py-1">
             <div class="fs-5">
@@ -150,22 +151,29 @@
             </div>
           </div>
           <div
-            class="offcanvas offcanvas-bottom"
+            class="offcanvas offcanvas-bottom offcanvasheight "
             :class="showMenu ? 'show' : ''"
             tabindex="-1"
             :style="{ visibility: showMenu ? 'visible' : 'hidden' }"
           >
-            <div class="offcanvas-header">
+            <!-- <div class="offcanvas-header">
               <button
                 type="button"
                 class="btn-close text-reset"
                 @click.prevent="showOffcanvasMenu()"
               ></button>
-            </div>
-            <div class="offcanvas-body">
+            </div> -->
+            <div class="offcanvas-body bg-rich-black">
+              <div class="d-flex justify-content-end">
+                <button
+                type="button"
+                class="btn-close text-reset bg-white text-white"
+                @click.prevent="showOffcanvasMenu()"
+                ></button>
+              </div>
               <form @submit.prevent="contactForm()" class="text-white fs-3">
                 <div class="mb-3">
-                  <label for="name" class="form-label fs-6 text-black"
+                  <label for="name" class="form-label fs-6 text-white"
                     >Name</label
                   >
                   <input
@@ -178,7 +186,7 @@
                   />
                 </div>
                 <div class="mb-3">
-                  <label for="name" class="form-label fs-6 text-black"
+                  <label for="name" class="form-label fs-6 text-white"
                     >Surname</label
                   >
                   <input
@@ -191,7 +199,7 @@
                   />
                 </div>
                 <div class="mb-3">
-                  <label for="name" class="form-label fs-6 text-black"
+                  <label for="name" class="form-label fs-6 text-white"
                     >Phone Number</label
                   >
                   <input
@@ -204,7 +212,7 @@
                   />
                 </div>
                 <div class="mb-3">
-                  <label for="email" class="form-label fs-6 text-black"
+                  <label for="email" class="form-label fs-6 text-white"
                     >Email address</label
                   >
                   <input
@@ -217,7 +225,7 @@
                   />
                 </div>
                 <div class="mb-3">
-                  <label for="message" class="form-label fs-6 text-black"
+                  <label for="message" class="form-label fs-6 text-white"
                     >Your Message</label
                   >
                   <textarea
@@ -533,6 +541,10 @@ export default {
 
 .imgsize {
   width: 100%;
+}
+
+.offcanvasheight{
+  height: 800px;
 }
 
 @media screen and (max-width: 575px) {
