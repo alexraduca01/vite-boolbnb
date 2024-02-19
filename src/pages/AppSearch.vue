@@ -1,5 +1,6 @@
 <template>
     <div class="position-relative">
+        <AppHeader />
         <div class="h-100 bg-prussian-blue home-container">
             <div class="container py-3">
                 <div v-if="store.apartments.length == 0">
@@ -46,6 +47,7 @@
 <script>
 import axios from 'axios';
 import { store } from '../store.js';
+import AppHeader from '../components/AppHeader.vue';
 import AppFooter from '../components/AppFooter.vue';
 export default {
     name: 'AppSearch',
@@ -57,6 +59,7 @@ export default {
     },
     components: {
         AppFooter,
+        AppHeader,
     },
     methods: {
         postVisuals(apartmentSlug) {
@@ -69,4 +72,28 @@ export default {
 
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@use '../assets/style/main.scss' as *;
+.home-container {
+    padding-bottom: 1200px;
+}
+.my-img{
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    max-height: 100%;
+    border-radius: 15px;
+}
+
+@media screen and (min-width: 768px){
+    .home-container{
+        padding-bottom: 920px;
+    }
+}
+
+@media screen and (min-width: 992px){
+    .home-container{
+        padding-bottom: 520px;
+        min-height: 100vh;
+    }
+}
+</style>
