@@ -150,7 +150,8 @@ export default {
             })
         },
         searchApartments() {
-            
+            this.redirectTo('/search');
+
             let url = store.searchUrl;
             
             if(this.userInput == ''){
