@@ -14,36 +14,21 @@
     <main>
       <div class="container">
         <div id="gallery" class="photos-grid-container gallery">
-          <div class="main-photo img-box h-100 w-100" @click="showimage()">
-            <img
-              :src="store.imgBasePath + apartment.cover_img"
-              alt=""
-              class="h-100 w-100"
-            />
+          <div class="main-photo img-box h-100 w-100" @click="showimage(0)">
+            <img :src="store.imgBasePath + imgApartment[0]" alt="" class="h-100 w-100" />
           </div>
           <div>
             <div class="sub">
-              <div
-                class="img-box"
-                v-for="image in apartment.images"
-                @click="showimage()"
-              >
-                <img :src="store.imgBasePath + image.url" alt="" />
+              <div class="img-box" v-for="(image, index) in imgApartment" :key="index" @click="showimage(index + 1)">
+                <img :src="store.imgBasePath + imgApartment[index + 1]" alt="" />
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div
-        class="info d-flex justify-content-center align-content-center align-items-center"
-        v-if="appear"
-        @click="closeimage()"
-      >
-        <img
-          class="imgsize imgtransition"
-          :src="store.imgBasePath + apartment.cover_img"
-          alt=""
-        />
+      <div class="info d-flex justify-content-center align-content-center align-items-center"
+        v-if="selectedImage !== null" @click="closeimage()">
+        <img class="imgsize imgtransition" :src="store.imgBasePath + imgApartment[selectedImage]" alt="" />
         <!-- <img class="imgsize imgtransition" :src="store.imgBasePath + apartment.images.url" alt=""> -->
       </div>
       <!-- <div v-for="image in apartment.images">
@@ -53,22 +38,11 @@
             </div> -->
 
       <!-- Swiper images -->
-      <swiper
-        :modules="modules"
-        class="mySwiper"
-        id="myswiper"
-        @click="showimage()"
-        :loop="true"
-      >
-        <swiper-slide class="img-box"
-          ><img
-            :src="store.imgBasePath + apartment.cover_img"
-            alt=""
-            class="h-100 w-100"
-        /></swiper-slide>
-        <swiper-slide class="img-box" v-for="image in apartment.images"
-          ><img :src="store.imgBasePath + image.url" alt=""
-        /></swiper-slide>
+      <swiper :modules="modules" class="mySwiper" id="myswiper" @click="showimage()" :loop="true">
+        <swiper-slide class="img-box"><img :src="store.imgBasePath + apartment.cover_img" alt=""
+            class="h-100 w-100" /></swiper-slide>
+        <swiper-slide class="img-box" v-for="image in apartment.images"><img :src="store.imgBasePath + image.url"
+            alt="" /></swiper-slide>
       </swiper>
     </main>
     <div class="container">
@@ -76,6 +50,7 @@
         <div class="col-sm-12 text-white">
           <div class="pt-3">
             <h2 class="">{{ apartment.title }}</h2>
+            <p>{{ apartment.address }}</p>
           </div>
           <div class="d-flex w-75 py-1">
             <div class="fs-5">
@@ -83,15 +58,10 @@
                 Host:
                 <span class="fw-bold">{{
                   apartment.user?.name + " " + apartment.user?.surname
-                }}</span></span
-              >
+                }}</span></span>
               <div class="py-4">
                 <span class="mb-4 float-start">
-                  <button
-                    class="btn btn-primary bg-light text-dark"
-                    type="button"
-                    @click.prevent="showOffcanvasMenu()"
-                  >
+                  <button class="btn btn-primary bg-light text-dark" type="button" @click.prevent="showOffcanvasMenu()">
                     Contact Host
                   </button>
                 </span>
@@ -100,18 +70,12 @@
           </div>
           <h3 class="pt-4">What you will find:</h3>
           <div class="d-flex gap-4">
-            <span class="fs-5 py-1"
-              ><i class="fa-solid fa-building"></i> Rooms:
-              {{ apartment.rooms }}</span
-            >
-            <span class="fs-5 py-1"
-              ><i class="fa-solid fa-bed fs-6"></i> Bedrooms:
-              {{ apartment.beds }}</span
-            >
-            <span class="fs-5 py-1"
-              ><i class="fa-solid fa-bath"></i> Bathrooms:
-              {{ apartment.bathrooms }}</span
-            >
+            <span class="fs-5 py-1"><i class="fa-solid fa-building"></i> Rooms:
+              {{ apartment.rooms }}</span>
+            <span class="fs-5 py-1"><i class="fa-solid fa-bed fs-6"></i> Bedrooms:
+              {{ apartment.beds }}</span>
+            <span class="fs-5 py-1"><i class="fa-solid fa-bath"></i> Bathrooms:
+              {{ apartment.bathrooms }}</span>
           </div>
           <h3 class="pt-4">Services:</h3>
           <div>
@@ -132,8 +96,7 @@
         </div>
         <div>
           <div
-            class="text-white my-5 py-5 centered d-flex flex-column align-content-center justify-content-center align-items-center"
-          >
+            class="text-white my-5 py-5 centered d-flex flex-column align-content-center justify-content-center align-items-center">
             <div py-2>
               <h2>Chi siamo</h2>
             </div>
@@ -150,90 +113,52 @@
               </p>
             </div>
           </div>
-          <div
-            class="offcanvas offcanvas-bottom"
-            :class="showMenu ? 'show' : ''"
-            tabindex="-1"
-            :style="{ visibility: showMenu ? 'visible' : 'hidden' }"
-          >
-            <div class="offcanvas-header">
+          <div class="offcanvas offcanvas-bottom offcanvasheight " :class="showMenu ? 'show' : ''" tabindex="-1"
+            :style="{ visibility: showMenu ? 'visible' : 'hidden' }">
+            <!-- <div class="offcanvas-header">
               <button
                 type="button"
                 class="btn-close text-reset"
                 @click.prevent="showOffcanvasMenu()"
               ></button>
-            </div>
-            <div class="offcanvas-body">
+            </div> -->
+            <div class="offcanvas-body bg-rich-black">
+              <div class="d-flex justify-content-end">
+                <button type="button" class="btn-close text-reset bg-white text-white"
+                  @click.prevent="showOffcanvasMenu()"></button>
+              </div>
               <form @submit.prevent="contactForm()" class="text-white fs-3">
-                <div class="mb-3">
-                  <label for="name" class="form-label fs-6 text-black"
-                    >Name</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="name"
-                    name="name"
-                    aria-describedby="nameHelp"
-                    v-model="name"
-                  />
+                <div class="mb-3 d-flex flex-column align-content-center align-items-center">
+                  <label for="name" class="form-label fs-6 text-white">Name</label>
+                  <input type="text" class="form-control w-50" id="name" name="name" aria-describedby="nameHelp"
+                    v-model="name" />
                 </div>
-                <div class="mb-3">
-                  <label for="name" class="form-label fs-6 text-black"
-                    >Surname</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="surname"
-                    name="surname"
-                    aria-describedby="nameHelp"
-                    v-model="surname"
-                  />
+                <div class="mb-3 d-flex flex-column align-content-center align-items-center">
+                  <label for="name" class="form-label fs-6 text-white">Surname</label>
+                  <input type="text" class="form-control w-50" id="surname" name="surname" aria-describedby="nameHelp"
+                    v-model="surname" />
                 </div>
-                <div class="mb-3">
-                  <label for="name" class="form-label fs-6 text-black"
-                    >Phone Number</label
-                  >
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="phone_number"
-                    name="phone_number"
-                    aria-describedby="nameHelp"
-                    v-model="phone_number"
-                  />
+                <div class="mb-3 d-flex flex-column align-content-center align-items-center">
+                  <label for="name" class="form-label fs-6 text-white">Phone Number</label>
+                  <input type="text" class="form-control w-50" id="phone_number" name="phone_number"
+                    aria-describedby="nameHelp" v-model="phone_number" />
                 </div>
-                <div class="mb-3">
-                  <label for="email" class="form-label fs-6 text-black"
-                    >Email address</label
-                  >
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="email"
-                    name="email"
-                    aria-describedby="emailHelp"
-                    v-model="email"
-                  />
+                <div class="mb-3 d-flex flex-column align-content-center align-items-center">
+                  <label for="email" class="form-label fs-6 text-white">Email address</label>
+                  <input type="email" class="form-control w-50" id="email" name="email" aria-describedby="emailHelp"
+                    v-model="email" />
                 </div>
-                <div class="mb-3">
-                  <label for="message" class="form-label fs-6 text-black"
-                    >Your Message</label
-                  >
-                  <textarea
-                    type="text"
-                    class="form-control"
-                    id="body"
-                    name="body"
-                    aria-describedby="body"
-                    v-model="body"
-                  ></textarea>
+                <div class="mb-3 d-flex flex-column align-content-center align-items-center">
+                  <label for="message" class="form-label fs-6 text-white">Your Message</label>
+                  <textarea type="text" class="form-control w-50" id="body" name="body" aria-describedby="body"
+                    v-model="body"></textarea>
+                  <div class="d-flex py-3">
+                    <button type="reset" class="btn btn-info bg-light text-center ">
+                      Reset
+                    </button>
+                    <button type="submit" class="btn btn-primary mx-3">Send</button>
+                  </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Send</button>
-                <button type="reset" class="btn btn-info mx-3 bg-light">
-                  Reset
-                </button>
               </form>
             </div>
           </div>
@@ -273,6 +198,8 @@ export default {
       body: "",
       appear: false,
       modules: [Navigation],
+      imgApartment: [],
+      selectedImage: null,
     };
   },
   methods: {
@@ -287,6 +214,12 @@ export default {
           lon = this.apartment.lon;
           this.services = this.apartment.services;
           console.log(this.apartment);
+          this.imgApartment.push(this.apartment.cover_img)
+          for (let i = 0; i < this.apartment.images.length; i++) {
+            // console.log(this.apartment.images[i].url);
+            this.imgApartment.push(this.apartment.images[i].url);
+          };
+          console.log(this.imgApartment);
         });
       const mapTime = setTimeout(() => {
         this.makeMap(lon, lat);
@@ -310,7 +243,7 @@ export default {
         surname: this.surname,
         phone_number: this.phone_number,
         email: this.email,
-        body: this.message,
+        body: this.body,
       };
       axios
         .post(
@@ -332,29 +265,21 @@ export default {
     showOffcanvasMenu() {
       this.showMenu ? (this.showMenu = false) : (this.showMenu = true);
     },
-    showimage() {
-      if (!this.appear) {
-        this.appear = true;
-        console.log(this.appear);
-      }
+    showimage(index) {
+      this.selectedImage = index;
     },
     closeimage() {
-      if (this.appear) {
-        this.appear = false;
-      }
+      this.selectedImage = null;
     },
   },
   mounted() {
     this.getApartments();
   },
-  created() {},
+  created() { },
 };
 </script>
 
 <style lang="scss" scoped>
-
-
-
 #map {
   aspect-ratio: 21 / 9;
   width: 100%;
@@ -450,7 +375,8 @@ export default {
 //https://www.nomensa.com/blog/how-improve-web-accessibility-hiding-elements
 .hide-element {
   border: 0;
-  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px 1px 1px 1px);
+  /* IE6, IE7 */
   clip: rect(1px, 1px, 1px, 1px);
   height: 1px;
   margin: -1px;
@@ -461,6 +387,7 @@ export default {
 }
 
 @media screen and (min-width: 1280px) {
+
   //HD Screens
   .container {
     margin: 0 auto;
@@ -483,16 +410,17 @@ export default {
   #myswiper {
     display: none;
   }
-  .showcontainer{
+
+  .showcontainer {
     padding-bottom: 920px;
   }
 }
 
-@media screen and (min-width: 992px){
-    .showcontainer{
-        padding-bottom: 520px;
-        min-height: 100vh;
-    }
+@media screen and (min-width: 992px) {
+  .showcontainer {
+    padding-bottom: 520px;
+    min-height: 100vh;
+  }
 }
 
 .verticalmiddle {
@@ -539,6 +467,10 @@ export default {
 
 .imgsize {
   width: 100%;
+}
+
+.offcanvasheight {
+  height: 800px;
 }
 
 @media screen and (max-width: 575px) {
