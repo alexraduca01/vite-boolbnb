@@ -233,7 +233,7 @@ export default {
         surname: this.surname,
         phone_number: this.phone_number,
         email: this.email,
-        body: this.message,
+        body: this.body,
       };
       axios
         .post(
