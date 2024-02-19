@@ -14,21 +14,21 @@
     <main>
       <div class="container">
         <div id="gallery" class="photos-grid-container gallery">
-          <div class="main-photo img-box h-100 w-100" @click="showimage()">
-            <img :src="store.imgBasePath + apartment.cover_img" alt="" class="h-100 w-100" />
+          <div class="main-photo img-box h-100 w-100" @click="showimage(0)">
+            <img :src="store.imgBasePath + imgApartment[0]" alt="" class="h-100 w-100" />
           </div>
           <div>
             <div class="sub">
-              <div class="img-box" v-for="image in apartment.images" @click="showimage()">
-                <img :src="store.imgBasePath + image.url" alt="" />
+              <div class="img-box" v-for="(image, index) in imgApartment" :key="index" @click="showimage(index + 1)">
+                <img :src="store.imgBasePath + imgApartment[index + 1]" alt="" />
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="info d-flex justify-content-center align-content-center align-items-center" v-if="appear"
-        @click="closeimage()" v-for="img in imgApartment">
-        <img class="imgsize imgtransition" :src="store.imgBasePath + img" alt="" />
+      <div class="info d-flex justify-content-center align-content-center align-items-center"
+        v-if="selectedImage !== null" @click="closeimage()">
+        <img class="imgsize imgtransition" :src="store.imgBasePath + imgApartment[selectedImage]" alt="" />
         <!-- <img class="imgsize imgtransition" :src="store.imgBasePath + apartment.images.url" alt=""> -->
       </div>
       <!-- <div v-for="image in apartment.images">
@@ -199,6 +199,7 @@ export default {
       appear: false,
       modules: [Navigation],
       imgApartment: [],
+      selectedImage: null,
     };
   },
   methods: {
@@ -264,16 +265,11 @@ export default {
     showOffcanvasMenu() {
       this.showMenu ? (this.showMenu = false) : (this.showMenu = true);
     },
-    showimage() {
-      if (!this.appear) {
-        this.appear = true;
-        console.log(this.appear);
-      }
+    showimage(index) {
+      this.selectedImage = index;
     },
     closeimage() {
-      if (this.appear) {
-        this.appear = false;
-      }
+      this.selectedImage = null;
     },
   },
   mounted() {
