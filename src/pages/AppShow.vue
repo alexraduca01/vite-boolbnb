@@ -28,15 +28,8 @@
       </div>
       <div class="info d-flex justify-content-center align-content-center align-items-center"
         v-if="selectedImage !== null" @click="closeimage()">
-        <img class="imgsize imgtransition" :src="store.imgBasePath + imgApartment[selectedImage]" alt="" />
-        <!-- <img class="imgsize imgtransition" :src="store.imgBasePath + apartment.images.url" alt=""> -->
+        <img class="w-50 imgtransition" :src="store.imgBasePath + imgApartment[selectedImage]" alt="" />
       </div>
-      <!-- <div v-for="image in apartment.images">
-                <div class="info d-flex justify-content-center align-content-center align-items-center" v-if="appear" @click="closeimage()">
-                    <img class="imgsize imgtransition" :src="store.imgBasePath + image.url" alt="">
-                </div>
-            </div> -->
-
       <!-- Swiper images -->
       <swiper :modules="modules" class="mySwiper" id="myswiper" @click="showimage()" :loop="true">
         <swiper-slide class="img-box"><img :src="store.imgBasePath + apartment.cover_img" alt=""
@@ -115,13 +108,6 @@
           </div>
           <div class="offcanvas offcanvas-bottom offcanvasheight " :class="showMenu ? 'show' : ''" tabindex="-1"
             :style="{ visibility: showMenu ? 'visible' : 'hidden' }">
-            <!-- <div class="offcanvas-header">
-              <button
-                type="button"
-                class="btn-close text-reset"
-                @click.prevent="showOffcanvasMenu()"
-              ></button>
-            </div> -->
             <div class="offcanvas-body bg-rich-black">
               <div class="d-flex justify-content-end">
                 <button type="button" class="btn-close text-reset bg-white text-white"
@@ -190,6 +176,7 @@ export default {
       store,
       apartment: [],
       services: [],
+      imageapartments: [],
       showMenu: false,
       name: "",
       surname: "",
@@ -213,6 +200,9 @@ export default {
           lat = this.apartment.lat;
           lon = this.apartment.lon;
           this.services = this.apartment.services;
+          this.imageapartments.push(this.apartment.cover_img);
+          this.imageapartments.push(this.apartment.images[1]);
+          console.log(this.imageapartments);
           console.log(this.apartment);
           this.imgApartment.push(this.apartment.cover_img)
           for (let i = 0; i < this.apartment.images.length; i++) {
@@ -275,7 +265,9 @@ export default {
   mounted() {
     this.getApartments();
   },
-  created() { },
+  created(){
+    
+  },
 };
 </script>
 
@@ -462,7 +454,7 @@ export default {
 }
 
 .imgtransition {
-  transition: background-color 0.5s ease;
+  transition: 0.5s ease;
 }
 
 .imgsize {
