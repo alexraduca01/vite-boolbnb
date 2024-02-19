@@ -275,6 +275,7 @@ export default {
       store,
       apartment: [],
       services: [],
+      imageapartments: [],
       showMenu: false,
       name: "",
       surname: "",
@@ -296,6 +297,9 @@ export default {
           lat = this.apartment.lat;
           lon = this.apartment.lon;
           this.services = this.apartment.services;
+          this.imageapartments.push(this.apartment.cover_img);
+          this.imageapartments.push(this.apartment.images[1]);
+          console.log(this.imageapartments);
           console.log(this.apartment);
         });
       const mapTime = setTimeout(() => {
@@ -342,6 +346,8 @@ export default {
     showOffcanvasMenu() {
       this.showMenu ? (this.showMenu = false) : (this.showMenu = true);
     },
+    
+    
     showimage() {
       if (!this.appear) {
         this.appear = true;
@@ -357,7 +363,9 @@ export default {
   mounted() {
     this.getApartments();
   },
-  created() {},
+  created(){
+    
+  },
 };
 </script>
 
