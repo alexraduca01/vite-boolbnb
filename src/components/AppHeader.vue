@@ -63,11 +63,11 @@
 
                             <!-- Chilometri -->
                             <div id="form-wrapper" class="mt-5 mb-3">
-                                <h3 class="fw-bold">Kilometers</h3>
+                                <h3 class="fw-bold">Radius</h3>
                                 <div id="kilometers-amount-slider">
                                     <input type="radio" name="kilometers-amount" id="1" value="10" v-model="radiusInput">
                                     <label for="1" data-kilometers-amount="10km"></label>
-                                    <input type="radio" name="kilometers-amount" id="2" value="20" v-model="radiusInput" checked>
+                                    <input type="radio" name="kilometers-amount" id="2" value="20" v-model="radiusInput">
                                     <label for="2" checked data-kilometers-amount="20km"></label>
                                     <input type="radio" name="kilometers-amount" id="3" value="30" v-model="radiusInput">
                                     <label for="3" data-kilometers-amount="30km"></label>
@@ -93,6 +93,11 @@
                                         </div>
                                     </li>
                                 </ul>
+                            </div>
+
+                            <div class="d-flex justify-content-end gap-3">
+                                <button @click="clearFilters()" class="btn btn-danger">Reset</button>
+                                <button @click="searchApartments()" class="btn btn-primary">Apply</button>
                             </div>
 
                         </div>
@@ -145,6 +150,8 @@ export default {
             })
         },
         searchApartments() {
+            this.redirectTo('/search');
+
             let url = store.searchUrl;
             
             if(this.userInput == ''){
@@ -183,6 +190,7 @@ export default {
                 console.log(res.data);
                 store.apartments = res.data;
             })
+            // this.redirectTo('/search');
         },
         getServices() {
             axios.get(store.apiUrl + 'services').then((res) => {
@@ -214,6 +222,9 @@ export default {
                     })
                     .catch(error => console.error('Si è verificato un errore durante il recupero dei dati:', error));
             }
+        },
+        redirectTo(url){
+            this.$router.push(url);
         }
     },
     created() {
