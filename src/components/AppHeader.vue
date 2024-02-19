@@ -95,6 +95,11 @@
                                 </ul>
                             </div>
 
+                            <div class="d-flex justify-content-end gap-3">
+                                <button @click="clearFilters()" class="btn btn-danger">Reset</button>
+                                <button @click="searchApartments()" class="btn btn-primary">Apply</button>
+                            </div>
+
                         </div>
                     </div>
 
