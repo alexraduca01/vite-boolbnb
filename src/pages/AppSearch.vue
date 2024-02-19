@@ -41,6 +41,7 @@
             </div>
         </div>
         <AppFooter style="position: absolute; bottom: 0;" />
+    </div>    
     <div>
         <ul>
             <li v-for="item in store.apartments">{{ item.title }}</li>
@@ -71,16 +72,7 @@ export default {
                 // console.log(res.data);
             })
         },
-import { store } from '../store.js'
-    export default {
-        name: 'AppSearch',
-        data() {
-            return{
-                store,
-            }
-        }
-    }
-}
+    }}
 
 </script>
 
