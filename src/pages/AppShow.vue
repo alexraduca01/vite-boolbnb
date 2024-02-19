@@ -49,7 +49,7 @@
       <div class="row">
         <div class="col-sm-12 text-white">
           <div class="pt-3">
-            <h2 class="">{{ apartment.title }}</h2>
+            <h2 class="d-flex align-items-center">{{ apartment.title }} <span v-if="apartment.sponsors?.length > 0" class="badge ms-3 fs-6 rounded-pill text-bg-warning text-uppercase"><i class="fa-solid fa-crown"></i> premium</span></h2>
             <p>{{ apartment.address }}</p>
           </div>
           <div class="d-flex w-75 py-1">
@@ -243,7 +243,7 @@ export default {
         surname: this.surname,
         phone_number: this.phone_number,
         email: this.email,
-        body: this.message,
+        body: this.body,
       };
       axios
         .post(

@@ -11,9 +11,13 @@
                         class="col-sm-6 col-md-4 col-lg-3 text-white mb-4 text-decoration-none"
                         :to="{ name: 'show', params: { slug: item.slug } }">
                         <div v-if="!searchFlag">
-                            <div>
+                            <div class="position-relative">
                                 <img class="img-fluid my-img" :src="store.imgBasePath + item.cover_img" :alt="item.title">
                                 <!-- <img v-for="(images, index) in imgApartment" :src="store.imgBasePath + images" alt=""> -->
+
+                                <div v-if="item.sponsors.length > 0">
+                                    <span class="badge rounded-pill text-bg-warning text-uppercase"><i class="fa-solid fa-crown"></i> premium</span>
+                                </div>
                             </div>
                             <div>
                                 <div class="my-2">
@@ -91,6 +95,18 @@ export default {
 
 <style lang="scss" scoped>
 @use '../assets/style/main.scss' as *;
+
+
+.fa-crown {
+    transform: translateY(-1px);
+}
+
+.badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 1rem;
+}
 
 .home-container {
     padding-bottom: 1200px;
