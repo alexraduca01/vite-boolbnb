@@ -72,30 +72,34 @@ export default {
                 // console.log(res.data);
             })
         },
-    }}
+    }
+}
+
 
 </script>
 
 <style lang="scss" scoped>
 @use '../assets/style/main.scss' as *;
+
 .home-container {
     padding-bottom: 1200px;
 }
-.my-img{
+
+.my-img {
     aspect-ratio: 1 / 1;
     width: 100%;
     max-height: 100%;
     border-radius: 15px;
 }
 
-@media screen and (min-width: 768px){
-    .home-container{
+@media screen and (min-width: 768px) {
+    .home-container {
         padding-bottom: 920px;
     }
 }
 
-@media screen and (min-width: 992px){
-    .home-container{
+@media screen and (min-width: 992px) {
+    .home-container {
         padding-bottom: 520px;
         min-height: 100vh;
     }
