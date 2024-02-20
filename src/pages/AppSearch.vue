@@ -42,11 +42,6 @@
         </div>
         <AppFooter style="position: absolute; bottom: 0;" />
     </div>    
-    <div>
-        <ul>
-            <li v-for="item in store.apartments">{{ item.title }}</li>
-        </ul>
-    </div>
 </template>
 
 <script>

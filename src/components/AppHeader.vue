@@ -66,7 +66,7 @@
                                 </div>
                             </div>
 
-                            <!-- Chilometri -->
+                            <!-- Raggio -->
                             <div id="form-wrapper" class="mt-5 mb-3">
                                 <h3 class="fw-bold">Radius</h3>
                                 <div id="kilometers-amount-slider">
@@ -196,7 +196,6 @@ export default {
                 console.log(res.data);
                 store.apartments = res.data;
             })
-            // this.redirectTo('/search');
         },
         getServices() {
             axios.get(store.apiUrl + 'services').then((res) => {

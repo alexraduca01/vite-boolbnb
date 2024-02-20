@@ -2,11 +2,14 @@
   <div class="w-100 bg-prussian-blue showcontainer position-relative">
     <div class="bg-rich-black">
       <div class="container">
-        <div class="row bg-rich-black py-2">
-          <div class="col-sm-12">
+        <div class="row bg-rich-black align-items-center py-2">
+          <div class="col-sm-10">
             <router-link to="/" id="desktoplogo">
               <img src="/public/images/logo.png" alt="" style="width: 100px" />
             </router-link>
+          </div>
+          <div class="col-sm-2">
+              <a href="http://localhost:8000/login">login</a>
           </div>
         </div>
       </div>
@@ -63,9 +66,9 @@
           </div>
           <h3 class="pt-4">What you will find:</h3>
           <div class="d-flex gap-4">
-            <span class="fs-5 py-1"><i class="fa-solid fa-building"></i> Rooms:
+            <span class="fs-5 py-1"><i class="fa-solid fa-couch"></i> Rooms:
               {{ apartment.rooms }}</span>
-            <span class="fs-5 py-1"><i class="fa-solid fa-bed fs-6"></i> Bedrooms:
+            <span class="fs-5 py-1"><i class="fa-solid fa-bed fs-6"></i> Beds:
               {{ apartment.beds }}</span>
             <span class="fs-5 py-1"><i class="fa-solid fa-bath"></i> Bathrooms:
               {{ apartment.bathrooms }}</span>
@@ -114,15 +117,18 @@
                   @click.prevent="showOffcanvasMenu()"></button>
               </div>
               <form @submit.prevent="contactForm()" class="text-white fs-3">
+                <div v-if="successMessage != ''">
+                  <p class="fs-6 text-success fw-bold text-center">{{ successMessage }}!</p>
+                </div>
                 <div class="mb-3 d-flex flex-column align-content-center align-items-center">
                   <label for="name" class="form-label fs-6 text-white">Name</label>
                   <input type="text" class="form-control w-50" id="name" name="name" aria-describedby="nameHelp"
-                    v-model="name" />
+                    v-model="name" required />
                 </div>
                 <div class="mb-3 d-flex flex-column align-content-center align-items-center">
                   <label for="name" class="form-label fs-6 text-white">Surname</label>
                   <input type="text" class="form-control w-50" id="surname" name="surname" aria-describedby="nameHelp"
-                    v-model="surname" />
+                    v-model="surname" required/>
                 </div>
                 <div class="mb-3 d-flex flex-column align-content-center align-items-center">
                   <label for="name" class="form-label fs-6 text-white">Phone Number</label>
@@ -132,12 +138,12 @@
                 <div class="mb-3 d-flex flex-column align-content-center align-items-center">
                   <label for="email" class="form-label fs-6 text-white">Email address</label>
                   <input type="email" class="form-control w-50" id="email" name="email" aria-describedby="emailHelp"
-                    v-model="email" />
+                    v-model="email" required/>
                 </div>
                 <div class="mb-3 d-flex flex-column align-content-center align-items-center">
                   <label for="message" class="form-label fs-6 text-white">Your Message</label>
                   <textarea type="text" class="form-control w-50" id="body" name="body" aria-describedby="body"
-                    v-model="body"></textarea>
+                    v-model="body" required minlength="5"></textarea>
                   <div class="d-flex py-3">
                     <button type="reset" class="btn btn-info bg-light text-center ">
                       Reset
@@ -187,6 +193,7 @@ export default {
       modules: [Navigation],
       imgApartment: [],
       selectedImage: null,
+      successMessage: '',
     };
   },
   methods: {
@@ -242,6 +249,7 @@ export default {
         )
         .then((res) => {
           console.log(res.data);
+          this.successMessage = res.data.message;
           this.name = "";
           this.surname = "";
           this.phone_number = "";
