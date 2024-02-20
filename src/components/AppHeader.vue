@@ -10,15 +10,17 @@
                 </div>
 
                 <!-- Search Bar  -->
-                <form class="my-form col-8 d-flex justify-content-between gap-0 gap-lg-5" @submit.prevent @keyup.enter="searchApartments()" autocomplete="off">
+                <form class="my-form col-8 d-flex justify-content-between gap-0 gap-lg-5" @submit.prevent
+                    @keyup.enter="searchApartments()" autocomplete="off">
 
                     <div class="input-group flex-nowrap ms-0">
-                        <span @click="searchApartments()" style="transform: translate(27px, 6px); z-index: 1000; cursor: pointer;" id="addon-wrapping"><i
+                        <span @click="searchApartments()"
+                            style="transform: translate(27px, 6px); z-index: 1000; cursor: pointer;" id="addon-wrapping"><i
                                 class="fa-solid text-black fa-magnifying-glass"></i></span>
 
-                        <input type="text" @input.prevent="autocomplete()" list="addressList"
-                            v-model="userInput" class="form-control ps-5 rounded-pill" placeholder="Search"
-                            aria-label="Username" aria-describedby="addon-wrapping">
+                        <input type="text" @input.prevent="autocomplete()" list="addressList" v-model="userInput"
+                            class="form-control ps-5 rounded-pill" placeholder="Search" aria-label="Username"
+                            aria-describedby="addon-wrapping">
                         <datalist id="addressList">
                             <option v-for="item in addressResults" :value="item.address.freeformAddress">
                                 {{ item.address.freeformAddress }}
@@ -35,9 +37,10 @@
                                     :disabled="filterDisabled" style="transform: translateY(8px);"></i></span>
                         </span>
                     </div>
-                    <div v-if="filterOpen && filterDisabled && showMenu" class="offcanvas offcanvas-end text-white bg-rich-black"
-                        :class="showMenu ? 'show' : ''" tabindex="-1"
-                        :style="{ visibility: showMenu ? 'visible' : 'hidden' }" style="z-index: 5000; position: fixed; height: 100vh; box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);">
+                    <div v-if="filterOpen && filterDisabled && showMenu"
+                        class="offcanvas offcanvas-end text-white bg-rich-black" :class="showMenu ? 'show' : ''"
+                        tabindex="-1" :style="{ visibility: showMenu ? 'visible' : 'hidden' }"
+                        style="z-index: 5000; position: fixed; height: 100vh; box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);">
                         <div class="offcanvas-header">
                             <h5 class="offcanvas-title" id="">Filtri</h5>
                             <button type="button" class="btn-close btn-close-white text-reset"
@@ -49,7 +52,8 @@
                             <div class="d-flex gap-4 justify-content-between align-items-center ">
                                 <div class="d-flex flex-column align-items-center">
                                     <label for="rooms">Rooms</label>
-                                    <input style="width: 60px;" type="number" name="rooms" id="rooms" min="1" v-model="rooms">
+                                    <input style="width: 60px;" type="number" name="rooms" id="rooms" min="1"
+                                        v-model="rooms">
                                 </div>
                                 <div class="d-flex flex-column align-items-center">
                                     <label for="beds">Beds</label>
@@ -57,7 +61,8 @@
                                 </div>
                                 <div class="d-flex flex-column align-items-center">
                                     <label for="bathrooms">Bathrooms</label>
-                                    <input style="width: 60px;" type="number" name="bathrooms" id="bathrooms" min="1" v-model="bathrooms">
+                                    <input style="width: 60px;" type="number" name="bathrooms" id="bathrooms" min="1"
+                                        v-model="bathrooms">
                                 </div>
                             </div>
 
@@ -87,7 +92,8 @@
                                         <div
                                             class="form-check form-switch d-flex flex-row-reverse justify-content-between p-0 mb-1 mb-lg-3">
                                             <input class="form-check-input" type="checkbox" role="switch"
-                                                id="flexSwitchCheckDefault" v-model="selectedServices" :value="service.name">
+                                                id="flexSwitchCheckDefault" v-model="selectedServices"
+                                                :value="service.name">
                                             <label class="form-check-label" for="flexSwitchCheckDefault"><i
                                                     :class="service.icon" class="me-2"></i>{{ service.name }}</label>
                                         </div>
@@ -137,14 +143,14 @@ export default {
         }
     },
     methods: {
-        clearFilters(){
+        clearFilters() {
             this.rooms = null;
             this.beds = null;
             this.bathrooms = null;
             this.radiusInput = '';
             this.selectedServices = [];
         },
-        getApartments(){
+        getApartments() {
             axios.get(store.apiUrl + 'apartments').then((res) => {
                 store.apartments = res.data
             })
@@ -153,30 +159,30 @@ export default {
             this.redirectTo('/search');
 
             let url = store.searchUrl;
-            
-            if(this.userInput == ''){
+
+            if (this.userInput == '') {
                 url += '?search=';
             } else {
                 url += '?search=' + this.userInput;
             }
 
-            if(this.radiusInput != ''){
+            if (this.radiusInput != '') {
                 url += '&radius=' + this.radiusInput;
             }
 
-            if(this.rooms){
+            if (this.rooms) {
                 url += '&rooms=' + this.rooms;
             }
 
-            if(this.beds){
+            if (this.beds) {
                 url += '&beds=' + this.beds;
             }
 
-            if(this.bathrooms){
+            if (this.bathrooms) {
                 url += '&bathrooms=' + this.bathrooms;
             }
 
-            if(this.selectedServices.length > 0){
+            if (this.selectedServices.length > 0) {
                 console.log(this.selectedServices);
                 url += '&services=' + this.selectedServices.join(',');
             }
@@ -185,7 +191,7 @@ export default {
             //     let servicesQuery = this.selectedServices.join(',');
             //     url += '&services=' + encodeURIComponent(servicesQuery);
             // }
-            
+
             axios.get(url).then((res) => {
                 console.log(res.data);
                 store.apartments = res.data;
@@ -203,14 +209,14 @@ export default {
             this.showMenu ? this.showMenu = false : this.showMenu = true;
         },
         addOverflowHidden() {
-            if(this.overflow == false){
+            if (this.overflow == false) {
                 document.querySelector('body').classList.add('overflow-hidden');
                 this.overflow = true;
             } else {
                 document.querySelector('body').classList.remove('overflow-hidden');
                 this.overflow = false;
             }
-            
+
         },
         autocomplete() {
             if (this.userInput.length >= 5) {
@@ -222,12 +228,23 @@ export default {
                     .catch(error => console.error('Si è verificato un errore durante il recupero dei dati:', error));
             }
         },
-        redirectTo(url){
+        redirectTo(url) {
             this.$router.push(url);
         }
     },
     created() {
         this.getServices();
+    },
+    mounted() {
+        const storedInput = localStorage.getItem('userInput');
+        if (storedInput) {
+            this.userInput = storedInput;
+        }
+    },
+    watch: {
+        userInput(newValue) {
+            localStorage.setItem('userInput', newValue);
+        }
     }
 }
 </script>
@@ -462,5 +479,4 @@ form {
     .offcanvas.offcanvas-end {
         width: 100% !important;
     }
-}
-</style>
+}</style>
