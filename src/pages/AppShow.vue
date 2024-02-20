@@ -3,7 +3,7 @@
     <div class="bg-rich-black">
       <div class="container">
         <div class="row bg-rich-black py-2">
-          <div class="col-sm-12">
+          <div class="col-sm-12 d-flex justify-content-between">
             <router-link to="/" id="desktoplogo">
               <img src="/public/images/logo.png" alt="" style="width: 100px" />
             </router-link>
