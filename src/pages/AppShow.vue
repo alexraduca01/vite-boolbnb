@@ -113,7 +113,7 @@
             :style="{ visibility: showMenu ? 'visible' : 'hidden' }">
             <div class="offcanvas-body bg-rich-black">
               <div class="d-flex justify-content-end">
-                <button type="button" class="btn-close text-reset bg-white text-white"
+                <button type="button" @click="clearInput()" style="cursor: pointer;" class="btn-close text-reset bg-white text-white"
                   @click.prevent="showOffcanvasMenu()"></button>
               </div>
               <form @submit.prevent="contactForm()" class="text-white fs-3">
@@ -145,7 +145,7 @@
                   <textarea type="text" class="form-control w-50" id="body" name="body" aria-describedby="body"
                     v-model="body" required minlength="5"></textarea>
                   <div class="d-flex py-3">
-                    <button type="reset" class="btn btn-info bg-light text-center ">
+                    <button type="reset" class="btn btn-info bg-light text-center " @click="clearInput()">
                       Reset
                     </button>
                     <button type="submit" class="btn btn-primary mx-3">Send</button>
@@ -269,6 +269,13 @@ export default {
     closeimage() {
       this.selectedImage = null;
     },
+    clearInput() {
+      this.name = ""
+      this.surname = ""
+      this.phone_number = ""
+      this.email = ""
+      this.body = ""  
+    }
   },
   mounted() {
     this.getApartments();
