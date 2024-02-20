@@ -12,11 +12,21 @@
                         :to="{ name: 'show', params: { slug: item.slug } }">
                         <div v-if="!searchFlag">
                             <div class="position-relative">
-                                <img class="img-fluid my-img" :src="store.imgBasePath + item.cover_img" :alt="item.title">
-                                <!-- <img v-for="(images, index) in imgApartment" :src="store.imgBasePath + images" alt=""> -->
-
+                                <swiper :slidesPerView="1" :loop="true" :pagination="{
+                                    clickable: true,
+                                }" :modules="modules" class="mySwiper">
+                                    <swiper-slide>
+                                        <img class="img-fluid my-img" :src="store.imgBasePath + item.cover_img"
+                                            :alt="item.title">
+                                    </swiper-slide>
+                                    <swiper-slide v-for="image in item.images">
+                                        <img  class="img-fluid my-img"
+                                            :src="store.imgBasePath + image.url" alt="">
+                                    </swiper-slide>
+                                </swiper>
                                 <div v-if="item.sponsors.length > 0">
-                                    <span class="badge rounded-pill text-bg-warning text-uppercase"><i class="fa-solid fa-crown"></i> premium</span>
+                                    <span class="badge rounded-pill text-bg-warning text-uppercase"><i
+                                            class="fa-solid fa-crown"></i> premium</span>
                                 </div>
                             </div>
                             <div>
@@ -54,10 +64,22 @@ import axios from 'axios';
 import { store } from '../store.js'
 import AppHeader from '../components/AppHeader.vue'
 import AppFooter from '../components/AppFooter.vue';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import { Pagination, Navigation } from 'swiper/modules';
 export default {
     components: {
         AppHeader,
-        AppFooter
+        AppFooter,
+        Swiper,
+        SwiperSlide,
+    },
+    setup() {
+      return {
+        modules: [Pagination, Navigation],
+      };
     },
     data() {
         return {
@@ -71,14 +93,6 @@ export default {
         getApartments() {
             axios.get(store.apiUrl + 'apartments').then((res) => {
                 store.apartments = res.data
-                // for (let i = 0; i < store.apartments.length; i++) {
-                //     // console.log(store.apartments[i].images);
-                //     for (let a = 0; a < store.apartments[i].images.length; a++) {
-                //         this.imgApartment.push(store.apartments[i].images[a].url);
-                //         // console.log(store.apartments[i].images[a].url);
-                //     }
-                // };
-                // console.log(this.imgApartment);
             })
         },
         postVisuals(apartmentSlug) {
