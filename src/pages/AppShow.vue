@@ -2,11 +2,14 @@
   <div class="w-100 bg-prussian-blue showcontainer position-relative">
     <div class="bg-rich-black">
       <div class="container">
-        <div class="row bg-rich-black py-2">
-          <div class="col-sm-12">
+        <div class="row bg-rich-black align-items-center py-2">
+          <div class="col-sm-10">
             <router-link to="/" id="desktoplogo">
               <img src="/public/images/logo.png" alt="" style="width: 100px" />
             </router-link>
+          </div>
+          <div class="col-sm-2">
+              <a href="http://localhost:8000/login">login</a>
           </div>
         </div>
       </div>
@@ -63,9 +66,9 @@
           </div>
           <h3 class="pt-4">What you will find:</h3>
           <div class="d-flex gap-4">
-            <span class="fs-5 py-1"><i class="fa-solid fa-building"></i> Rooms:
+            <span class="fs-5 py-1"><i class="fa-solid fa-couch"></i> Rooms:
               {{ apartment.rooms }}</span>
-            <span class="fs-5 py-1"><i class="fa-solid fa-bed fs-6"></i> Bedrooms:
+            <span class="fs-5 py-1"><i class="fa-solid fa-bed fs-6"></i> Beds:
               {{ apartment.beds }}</span>
             <span class="fs-5 py-1"><i class="fa-solid fa-bath"></i> Bathrooms:
               {{ apartment.bathrooms }}</span>
@@ -187,6 +190,7 @@ export default {
       modules: [Navigation],
       imgApartment: [],
       selectedImage: null,
+      error: {},
     };
   },
   methods: {
