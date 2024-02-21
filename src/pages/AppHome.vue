@@ -5,46 +5,26 @@
             <div class="container py-4">
                 <div class="row">
                     <router-link v-for="item in store.apartments" @click="postVisuals(item.slug)"
-                        class="col-sm-6 col-md-4 col-lg-3 mb-5 text-white text-decoration-none"
+                        class="col-12 col-md-6 col-lg-4 mb-5 text-white text-decoration-none"
                         :to="{ name: 'show', params: { slug: item.slug } }">
                         <div v-if="!searchFlag" class="position-relative position-relative card-container">
                             <div class="position-relative">
                                 <swiper :slidesPerView="1" :loop="true" :navigation="true" :modules="modules"
-                                    @swiper="onSwiper" @slideChange="onSlideChange" class="mySwiper default-slider">
+                                    @swiper="onSwiper" @slideChange="onSlideChange" class="mySwiper rounded-swiper default-slider">
                                     <swiper-slide>
-                                        <img class="img-fluid my-img" :src="store.imgBasePath + item.cover_img"
-                                            :alt="item.title">
-                                        <div style="position: absolute; top: 10px; left: 10px;">
-                                            <div class="d-flex gap-5">
-                                                <div v-if="item.sponsors.length > 0">
-                                                    <span class="badge rounded-pill text-bg-warning text-uppercase"><i
-                                                            class="fa-solid fa-crown"></i> premium</span>
-                                                </div>
-                                                <div class="position-relative" style="transform: translateY(2px);">
-                                                    <h6 class="fw-bold">Hosted by: <span class="text-capitalize">{{
-                                                        item.user.name }}</span></h6>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <img class="img-fluid my-img" :src="store.imgBasePath + item.cover_img" :alt="item.title">
                                     </swiper-slide>
                                     <swiper-slide v-for="image in item.images">
-                                        <img class="img-fluid my-img" :src="store.imgBasePath + image.url" alt="">
-                                        <div style="position: absolute; top: 10px; left: 10px;">
-                                            <div class="d-flex gap-5">
-                                                <div v-if="item.sponsors.length > 0">
-                                                    <span class="badge rounded-pill text-bg-warning text-uppercase"><i
-                                                            class="fa-solid fa-crown"></i> premium</span>
-                                                </div>
-                                                <div class="position-relative" style="transform: translateY(1px);">
-                                                    <h6 class="fw-bold hosted-by">Hosted by: <span
-                                                            class="text-capitalize">{{ item.user.name }}</span></h6>
-                                                </div>
-                                            </div>
+                                        <img class="img-fluid my-img" :src="store.imgBasePath + image.url" alt="" />
                                     </swiper-slide>
                                 </swiper>
-                                <div v-if="item.sponsors.length > 0">
-                                    <span class="badge rounded-pill text-bg-warning text-uppercase"><i
-                                            class="fa-solid fa-crown"></i> premium</span>
+                                <div style="position: absolute; top: 10px; left: 10px; z-index: 1000;">
+                                    <div class="d-flex gap-5">
+                                        <div v-if="item.sponsors.length > 0">
+                                            <span class="badge rounded-pill text-bg-warning text-uppercase">
+                                                <i class="fa-solid fa-crown"></i> premium</span>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div>
                                     <div class="box">
@@ -120,9 +100,12 @@ export default {
 <style lang="scss" scoped>
 @use '../assets/style/main.scss' as *;
 
+.rounded-swiper {
+    border-radius: 15px;
+}
 
 .card-container:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
     box-shadow: 0 0 15px rgb(255, 255, 255, 0.6);
 }
 
@@ -147,7 +130,7 @@ export default {
     padding-top: 5px;
     padding-bottom: 5px;
     border-radius: 15px;
-    width: 95%;
+    width: 96.5%;
     z-index: 1000;
 }
 
@@ -168,6 +151,12 @@ export default {
     width: 100%;
     max-height: 100%;
     border-radius: 15px;
+}
+
+@media screen and (max-width: 576px){
+    .card-container:hover{
+        transform: scale(1);
+    }
 }
 
 @media screen and (min-width: 768px) {
