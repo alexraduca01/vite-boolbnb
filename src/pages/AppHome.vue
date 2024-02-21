@@ -3,10 +3,7 @@
         <AppHeader />
         <div class="h-100 bg-prussian-blue home-container">
             <div class="container py-3">
-                <div v-if="store.apartments.length == 0">
-                    <h1 class="text-white">No results</h1>
-                </div>
-                <div class="row" v-else>
+                <div class="row">
                     <router-link v-for="item in store.apartments" @click="postVisuals(item.slug)"
                         class="col-sm-6 col-md-4 col-lg-3 text-white text-decoration-none"
                         :to="{ name: 'show', params: { slug: item.slug } }">
@@ -19,7 +16,7 @@
                                             <span class="badge rounded-pill text-bg-warning text-uppercase"><i class="fa-solid fa-crown"></i> premium</span>
                                         </div>
                                         <div class="position-relative" style="transform: translateY(5px);">
-                                            <h6 class="fw-bold">Hosted by: {{ item.user.name }}</h6>
+                                            <h6 class="fw-bold">Hosted by: <span class="text-capitalize">{{ item.user.name }}</span></h6>
                                         </div>
                                     </div>
                                 </div>
@@ -88,8 +85,6 @@ export default {
     padding-bottom: 5px;
     border-radius: 15px;
     width: 95%;
-    // border-bottom-right-radius: 15px;
-    // border-bottom-left-radius: 15px;
 }
 
 .fa-crown {
