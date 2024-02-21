@@ -3,48 +3,58 @@
         <AppHeader />
         <div class="h-100 bg-prussian-blue home-container">
             <div class="container py-3">
-                <div v-if="store.apartments.length == 0">
-                    <h1 class="text-white">No results</h1>
-                </div>
-                <div class="row" v-else>
+                <div class="row">
                     <router-link v-for="item in store.apartments" @click="postVisuals(item.slug)"
-                        class="col-sm-6 col-md-4 col-lg-3 text-white mb-4 text-decoration-none"
+                        class="col-sm-6 col-md-4 col-lg-3 text-white text-decoration-none"
                         :to="{ name: 'show', params: { slug: item.slug } }">
-                        <div v-if="!searchFlag">
+                        <div v-if="!searchFlag" class="position-relative">
                             <div class="position-relative">
                                 <swiper :slidesPerView="1" :loop="true" :navigation="true" :modules="modules"
                                     @swiper="onSwiper" @slideChange="onSlideChange" class="mySwiper default-slider">
                                     <swiper-slide>
                                         <img class="img-fluid my-img" :src="store.imgBasePath + item.cover_img"
                                             :alt="item.title">
+                                        <div style="position: absolute; top: 10px; left: 10px;">
+                                            <div class="d-flex gap-5">
+                                                <div v-if="item.sponsors.length > 0">
+                                                    <span class="badge rounded-pill text-bg-warning text-uppercase"><i
+                                                            class="fa-solid fa-crown"></i> premium</span>
+                                                </div>
+                                                <div class="position-relative" style="transform: translateY(5px);">
+                                                    <h6 class="fw-bold">Hosted by: <span class="text-capitalize">{{
+                                                        item.user.name }}</span></h6>
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </swiper-slide>
                                     <swiper-slide v-for="image in item.images">
                                         <img class="img-fluid my-img" :src="store.imgBasePath + image.url" alt="">
+                                        <div style="position: absolute; top: 10px; left: 10px;">
+                                            <div class="d-flex gap-5">
+                                                <div v-if="item.sponsors.length > 0">
+                                                    <span class="badge rounded-pill text-bg-warning text-uppercase"><i
+                                                            class="fa-solid fa-crown"></i> premium</span>
+                                                </div>
+                                                <div class="position-relative" style="transform: translateY(5px);">
+                                                    <h6 class="fw-bold">Hosted by: <span class="text-capitalize">{{
+                                                        item.user.name }}</span></h6>
+                                                </div>
+                                            </div>
+
+                                        </div>
                                     </swiper-slide>
                                 </swiper>
                                 <div v-if="item.sponsors.length > 0">
                                     <span class="badge rounded-pill text-bg-warning text-uppercase"><i
                                             class="fa-solid fa-crown"></i> premium</span>
+                                    =======
+
                                 </div>
-                            </div>
-                            <div>
-                                <div class="my-2">
-                                    <h5 class="m-0">{{ item.title }}</h5>
-                                    <span style="font-size: 0.7rem;">{{ item.address }}</span>
-                                </div>
-                                <h6>Offered by: {{ item.user.name }}</h6>
-                                <div class="d-flex flex-column gap-1">
-                                    <div class="d-flex gap-2">
-                                        <i class="fa-solid fa-couch"></i>
-                                        <div style="line-height: 15px;">{{ item.rooms }}</div>
-                                    </div>
-                                    <div class="d-flex gap-2">
-                                        <i class="fa-solid fa-bed"></i>
-                                        <div style="line-height: 15px;">{{ item.beds }}</div>
-                                    </div>
-                                    <div class="d-flex gap-2">
-                                        <i class="fa-solid fa-bath"></i>
-                                        <div class="ps-1" style="line-height: 15px;">{{ item.bathrooms }}</div>
+                                <div>
+                                    <div class="box">
+                                        <h5 class="m-0">{{ item.title }}</h5>
+                                        <span style="font-size: 0.7rem;">{{ item.address }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -115,14 +125,24 @@ export default {
 <style lang="scss" scoped>
 @use '../assets/style/main.scss' as *;
 
+
+.box {
+    position: relative;
+    bottom: 65px;
+    left: 8px;
+    background-color: rgb(0, 0, 0, 0.6);
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 15px;
+    width: 95%;
+}
+
 .fa-crown {
     transform: translateY(-1px);
 }
 
 .badge {
-    position: absolute;
-    top: 10px;
-    left: 10px;
     font-size: 1rem;
 }
 
@@ -131,11 +151,12 @@ export default {
 }
 
 .my-img {
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 6 / 5;
     width: 100%;
     max-height: 100%;
     border-radius: 15px;
 }
+
 @media screen and (min-width: 768px) {
     .home-container {
         padding-bottom: 920px;
@@ -147,5 +168,4 @@ export default {
         padding-bottom: 520px;
         min-height: 100vh;
     }
-}
-</style>
+}</style>

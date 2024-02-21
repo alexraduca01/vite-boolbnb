@@ -1,19 +1,19 @@
 <template>
-        <div class=" bg-prussian-blue">
+        <div class="w-100 vh-100 bg-prussian-blue">
                 <img  src="/public/images/house-gif.gif" alt="loader-logo">
             <div class="loader">
-                <p class="text-white">Loading your apartment  
+                <p class="text-white">Loading your apartments  
                     <span class="dots"></span>
                     <span class="dots"></span>
                     <span class="dots"></span>
                 </p>
-              </div>
             </div>
+        </div>
 </template>
 
 <script>
 export default {
-    name: 'AppLoader',
+    name: 'LoaderComponent',
 }
 </script>
 
