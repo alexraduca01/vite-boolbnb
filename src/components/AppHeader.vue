@@ -1,24 +1,29 @@
 <template>
-    <div class="w-100 bg-rich-black p-2 position-relative">
+    <div class="w-100 bg-rich-black p-3 position-relative" >
+        <div v-if="loaderFlag" class="overflow-y-hidden">
+            <LoaderComponent />
+        </div>
         <div class="container text-white p-0">
             <div class="row justify-content-between align-items-center m-0">
                 <!-- Logo -->
                 <div class="col-2">
                     <router-link to="/" @click="getApartments(), userInput = ''">
-                        <img src="/public/images/logo.png" alt="" style="width: 100px;">
+                        <img src="/public/images/logo.png" class="logo" alt="" >
                     </router-link>
                 </div>
 
                 <!-- Search Bar  -->
-                <form class="my-form col-8 d-flex justify-content-between gap-0 gap-lg-5" @submit.prevent @keyup.enter="searchApartments()" autocomplete="off">
+                <form class="my-form col-8 d-flex justify-content-between gap-0 gap-lg-5" @submit.prevent
+                    @keyup.enter="searchApartments()" autocomplete="off">
 
                     <div class="input-group flex-nowrap ms-0">
-                        <span @click="searchApartments()" style="transform: translate(27px, 6px); z-index: 1000; cursor: pointer;" id="addon-wrapping"><i
+                        <span @click="searchApartments()"
+                            style="transform: translate(27px, 6px); z-index: 1000; cursor: pointer;" id="addon-wrapping"><i
                                 class="fa-solid text-black fa-magnifying-glass"></i></span>
 
-                        <input type="text" @input.prevent="autocomplete()" list="addressList"
-                            v-model="userInput" class="form-control ps-5 rounded-pill" placeholder="Search"
-                            aria-label="Username" aria-describedby="addon-wrapping">
+                        <input type="text" @input.prevent="autocomplete()" list="addressList" v-model="userInput"
+                            class="form-control ps-5 rounded-pill" placeholder="Search" aria-label="Username"
+                            aria-describedby="addon-wrapping">
                         <datalist id="addressList">
                             <option v-for="item in addressResults" :value="item.address.freeformAddress">
                                 {{ item.address.freeformAddress }}
@@ -29,15 +34,16 @@
 
                     <!-- Filter -->
 
-                    <div>
+                    <div class="ps-3">
                         <span>
                             <span><i class="fa-solid fa-filter" @click.prevent="showOffcanvasMenu(), clearFilters()"
                                     :disabled="filterDisabled" style="transform: translateY(8px);"></i></span>
                         </span>
                     </div>
-                    <div v-if="filterOpen && filterDisabled && showMenu" class="offcanvas offcanvas-end text-white bg-rich-black"
-                        :class="showMenu ? 'show' : ''" tabindex="-1"
-                        :style="{ visibility: showMenu ? 'visible' : 'hidden' }" style="z-index: 5000; position: fixed; height: 100vh; box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);">
+                    <div v-if="filterOpen && filterDisabled && showMenu"
+                        class="offcanvas offcanvas-end text-white bg-rich-black" :class="showMenu ? 'show' : ''"
+                        tabindex="-1" :style="{ visibility: showMenu ? 'visible' : 'hidden' }"
+                        style="z-index: 5000; position: fixed; height: 100vh; box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);">
                         <div class="offcanvas-header">
                             <h5 class="offcanvas-title" id="">Filtri</h5>
                             <button type="button" class="btn-close btn-close-white text-reset"
@@ -49,7 +55,8 @@
                             <div class="d-flex gap-4 justify-content-between align-items-center ">
                                 <div class="d-flex flex-column align-items-center">
                                     <label for="rooms">Rooms</label>
-                                    <input style="width: 60px;" type="number" name="rooms" id="rooms" min="1" v-model="rooms">
+                                    <input style="width: 60px;" type="number" name="rooms" id="rooms" min="1"
+                                        v-model="rooms">
                                 </div>
                                 <div class="d-flex flex-column align-items-center">
                                     <label for="beds">Beds</label>
@@ -57,7 +64,8 @@
                                 </div>
                                 <div class="d-flex flex-column align-items-center">
                                     <label for="bathrooms">Bathrooms</label>
-                                    <input style="width: 60px;" type="number" name="bathrooms" id="bathrooms" min="1" v-model="bathrooms">
+                                    <input style="width: 60px;" type="number" name="bathrooms" id="bathrooms" min="1"
+                                        v-model="bathrooms">
                                 </div>
                             </div>
 
@@ -87,7 +95,8 @@
                                         <div
                                             class="form-check form-switch d-flex flex-row-reverse justify-content-between p-0 mb-1 mb-lg-3">
                                             <input class="form-check-input" type="checkbox" role="switch"
-                                                id="flexSwitchCheckDefault" v-model="selectedServices" :value="service.name">
+                                                id="flexSwitchCheckDefault" v-model="selectedServices"
+                                                :value="service.name">
                                             <label class="form-check-label" for="flexSwitchCheckDefault"><i
                                                     :class="service.icon" class="me-2"></i>{{ service.name }}</label>
                                         </div>
@@ -107,7 +116,16 @@
 
                 <!-- Login -->
                 <div class="col-2">
-                    <a href="http://localhost:8000/login">login</a>
+                    <!-- <a href="http://localhost:8000/login">login</a> -->
+                    <div class="dropdown d-flex justify-content-end pe-3">
+                        <div class="text-bg-light login-button d-flex justify-content-center align-items-center" @click="dropdownMenu()">
+                            <img src="/public/images/user.png" style="width: 25px;" alt="">
+                        </div>
+                        <ul class="dropdown-menu" style="transform: translateY(40px);" ref="dropdown">
+                            <li><a class="dropdown-item" href="http://localhost:8000/login">Login</a></li>
+                            <li><a class="dropdown-item" href="http://localhost:8000/register">Register</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -117,8 +135,12 @@
 <script>
 import axios from 'axios';
 import { store } from '../store.js';
+import LoaderComponent from './LoaderComponent.vue';
 export default {
     name: 'AppHeader',
+    components: {
+        LoaderComponent,
+    },
     data() {
         return {
             store,
@@ -134,58 +156,56 @@ export default {
             beds: null,
             bathrooms: null,
             selectedServices: [],
+            loaderFlag: false,
         }
     },
     methods: {
-        clearFilters(){
+        clearFilters() {
             this.rooms = null;
             this.beds = null;
             this.bathrooms = null;
             this.radiusInput = '';
             this.selectedServices = [];
         },
-        getApartments(){
+        getApartments() {
             axios.get(store.apiUrl + 'apartments').then((res) => {
                 store.apartments = res.data
             })
         },
         searchApartments() {
+            this.loaderFlag = true;
+            this.loading();
             this.redirectTo('/search');
 
             let url = store.searchUrl;
-            
-            if(this.userInput == ''){
+
+            if (this.userInput == '') {
                 url += '?search=';
             } else {
                 url += '?search=' + this.userInput;
             }
 
-            if(this.radiusInput != ''){
+            if (this.radiusInput != '') {
                 url += '&radius=' + this.radiusInput;
             }
 
-            if(this.rooms){
+            if (this.rooms) {
                 url += '&rooms=' + this.rooms;
             }
 
-            if(this.beds){
+            if (this.beds) {
                 url += '&beds=' + this.beds;
             }
 
-            if(this.bathrooms){
+            if (this.bathrooms) {
                 url += '&bathrooms=' + this.bathrooms;
             }
 
-            if(this.selectedServices.length > 0){
+            if (this.selectedServices.length > 0) {
                 console.log(this.selectedServices);
                 url += '&services=' + this.selectedServices.join(',');
             }
 
-            // if (this.selectedServices.length > 0) {
-            //     let servicesQuery = this.selectedServices.join(',');
-            //     url += '&services=' + encodeURIComponent(servicesQuery);
-            // }
-            
             axios.get(url).then((res) => {
                 console.log(res.data);
                 store.apartments = res.data;
@@ -203,14 +223,14 @@ export default {
             this.showMenu ? this.showMenu = false : this.showMenu = true;
         },
         addOverflowHidden() {
-            if(this.overflow == false){
+            if (this.overflow == false) {
                 document.querySelector('body').classList.add('overflow-hidden');
                 this.overflow = true;
             } else {
                 document.querySelector('body').classList.remove('overflow-hidden');
                 this.overflow = false;
             }
-            
+
         },
         autocomplete() {
             if (this.userInput.length >= 5) {
@@ -222,12 +242,31 @@ export default {
                     .catch(error => console.error('Si è verificato un errore durante il recupero dei dati:', error));
             }
         },
-        redirectTo(url){
+        redirectTo(url) {
             this.$router.push(url);
+        },
+        dropdownMenu(){
+            this.$refs.dropdown.classList.toggle('show');
+        },
+        loading(){
+            const loading = setTimeout(() => {
+                this.loaderFlag = false;
+            }, 1000);
         }
     },
     created() {
         this.getServices();
+    },
+    mounted() {
+        const storedInput = localStorage.getItem('userInput');
+        if (storedInput) {
+            this.userInput = storedInput;
+        }
+    },
+    watch: {
+        userInput(newValue) {
+            localStorage.setItem('userInput', newValue);
+        }
     }
 }
 </script>
@@ -236,6 +275,16 @@ export default {
 @use '../assets/style/main.scss' as *;
 
 $number-of-options: 5;
+
+.login-button{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.logo{
+    width: 100px;
+}
 
 .my-form {
     max-width: none;
@@ -462,5 +511,7 @@ form {
     .offcanvas.offcanvas-end {
         width: 100% !important;
     }
-}
-</style>
+    .logo {
+        width: 75px;
+    }
+}</style>
