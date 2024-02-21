@@ -1,5 +1,8 @@
 <template>
-    <div class="w-100 bg-rich-black p-3 position-relative">
+    <div class="w-100 bg-rich-black p-3 position-relative" >
+        <div v-if="loaderFlag" class="overflow-y-hidden">
+            <LoaderComponent />
+        </div>
         <div class="container text-white p-0">
             <div class="row justify-content-between align-items-center m-0">
                 <!-- Logo -->
@@ -132,8 +135,12 @@
 <script>
 import axios from 'axios';
 import { store } from '../store.js';
+import LoaderComponent from './LoaderComponent.vue';
 export default {
     name: 'AppHeader',
+    components: {
+        LoaderComponent,
+    },
     data() {
         return {
             store,
@@ -149,6 +156,7 @@ export default {
             beds: null,
             bathrooms: null,
             selectedServices: [],
+            loaderFlag: false,
         }
     },
     methods: {
@@ -165,6 +173,8 @@ export default {
             })
         },
         searchApartments() {
+            this.loaderFlag = true;
+            this.loading();
             this.redirectTo('/search');
 
             let url = store.searchUrl;
@@ -237,6 +247,11 @@ export default {
         },
         dropdownMenu(){
             this.$refs.dropdown.classList.toggle('show');
+        },
+        loading(){
+            const loading = setTimeout(() => {
+                this.loaderFlag = false;
+            }, 1000);
         }
     },
     created() {
