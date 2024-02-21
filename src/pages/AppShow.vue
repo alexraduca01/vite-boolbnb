@@ -1,19 +1,6 @@
 <template>
   <div class="w-100 bg-prussian-blue showcontainer position-relative">
-    <div class="bg-rich-black">
-      <div class="container">
-        <div class="row bg-rich-black align-items-center py-2">
-          <div class="col-sm-10">
-            <router-link to="/" id="desktoplogo">
-              <img src="/public/images/logo.png" alt="" style="width: 100px" />
-            </router-link>
-          </div>
-          <div class="col-sm-2">
-              <a href="http://localhost:8000/login">login</a>
-          </div>
-        </div>
-      </div>
-    </div>
+    <AppHeader />
     <main>
       <div class="container">
         <div id="gallery" class="photos-grid-container gallery">
@@ -173,9 +160,11 @@ import { Navigation } from "swiper/modules";
 import axios from "axios";
 import { store } from "../store.js";
 import LoaderComponent from "../components/LoaderComponent.vue";
+import AppHeader from "../components/AppHeader.vue";
 export default {
   name: "AppShow",
   components: {
+    AppHeader,
     AppFooter,
     Swiper,
     SwiperSlide,
