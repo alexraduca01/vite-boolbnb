@@ -12,16 +12,14 @@
                         :to="{ name: 'show', params: { slug: item.slug } }">
                         <div v-if="!searchFlag">
                             <div class="position-relative">
-                                <swiper :slidesPerView="1" :loop="true" :pagination="{
-                                    clickable: true,
-                                }" :modules="modules" class="mySwiper">
+                                <swiper :slidesPerView="1" :loop="true" :navigation="true" :modules="modules"
+                                    @swiper="onSwiper" @slideChange="onSlideChange" class="mySwiper default-slider">
                                     <swiper-slide>
                                         <img class="img-fluid my-img" :src="store.imgBasePath + item.cover_img"
                                             :alt="item.title">
                                     </swiper-slide>
                                     <swiper-slide v-for="image in item.images">
-                                        <img  class="img-fluid my-img"
-                                            :src="store.imgBasePath + image.url" alt="">
+                                        <img class="img-fluid my-img" :src="store.imgBasePath + image.url" alt="">
                                     </swiper-slide>
                                 </swiper>
                                 <div v-if="item.sponsors.length > 0">
@@ -66,9 +64,9 @@ import AppHeader from '../components/AppHeader.vue'
 import AppFooter from '../components/AppFooter.vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
-import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import { Pagination, Navigation } from 'swiper/modules';
+import { Navigation } from 'swiper/modules';
+
 export default {
     components: {
         AppHeader,
@@ -77,16 +75,23 @@ export default {
         SwiperSlide,
     },
     setup() {
-      return {
-        modules: [Pagination, Navigation],
-      };
+        const onSwiper = (swiper) => {
+            console.log(swiper);
+        };
+        const onSlideChange = () => {
+            console.log('slide change');
+        };
+        return {
+            onSwiper,
+            onSlideChange,
+            modules: [Navigation],
+        };
     },
     data() {
         return {
             store,
             searchFlag: false,
             userInput: '',
-            imgApartment: [],
         }
     },
     methods: {
@@ -103,13 +108,12 @@ export default {
     },
     created() {
         this.getApartments();
-    }
+    },
 }
 </script>
 
 <style lang="scss" scoped>
 @use '../assets/style/main.scss' as *;
-
 
 .fa-crown {
     transform: translateY(-1px);
@@ -132,7 +136,6 @@ export default {
     max-height: 100%;
     border-radius: 15px;
 }
-
 @media screen and (min-width: 768px) {
     .home-container {
         padding-bottom: 920px;
