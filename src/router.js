@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import AppHome from './pages/AppHome.vue'
 import AppShow from './pages/AppShow.vue'
 import NotFound from "./pages/NotFound.vue";
-import AppLoader from "./pages/AppLoader.vue";
+import LoaderComponent from "./components/LoaderComponent.vue";
 import AppSearch from "./pages/AppSearch.vue";
 
 const router = createRouter({
@@ -26,7 +26,7 @@ const router = createRouter({
     {
       path: '/loader',
       name: 'loader',
-      component: AppLoader
+      component: LoaderComponent
     },
     {
       path: "/:pathMatch(.*)*",

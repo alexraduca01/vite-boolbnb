@@ -8,7 +8,7 @@
                 </div>
                 <div class="row" v-else>
                     <router-link v-for="item in store.apartments" @click="postVisuals(item.slug)"
-                        class="col-sm-6 col-md-4 col-lg-3 text-white mb-4 text-decoration-none"
+                        class="col-sm-6 col-md-4 col-lg-3 text-white text-decoration-none"
                         :to="{ name: 'show', params: { slug: item.slug } }">
                         <div v-if="!searchFlag" class="position-relative">
                             <div class="position-relative">
@@ -25,7 +25,7 @@
                                 </div>
                             </div>
                             <div>
-                                <div class="my-2">
+                                <div class="box">
                                     <h5 class="m-0">{{ item.title }}</h5>
                                     <span style="font-size: 0.7rem;">{{ item.address }}</span>
                                 </div>
@@ -78,6 +78,19 @@ export default {
 <style lang="scss" scoped>
 @use '../assets/style/main.scss' as *;
 
+.box {
+    position: relative;
+    bottom: 65px;
+    left: 8px;
+    background-color: rgb(0, 0, 0, 0.6);
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 15px;
+    width: 95%;
+    // border-bottom-right-radius: 15px;
+    // border-bottom-left-radius: 15px;
+}
 
 .fa-crown {
     transform: translateY(-1px);
@@ -92,7 +105,7 @@ export default {
 }
 
 .my-img {
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 6 / 5;
     width: 100%;
     max-height: 100%;
     border-radius: 15px;

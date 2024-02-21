@@ -170,12 +170,14 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import axios from "axios";
 import { store } from "../store.js";
+import LoaderComponent from "../components/LoaderComponent.vue";
 export default {
   name: "AppShow",
   components: {
     AppFooter,
     Swiper,
     SwiperSlide,
+    LoaderComponent,
   },
   data() {
     return {
@@ -272,9 +274,6 @@ export default {
   },
   mounted() {
     this.getApartments();
-  },
-  created(){
-    
   },
 };
 </script>

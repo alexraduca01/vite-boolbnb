@@ -1,5 +1,8 @@
 <template>
-    <div class="position-relative">
+    <div v-if="loaderFlag">
+        <LoaderComponent />
+    </div>
+    <div v-else class="position-relative">
         <AppHeader />
         <div class="h-100 bg-prussian-blue home-container">
             <div class="container py-3">
@@ -49,17 +52,20 @@ import axios from 'axios';
 import { store } from '../store.js';
 import AppHeader from '../components/AppHeader.vue';
 import AppFooter from '../components/AppFooter.vue';
+import LoaderComponent from '../components/LoaderComponent.vue';
 export default {
     name: 'AppSearch',
     data() {
         return {
             store,
             searchFlag: false,
+            loaderFlag: true,
         }
     },
     components: {
         AppFooter,
         AppHeader,
+        LoaderComponent
     },
     methods: {
         postVisuals(apartmentSlug) {
@@ -67,6 +73,14 @@ export default {
                 // console.log(res.data);
             })
         },
+        loading(){
+            const loading = setTimeout(() => {
+                this.loaderFlag = false;
+            }, 2000);
+        }
+    },
+    mounted(){
+        this.loading();
     }
 }
 
