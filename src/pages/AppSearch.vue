@@ -21,7 +21,7 @@
                                         <div v-if="item.sponsors.length > 0">
                                             <span class="badge rounded-pill text-bg-warning text-uppercase"><i class="fa-solid fa-crown"></i> premium</span>
                                         </div>
-                                        <div class="position-relative" style="transform: translateY(2px);">
+                                        <div class="position-relative" style="transform: translateY(1px);">
                                             <h6 class="fw-bold hosted-by">Hosted by: <span class="text-capitalize">{{ item.user.name }}</span></h6>
                                         </div>
                                     </div>
