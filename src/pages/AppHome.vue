@@ -2,21 +2,21 @@
     <div class="position-relative">
         <AppHeader />
         <div class="h-100 bg-prussian-blue home-container">
-            <div class="container py-3">
+            <div class="container py-4">
                 <div class="row">
                     <router-link v-for="item in store.apartments" @click="postVisuals(item.slug)"
-                        class="col-sm-6 col-md-4 col-lg-3 text-white text-decoration-none"
+                        class="col-sm-6 col-md-4 col-lg-3 mb-5 text-white text-decoration-none"
                         :to="{ name: 'show', params: { slug: item.slug } }">
-                        <div v-if="!searchFlag" class="position-relative">
-                            <div class="position-relative">
-                                <img class="img-fluid my-img" :src="store.imgBasePath + item.cover_img" :alt="item.title">
+                        <div v-if="!searchFlag" class="position-relative card-container">
+                            <div>
+                                <img class="img-fluid  my-img" :src="store.imgBasePath + item.cover_img" :alt="item.title">
                                 <div style="position: absolute; top: 10px; left: 10px;">
                                     <div class="d-flex gap-5">
                                         <div v-if="item.sponsors.length > 0">
                                             <span class="badge rounded-pill text-bg-warning text-uppercase"><i class="fa-solid fa-crown"></i> premium</span>
                                         </div>
-                                        <div class="position-relative" style="transform: translateY(5px);">
-                                            <h6 class="fw-bold">Hosted by: <span class="text-capitalize">{{ item.user.name }}</span></h6>
+                                        <div class="position-relative" style="transform: translateY(2px);">
+                                            <h6 class="fw-bold hosted-by">Hosted by: <span class="text-capitalize">{{ item.user.name }}</span></h6>
                                         </div>
                                     </div>
                                 </div>
@@ -75,9 +75,26 @@ export default {
 <style lang="scss" scoped>
 @use '../assets/style/main.scss' as *;
 
+.card-container:hover{
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgb(255, 255, 255, 0.6);
+}
+
+.card-container {
+    transition: all 0.3s linear;
+    border-radius: 15px;
+}
+
+.hosted-by {
+    background-color: rgb(0, 0, 0, 0.6);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+}
+
 .box {
-    position: relative;
-    bottom: 65px;
+    position: absolute;
+    bottom: 10px;
     left: 8px;
     background-color: rgb(0, 0, 0, 0.6);
     padding-left: 10px;
