@@ -7,24 +7,50 @@
                     <router-link v-for="item in store.apartments" @click="postVisuals(item.slug)"
                         class="col-sm-6 col-md-4 col-lg-3 mb-5 text-white text-decoration-none"
                         :to="{ name: 'show', params: { slug: item.slug } }">
-                        <div v-if="!searchFlag" class="position-relative card-container">
-                            <div>
-                                <img class="img-fluid  my-img" :src="store.imgBasePath + item.cover_img" :alt="item.title">
-                                <div style="position: absolute; top: 10px; left: 10px;">
-                                    <div class="d-flex gap-5">
-                                        <div v-if="item.sponsors.length > 0">
-                                            <span class="badge rounded-pill text-bg-warning text-uppercase"><i class="fa-solid fa-crown"></i> premium</span>
+                        <div v-if="!searchFlag" class="position-relative position-relative card-container">
+                            <div class="position-relative">
+                                <swiper :slidesPerView="1" :loop="true" :navigation="true" :modules="modules"
+                                    @swiper="onSwiper" @slideChange="onSlideChange" class="mySwiper default-slider">
+                                    <swiper-slide>
+                                        <img class="img-fluid my-img" :src="store.imgBasePath + item.cover_img"
+                                            :alt="item.title">
+                                        <div style="position: absolute; top: 10px; left: 10px;">
+                                            <div class="d-flex gap-5">
+                                                <div v-if="item.sponsors.length > 0">
+                                                    <span class="badge rounded-pill text-bg-warning text-uppercase"><i
+                                                            class="fa-solid fa-crown"></i> premium</span>
+                                                </div>
+                                                <div class="position-relative" style="transform: translateY(2px);">
+                                                    <h6 class="fw-bold">Hosted by: <span class="text-capitalize">{{
+                                                        item.user.name }}</span></h6>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="position-relative" style="transform: translateY(1px);">
-                                            <h6 class="fw-bold hosted-by">Hosted by: <span class="text-capitalize">{{ item.user.name }}</span></h6>
-                                        </div>
-                                    </div>
+                                    </swiper-slide>
+                                    <swiper-slide v-for="image in item.images">
+                                        <img class="img-fluid my-img" :src="store.imgBasePath + image.url" alt="">
+                                        <div style="position: absolute; top: 10px; left: 10px;">
+                                            <div class="d-flex gap-5">
+                                                <div v-if="item.sponsors.length > 0">
+                                                    <span class="badge rounded-pill text-bg-warning text-uppercase"><i
+                                                            class="fa-solid fa-crown"></i> premium</span>
+                                                </div>
+                                                <div class="position-relative" style="transform: translateY(1px);">
+                                                    <h6 class="fw-bold hosted-by">Hosted by: <span
+                                                            class="text-capitalize">{{ item.user.name }}</span></h6>
+                                                </div>
+                                            </div>
+                                    </swiper-slide>
+                                </swiper>
+                                <div v-if="item.sponsors.length > 0">
+                                    <span class="badge rounded-pill text-bg-warning text-uppercase"><i
+                                            class="fa-solid fa-crown"></i> premium</span>
                                 </div>
-                            </div>
-                            <div>
-                                <div class="box">
-                                    <h5 class="m-0">{{ item.title }}</h5>
-                                    <span style="font-size: 0.7rem;">{{ item.address }}</span>
+                                <div>
+                                    <div class="box">
+                                        <h5 class="m-0">{{ item.title }}</h5>
+                                        <span style="font-size: 0.7rem;">{{ item.address }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -41,17 +67,36 @@ import axios from 'axios';
 import { store } from '../store.js'
 import AppHeader from '../components/AppHeader.vue'
 import AppFooter from '../components/AppFooter.vue';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { Navigation } from 'swiper/modules';
+
 export default {
     components: {
         AppHeader,
-        AppFooter
+        AppFooter,
+        Swiper,
+        SwiperSlide,
+    },
+    setup() {
+        const onSwiper = (swiper) => {
+            console.log(swiper);
+        };
+        const onSlideChange = () => {
+            console.log('slide change');
+        };
+        return {
+            onSwiper,
+            onSlideChange,
+            modules: [Navigation],
+        };
     },
     data() {
         return {
             store,
             searchFlag: false,
             userInput: '',
-            imgApartment: [],
         }
     },
     methods: {
@@ -68,14 +113,15 @@ export default {
     },
     created() {
         this.getApartments();
-    }
+    },
 }
 </script>
 
 <style lang="scss" scoped>
 @use '../assets/style/main.scss' as *;
 
-.card-container:hover{
+
+.card-container:hover {
     transform: scale(1.1);
     box-shadow: 0 0 15px rgb(255, 255, 255, 0.6);
 }
