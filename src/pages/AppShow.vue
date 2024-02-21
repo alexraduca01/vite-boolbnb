@@ -55,29 +55,31 @@
                 <span class="fw-bold">{{
                   apartment.user?.name + " " + apartment.user?.surname
                 }}</span></span>
-              <div class="py-4">
+              <div class="pt-3">
                 <span class="mb-4 float-start">
-                  <button class="btn btn-primary bg-light text-dark" type="button" @click.prevent="showOffcanvasMenu()">
+                  <button class="btn btn-primary bg-light text-dark fw-bold" type="button" @click.prevent="showOffcanvasMenu()">
                     Contact Host
                   </button>
                 </span>
               </div>
             </div>
           </div>
-          <h3 class="pt-4">What you will find:</h3>
-          <div class="d-flex gap-4">
-            <span class="fs-5 py-1"><i class="fa-solid fa-couch"></i> Rooms:
+          <h3 class="pt-1">What you will find:</h3>
+          <div class="d-flex gap-4 pt-2 fw-bold">
+            <span class="fs-5 py-1 badge rounded-pill bg-light text-dark"><i class="fa-solid fa-couch"></i> Rooms:
               {{ apartment.rooms }}</span>
-            <span class="fs-5 py-1"><i class="fa-solid fa-bed fs-6"></i> Beds:
+            <span class="fs-5 py-1 badge rounded-pill bg-light text-dark"><i class="fa-solid fa-bed fs-6"></i> Beds:
               {{ apartment.beds }}</span>
-            <span class="fs-5 py-1"><i class="fa-solid fa-bath"></i> Bathrooms:
+            <span class="fs-5 py-1 badge rounded-pill bg-light text-dark"><i class="fa-solid fa-bath"></i> Bathrooms:
               {{ apartment.bathrooms }}</span>
           </div>
           <h3 class="pt-4">Services:</h3>
           <div>
             <ul class="list-unstyled d-flex flex-column align-content-center">
-              <li v-for="service in services" class="py-1 fs-5 text-capitalize">
-                <i :class="service.icon" class="pe-3"></i> {{ service.name }}
+              <li v-for="service in services" class="py-1 fs-4 text-capitalize ">
+                <span class="badge rounded-pill bg-light text-dark">
+                  <i :class="service.icon" class="pe-1"></i> {{ service.name }}
+                </span>
               </li>
             </ul>
           </div>
@@ -113,7 +115,7 @@
             :style="{ visibility: showMenu ? 'visible' : 'hidden' }">
             <div class="offcanvas-body bg-rich-black">
               <div class="d-flex justify-content-end">
-                <button type="button" class="btn-close text-reset bg-white text-white"
+                <button type="button" @click="clearInput()" style="cursor: pointer;" class="btn-close text-reset bg-white text-white"
                   @click.prevent="showOffcanvasMenu()"></button>
               </div>
               <form @submit.prevent="contactForm()" class="text-white fs-3">
@@ -145,7 +147,7 @@
                   <textarea type="text" class="form-control w-50" id="body" name="body" aria-describedby="body"
                     v-model="body" required minlength="5"></textarea>
                   <div class="d-flex py-3">
-                    <button type="reset" class="btn btn-info bg-light text-center ">
+                    <button type="reset" class="btn btn-info bg-light text-center " @click="clearInput()">
                       Reset
                     </button>
                     <button type="submit" class="btn btn-primary mx-3">Send</button>
@@ -271,6 +273,13 @@ export default {
     closeimage() {
       this.selectedImage = null;
     },
+    clearInput() {
+      this.name = ""
+      this.surname = ""
+      this.phone_number = ""
+      this.email = ""
+      this.body = ""  
+    }
   },
   mounted() {
     this.getApartments();
