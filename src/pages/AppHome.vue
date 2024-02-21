@@ -2,12 +2,12 @@
     <div class="position-relative">
         <AppHeader />
         <div class="h-100 bg-prussian-blue home-container">
-            <div class="container py-3">
+            <div class="container py-4">
                 <div class="row">
                     <router-link v-for="item in store.apartments" @click="postVisuals(item.slug)"
-                        class="col-sm-6 col-md-4 col-lg-3 text-white text-decoration-none"
+                        class="col-sm-6 col-md-4 col-lg-3 mb-5 text-white text-decoration-none"
                         :to="{ name: 'show', params: { slug: item.slug } }">
-                        <div v-if="!searchFlag" class="position-relative">
+                        <div v-if="!searchFlag" class="position-relative position-relative card-container">
                             <div class="position-relative">
                                 <swiper :slidesPerView="1" :loop="true" :navigation="true" :modules="modules"
                                     @swiper="onSwiper" @slideChange="onSlideChange" class="mySwiper default-slider">
@@ -20,12 +20,11 @@
                                                     <span class="badge rounded-pill text-bg-warning text-uppercase"><i
                                                             class="fa-solid fa-crown"></i> premium</span>
                                                 </div>
-                                                <div class="position-relative" style="transform: translateY(5px);">
+                                                <div class="position-relative" style="transform: translateY(2px);">
                                                     <h6 class="fw-bold">Hosted by: <span class="text-capitalize">{{
                                                         item.user.name }}</span></h6>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </swiper-slide>
                                     <swiper-slide v-for="image in item.images">
@@ -36,20 +35,17 @@
                                                     <span class="badge rounded-pill text-bg-warning text-uppercase"><i
                                                             class="fa-solid fa-crown"></i> premium</span>
                                                 </div>
-                                                <div class="position-relative" style="transform: translateY(5px);">
-                                                    <h6 class="fw-bold">Hosted by: <span class="text-capitalize">{{
-                                                        item.user.name }}</span></h6>
+                                                <div class="position-relative" style="transform: translateY(2px);">
+                                                    <h6 class="fw-bold hosted-by">Hosted by: <span
+                                                            class="text-capitalize">{{ item.user.name }}</span></h6>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </swiper-slide>
                                 </swiper>
                                 <div v-if="item.sponsors.length > 0">
                                     <span class="badge rounded-pill text-bg-warning text-uppercase"><i
                                             class="fa-solid fa-crown"></i> premium</span>
-                                    =======
-
                                 </div>
                                 <div>
                                     <div class="box">
@@ -126,9 +122,26 @@ export default {
 @use '../assets/style/main.scss' as *;
 
 
+.card-container:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgb(255, 255, 255, 0.6);
+}
+
+.card-container {
+    transition: all 0.3s linear;
+    border-radius: 15px;
+}
+
+.hosted-by {
+    background-color: rgb(0, 0, 0, 0.6);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+}
+
 .box {
-    position: relative;
-    bottom: 65px;
+    position: absolute;
+    bottom: 10px;
     left: 8px;
     background-color: rgb(0, 0, 0, 0.6);
     padding-left: 10px;
@@ -168,4 +181,5 @@ export default {
         padding-bottom: 520px;
         min-height: 100vh;
     }
-}</style>
+}
+</style>
