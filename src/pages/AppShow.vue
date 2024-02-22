@@ -42,26 +42,26 @@
                 <span class="fw-bold">{{
                   apartment.user?.name + " " + apartment.user?.surname
                 }}</span></span>
-              <div class="pt-3">
-                <span class="mb-4 float-start">
-                  <button class="btn btn-primary bg-light text-dark fw-bold" type="button" @click.prevent="showOffcanvasMenu()">
-                    Contact Host
-                  </button>
-                </span>
-              </div>
+                <div class="pt-3">
+                  <span class="mb-4 float-start">
+                    <button class="btn btn-primary bg-light text-dark fw-bold" type="button" @click.prevent="showOffcanvasMenu()">
+                      Contact Host
+                    </button>
+                  </span>
+                </div>
             </div>
           </div>
           <h3 class="pt-1">What you will find:</h3>
-          <div class="d-flex gap-4 pt-2 fw-bold">
-            <span class="fs-5 py-1 badge rounded-pill bg-light text-dark"><i class="fa-solid fa-couch"></i> Rooms:
-              {{ apartment.rooms }}</span>
-            <span class="fs-5 py-1 badge rounded-pill bg-light text-dark"><i class="fa-solid fa-bed fs-6"></i> Beds:
-              {{ apartment.beds }}</span>
-            <span class="fs-5 py-1 badge rounded-pill bg-light text-dark"><i class="fa-solid fa-bath"></i> Bathrooms:
-              {{ apartment.bathrooms }}</span>
-          </div>
+            <div class="d-flex  gap-4 pt-2 fw-bold">
+              <span class="fs-5 py-1 badge rounded-pill bg-light text-dark"><i class="fa-solid fa-couch"></i> Rooms:
+                {{ apartment.rooms }}</span>
+              <span class="fs-5 py-1 badge rounded-pill bg-light text-dark"><i class="fa-solid fa-bed fs-6"></i> Beds:
+                {{ apartment.beds }}</span>
+              <span class="fs-5 py-1 badge rounded-pill bg-light text-dark"><i class="fa-solid fa-bath"></i> Bathrooms:
+                {{ apartment.bathrooms }}</span>
+            </div>
           <h3 class="pt-4">Services:</h3>
-          <div>
+          <div class="">
             <ul class="list-unstyled d-flex flex-column align-content-center">
               <li v-for="service in services" class="py-1 fs-4 text-capitalize ">
                 <span class="badge rounded-pill bg-light text-dark">
@@ -81,7 +81,7 @@
         </div>
         <div>
           <div
-            class="text-white my-5 py-5 centered d-flex flex-column align-content-center justify-content-center align-items-center">
+            class="text-white my-5 py-5 centered d-flex flex-column align-content-center justify-content-center align-items-center ">
             <div py-2>
               <h2>Chi siamo</h2>
             </div>
@@ -145,6 +145,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="col-sm-12">
+       <p class="paragraph">{{ apartment.desc }}</p>
     </div>
     <AppFooter style="position: absolute; bottom: 0;" />
   </div>
@@ -469,11 +472,25 @@ export default {
 .offcanvasheight {
   height: 800px;
 }
+.paragraph{
+     position: absolute;
+     //top: 50%;
+     bottom: 62%;
+     right: 0%;
+     left: 56%;
+     color: #fff;
+     width: 400px;
+     text-align: center;
 
+}
 @media screen and (max-width: 575px) {
   .offcanvas.offcanvas-bottom {
     width: 100% !important;
     height: 100% !important;
   }
+  .paragraph{
+   display: none;
+  }
+ 
 }
 </style>
