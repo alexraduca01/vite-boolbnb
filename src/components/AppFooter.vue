@@ -3,7 +3,7 @@
             <section class="container">
                <div class="row">
                 <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-                     <h6 class="text-uppercase text-white">Assistenza</h6>
+                     <h6 class="text-uppercase text-white">Assistance</h6>
                    <ul class="list-unstyled mb-0">
                       <li v-for="(item, index) in assistenza" :key="index">
                         <a class="text-white" :href="item.url">{{ item.title }}</a>
@@ -11,7 +11,7 @@
                     </ul>
                 </div>
                 <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
-                  <h6 class="text-uppercase text-white">Ospitare</h6>
+                  <h6 class="text-uppercase text-white">Hosting</h6>
                        <ul class="list-unstyled mb-0">
                           <li v-for="(item, index) in ospitare" :key="index">
                             <a class="text-white" :href="item.url">{{ item.title }}</a>
@@ -37,9 +37,9 @@
                             <ul class="d-flex list-unstyled">
                                 <li><a class="text-white fw-bold" href="#!"> © 2024 Copyright:BoolBnb.com</a></li>
                                 <li><a class="text-white d-none d-md-flex" href="#">Privacy</a></li>
-                                <li><a class="text-white d-none d-md-flex" href="#">Termini</a></li>
-                                <li><a class="text-white d-none d-md-flex" href="#">Mappa del sito</a></li>
-                                <li><a class="text-white d-none d-md-flex" href="#">Dettagli del sito</a></li>
+                                <li><a class="text-white d-none d-md-flex" href="#">Terms</a></li>
+                                <li><a class="text-white d-none d-md-flex" href="#">Site Map</a></li>
+                                <li><a class="text-white d-none d-md-flex" href="#">Site Details</a></li>
                             </ul>
                         </div>
                         <div class="col-sm-12 col-lg-4 col-md-8 d-flex lg-justify-content-end mt-3">
@@ -78,27 +78,27 @@
         data() {
             return {
               assistenza:[
-                        { title: 'Centro Assistenza', url: '#!' },
+                        { title: 'Service Center', url: '#!' },
                         { title: 'AirCover', url: '#!' },
-                        { title: 'Antidiscriminazione', url: '#!' },
-                        { title: 'Supporto alla disabilità', url: '#!' },
-                        { title: 'Opzioni di cancellazione', url: '#!' },
-                        { title: 'Segnala problema nel quartiere', url: '#!' },
+                        { title: 'Antidiscrimination', url: '#!' },
+                        { title: 'Disability support', url: '#!' },
+                        { title: 'Cancellation options', url: '#!' },
+                        { title: 'Report problem in the neighborhood', url: '#!' },
                 ],
               ospitare:[
-                        { title: 'Apri un BoolBnb', url: '#!' },
-                        { title: 'AirCover per gli host', url: '#!' },
-                        { title: 'Risorse per gli host', url: '#!' },
-                        { title: 'Forum della community', url: '#!' },
-                        { title: 'Ospitare responsabilmente', url: '#!' },
+                        { title: 'Open a BoolBnb', url: '#!' },
+                        { title: 'AirCover for hosts', url: '#!' },
+                        { title: 'Resources for hosts', url: '#!' },
+                        { title: 'Community forums', url: '#!' },
+                        { title: 'Hosting responsibly', url: '#!' },
               ],
               Boolbnb:[
                         { title: 'Newsroom', url: '#!' },
-                        { title: 'Nuove funzionalità', url: '#!' },
-                        { title: 'Opportunità di lavoro', url: '#!' },
-                        { title: 'Investitori', url: '#!' },
+                        { title: 'New Features', url: '#!' },
+                        { title: 'Job opportunities', url: '#!' },
+                        { title: 'Investors', url: '#!' },
                         { title: 'Gift Card', url: '#!' },
-                        { title: 'Soggiorni con BoolBnb.org', url: '#!' },
+                        { title: 'Stays with BoolBnb.org.', url: '#!' },
                 ],
             }
         }
