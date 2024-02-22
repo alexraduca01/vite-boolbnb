@@ -36,7 +36,7 @@
 
                     <div class="ps-3">
                         <span>
-                            <span><i class="fa-solid fa-filter" @click.prevent="showOffcanvasMenu(), clearFilters()"
+                            <span><i class="fa-solid fa-filter cursor-pointer" @click.prevent="showOffcanvasMenu(), clearFilters()"
                                     :disabled="filterDisabled" style="transform: translateY(8px);"></i></span>
                         </span>
                     </div>
@@ -119,7 +119,7 @@
                     <!-- <a href="http://localhost:8000/login">login</a> -->
                     <div class="dropdown d-flex justify-content-end pe-3">
                         <div class="text-bg-light login-button d-flex justify-content-center align-items-center" @click="dropdownMenu()">
-                            <img src="/public/images/user.png" style="width: 25px;" alt="">
+                            <img src="/public/images/user.png" class="cursor-pointer" style="width: 25px;" alt="">
                         </div>
                         <ul class="dropdown-menu" style="transform: translateY(40px);" ref="dropdown">
                             <li><a class="dropdown-item" href="http://localhost:8000/login">Login</a></li>
@@ -275,6 +275,10 @@ export default {
 @use '../assets/style/main.scss' as *;
 
 $number-of-options: 5;
+
+.cursor-pointer {
+    cursor: pointer;
+}
 
 .login-button{
     width: 30px;
