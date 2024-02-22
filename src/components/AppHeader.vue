@@ -1,11 +1,14 @@
 <template>
-    <div class="w-100 bg-rich-black p-2 position-relative">
+    <div class="w-100 bg-rich-black p-3 position-relative" >
+        <div v-if="loaderFlag" class="overflow-y-hidden">
+            <LoaderComponent />
+        </div>
         <div class="container text-white p-0">
             <div class="row justify-content-between align-items-center m-0">
                 <!-- Logo -->
                 <div class="col-2">
                     <router-link to="/" @click="getApartments(), userInput = ''">
-                        <img src="/public/images/logo.png" alt="" style="width: 100px;">
+                        <img src="/public/images/logo.png" class="logo" alt="" >
                     </router-link>
                 </div>
 
@@ -31,9 +34,9 @@
 
                     <!-- Filter -->
 
-                    <div>
+                    <div class="ps-3">
                         <span>
-                            <span><i class="fa-solid fa-filter" @click.prevent="showOffcanvasMenu(), clearFilters()"
+                            <span><i class="fa-solid fa-filter cursor-pointer" @click.prevent="showOffcanvasMenu(), clearFilters()"
                                     :disabled="filterDisabled" style="transform: translateY(8px);"></i></span>
                         </span>
                     </div>
@@ -113,7 +116,16 @@
 
                 <!-- Login -->
                 <div class="col-2">
-                    <a href="http://localhost:8000/login">login</a>
+                    <!-- <a href="http://localhost:8000/login">login</a> -->
+                    <div class="dropdown d-flex justify-content-end pe-3">
+                        <div class="text-bg-light login-button d-flex justify-content-center align-items-center" @click="dropdownMenu()">
+                            <img src="/public/images/user.png" class="cursor-pointer" style="width: 25px;" alt="">
+                        </div>
+                        <ul class="dropdown-menu" style="transform: translateY(40px);" ref="dropdown">
+                            <li><a class="dropdown-item" href="http://localhost:8000/login">Login</a></li>
+                            <li><a class="dropdown-item" href="http://localhost:8000/register">Register</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -123,8 +135,12 @@
 <script>
 import axios from 'axios';
 import { store } from '../store.js';
+import LoaderComponent from './LoaderComponent.vue';
 export default {
     name: 'AppHeader',
+    components: {
+        LoaderComponent,
+    },
     data() {
         return {
             store,
@@ -140,6 +156,7 @@ export default {
             beds: null,
             bathrooms: null,
             selectedServices: [],
+            loaderFlag: false,
         }
     },
     methods: {
@@ -156,6 +173,8 @@ export default {
             })
         },
         searchApartments() {
+            this.loaderFlag = true;
+            this.loading();
             this.redirectTo('/search');
 
             let url = store.searchUrl;
@@ -186,11 +205,6 @@ export default {
                 console.log(this.selectedServices);
                 url += '&services=' + this.selectedServices.join(',');
             }
-
-            // if (this.selectedServices.length > 0) {
-            //     let servicesQuery = this.selectedServices.join(',');
-            //     url += '&services=' + encodeURIComponent(servicesQuery);
-            // }
 
             axios.get(url).then((res) => {
                 console.log(res.data);
@@ -230,6 +244,14 @@ export default {
         },
         redirectTo(url) {
             this.$router.push(url);
+        },
+        dropdownMenu(){
+            this.$refs.dropdown.classList.toggle('show');
+        },
+        loading(){
+            const loading = setTimeout(() => {
+                this.loaderFlag = false;
+            }, 1000);
         }
     },
     created() {
@@ -253,6 +275,20 @@ export default {
 @use '../assets/style/main.scss' as *;
 
 $number-of-options: 5;
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.login-button{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.logo{
+    width: 100px;
+}
 
 .my-form {
     max-width: none;
@@ -478,5 +514,8 @@ form {
 @media screen and (max-width: 575px) {
     .offcanvas.offcanvas-end {
         width: 100% !important;
+    }
+    .logo {
+        width: 75px;
     }
 }</style>

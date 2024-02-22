@@ -5,7 +5,7 @@
             <div class="container py-4">
                 <div class="row">
                     <router-link v-for="item in store.apartments" @click="postVisuals(item.slug)"
-                        class="col-sm-6 col-md-4 col-lg-3 mb-5 text-white text-decoration-none"
+                        class="col-12 col-md-6 col-lg-4 mb-5 text-white text-decoration-none"
                         :to="{ name: 'show', params: { slug: item.slug } }">
                         <div v-if="!searchFlag" class="position-relative position-relative card-container">
                             <div class="position-relative">
@@ -130,7 +130,7 @@ export default {
     padding-top: 5px;
     padding-bottom: 5px;
     border-radius: 15px;
-    width: 95%;
+    width: 96.5%;
     z-index: 1000;
 }
 
