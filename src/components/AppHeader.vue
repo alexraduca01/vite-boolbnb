@@ -518,4 +518,5 @@ form {
     .logo {
         width: 75px;
     }
-}</style>
+}
+</style>
