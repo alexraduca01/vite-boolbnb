@@ -29,7 +29,7 @@
       </swiper>
     </main>
     <div class="container">
-      <div class="row">
+      <div class="row position-relative">
         <div class="col-sm-12 text-white">
           <div class="pt-3">
             <h2 class="d-flex align-items-center">{{ apartment.title }} <span v-if="apartment.sponsors?.length > 0" class="badge ms-3 fs-6 rounded-pill text-bg-warning text-uppercase"><i class="fa-solid fa-crown"></i> premium</span></h2>
@@ -144,10 +144,13 @@
             </div>
           </div>
         </div>
+        <div class="card w-25 infoscard">
+        <div class="card-header">
+          <h4 class="fw-bold">Info</h4>
+        </div>
+            <p class="card-body">{{ apartment.desc }}</p>
+        </div>
       </div>
-    </div>
-    <div class="col-sm-12">
-       <p class="paragraph">{{ apartment.desc }}</p>
     </div>
     <AppFooter style="position: absolute; bottom: 0;" />
   </div>
@@ -472,16 +475,10 @@ export default {
 .offcanvasheight {
   height: 800px;
 }
-.paragraph{
-     position: absolute;
-     //top: 50%;
-     bottom: 62%;
-     right: 0%;
-     left: 56%;
-     color: #fff;
-     width: 400px;
-     text-align: center;
-
+.infoscard{
+  position: absolute;
+  right: 0;
+  top: 13%;
 }
 @media screen and (max-width: 575px) {
   .offcanvas.offcanvas-bottom {
