@@ -36,7 +36,7 @@
 
                     <div class="ps-3">
                         <span>
-                            <span><i class="fa-solid fa-filter" @click.prevent="showOffcanvasMenu(), clearFilters()"
+                            <span><i class="fa-solid fa-filter cursor-pointer" @click.prevent="showOffcanvasMenu()"
                                     :disabled="filterDisabled" style="transform: translateY(8px);"></i></span>
                         </span>
                     </div>
@@ -47,7 +47,7 @@
                         <div class="offcanvas-header">
                             <h5 class="offcanvas-title" id="">Filtri</h5>
                             <button type="button" class="btn-close btn-close-white text-reset"
-                                @click.prevent="showOffcanvasMenu(), clearFilters()"></button>
+                                @click.prevent="showOffcanvasMenu()"></button>
                         </div>
                         <div class="offcanvas-body d-flex flex-column gap-2 gap-lg-5 bg-rich-black">
 
@@ -118,8 +118,8 @@
                 <div class="col-2">
                     <!-- <a href="http://localhost:8000/login">login</a> -->
                     <div class="dropdown d-flex justify-content-end pe-3">
-                        <div class="text-bg-light login-button d-flex justify-content-center align-items-center" @click="dropdownMenu()">
-                            <img src="/public/images/user.png" style="width: 25px;" alt="">
+                        <div class="d-flex bg-white rounded-circle p-1 justify-content-center align-items-center" @click="dropdownMenu()">
+                            <img src="/public/images/user.png" class="cursor-pointer " style="width: 25px; height: 25px;" alt="">
                         </div>
                         <ul class="dropdown-menu" style="transform: translateY(40px);" ref="dropdown">
                             <li><a class="dropdown-item" href="http://localhost:8000/login">Login</a></li>
@@ -261,12 +261,19 @@ export default {
         const storedInput = localStorage.getItem('userInput');
         if (storedInput) {
             this.userInput = storedInput;
-        }
+        };
+        const storedRadius = localStorage.getItem('radiusInput');
+        if (storedRadius) {
+            this.radiusInput = storedRadius;
+        };
     },
     watch: {
         userInput(newValue) {
             localStorage.setItem('userInput', newValue);
-        }
+        },
+        radiusInput(newValue) {
+            localStorage.setItem('radiusInput', newValue);
+        },
     }
 }
 </script>
@@ -276,10 +283,8 @@ export default {
 
 $number-of-options: 5;
 
-.login-button{
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
+.cursor-pointer {
+    cursor: pointer;
 }
 
 .logo{
@@ -514,4 +519,5 @@ form {
     .logo {
         width: 75px;
     }
-}</style>
+}
+</style>
