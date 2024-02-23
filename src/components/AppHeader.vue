@@ -36,7 +36,7 @@
 
                     <div class="ps-3">
                         <span>
-                            <span><i class="fa-solid fa-filter cursor-pointer" @click.prevent="showOffcanvasMenu(), clearFilters()"
+                            <span><i class="fa-solid fa-filter cursor-pointer" @click.prevent="showOffcanvasMenu()"
                                     :disabled="filterDisabled" style="transform: translateY(8px);"></i></span>
                         </span>
                     </div>
@@ -47,7 +47,7 @@
                         <div class="offcanvas-header">
                             <h5 class="offcanvas-title" id="">Filtri</h5>
                             <button type="button" class="btn-close btn-close-white text-reset"
-                                @click.prevent="showOffcanvasMenu(), clearFilters()"></button>
+                                @click.prevent="showOffcanvasMenu()"></button>
                         </div>
                         <div class="offcanvas-body d-flex flex-column gap-2 gap-lg-5 bg-rich-black">
 
