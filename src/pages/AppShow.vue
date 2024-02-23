@@ -30,7 +30,7 @@
     </main>
     <div class="container">
       <div class="row position-relative">
-        <div class="col-6 text-white">
+        <div class="col-12 col-md-6 text-white">
           <div class="pt-3">
             <h2 class="d-flex align-items-center">{{ apartment.title }} <span v-if="apartment.sponsors?.length > 0"
                 class="badge ms-3 fs-6 rounded-pill text-bg-warning text-uppercase"><i class="fa-solid fa-crown"></i>
@@ -74,7 +74,7 @@
             </ul>
           </div>
         </div>
-        <div class="col-6" style="padding-top: 12rem;">
+        <div class="col-12 col-md-6 d-flex align-items-center">
           <div v-if="apartment.desc" class="card px-0">
             <div class="card-header">
               <h4 class="fw-bold">Description</h4>
@@ -99,7 +99,7 @@
               <button type="button" @click="clearInput()" style="cursor: pointer;"
                 class="btn-close text-reset bg-white text-white" @click.prevent="showOffcanvasMenu()"></button>
             </div>
-            <form @submit.prevent="contactForm()" class="text-white fs-3">
+            <form @submit.prevent="contactForm()" class="text-white container fs-3">
               <div v-if="successMessage != ''">
                 <p class="fs-6 text-success fw-bold text-center">{{ successMessage }}!</p>
               </div>
@@ -108,27 +108,27 @@
               </div>
               <div class="mb-3 d-flex flex-column align-content-center align-items-center">
                 <label for="name" class="form-label fs-6 text-white">Name *</label>
-                <input type="text" class="form-control w-50" id="name" name="name" aria-describedby="nameHelp"
+                <input type="text" class="form-control" id="name" name="name" aria-describedby="nameHelp"
                   v-model="name" required />
               </div>
               <div class="mb-3 d-flex flex-column align-content-center align-items-center">
                 <label for="name" class="form-label fs-6 text-white">Surname *</label>
-                <input type="text" class="form-control w-50" id="surname" name="surname" aria-describedby="nameHelp"
+                <input type="text" class="form-control" id="surname" name="surname" aria-describedby="nameHelp"
                   v-model="surname" required />
               </div>
               <div class="mb-3 d-flex flex-column align-content-center align-items-center">
                 <label for="name" class="form-label fs-6 text-white">Phone Number</label>
-                <input type="text" class="form-control w-50" id="phone_number" name="phone_number"
+                <input type="text" class="form-control" id="phone_number" name="phone_number"
                   aria-describedby="nameHelp" v-model="phone_number" />
               </div>
               <div class="mb-3 d-flex flex-column align-content-center align-items-center">
                 <label for="email" class="form-label fs-6 text-white">Email address *</label>
-                <input type="email" class="form-control w-50" id="email" name="email" aria-describedby="emailHelp"
+                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp"
                   v-model="email" required />
               </div>
               <div class="mb-3 d-flex flex-column align-content-center align-items-center">
                 <label for="message" class="form-label fs-6 text-white">Your Message *</label>
-                <textarea type="text" class="form-control w-50" id="body" name="body" aria-describedby="body"
+                <textarea type="text" class="form-control" id="body" name="body" aria-describedby="body"
                   v-model="body" rows="5" required minlength="5"></textarea>
                 <div class="d-flex py-3">
                   <button type="reset" class="btn btn-info bg-light text-center " @click="clearInput()">
@@ -141,12 +141,6 @@
           </div>
         </div>
       </div>
-      <!-- <div v-if="apartment.desc" class="card w-25 infoscard px-0">
-        <div class="card-header">
-          <h4 class="fw-bold">Description</h4>
-        </div>
-            <p class="card-body">{{ apartment.desc }}</p>
-        </div> -->
     </div>
     <AppFooter style="position: absolute; bottom: 0;" />
   </div>

@@ -118,8 +118,8 @@
                 <div class="col-2">
                     <!-- <a href="http://localhost:8000/login">login</a> -->
                     <div class="dropdown d-flex justify-content-end pe-3">
-                        <div class="text-bg-light login-button d-flex justify-content-center align-items-center" @click="dropdownMenu()">
-                            <img src="/public/images/user.png" class="cursor-pointer" style="width: 25px;" alt="">
+                        <div class="d-flex bg-white rounded-circle p-1 justify-content-center align-items-center" @click="dropdownMenu()">
+                            <img src="/public/images/user.png" class="cursor-pointer " style="width: 25px; height: 25px;" alt="">
                         </div>
                         <ul class="dropdown-menu" style="transform: translateY(40px);" ref="dropdown">
                             <li><a class="dropdown-item" href="http://localhost:8000/login">Login</a></li>
@@ -285,12 +285,6 @@ $number-of-options: 5;
 
 .cursor-pointer {
     cursor: pointer;
-}
-
-.login-button{
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
 }
 
 .logo{
