@@ -73,31 +73,13 @@
           <div class="centered">
             <h3 class="py-2 text-uppercase">Location:</h3>
             <div class="row">
-              <div class="col-12 rounded-top">
+              <div class="col-12 rounded-top py-5">
                 <div id="map" class="rounded"></div>
               </div>
             </div>
           </div>
         </div>
         <div>
-          <div
-            class="text-white my-5 py-5 centered d-flex flex-column align-content-center justify-content-center align-items-center ">
-            <div py-2>
-              <h2>Chi siamo</h2>
-            </div>
-            <div>
-              <p class="fs-6 text-center">
-                BoolBnb è stata fondata nel 2007, quando due host decisero di
-                accogliere per la prima volta tre ospiti nella loro casa di San
-                Francisco. Da allora, questa community è cresciuta e oggi conta
-                oltre 4 milioni di host, che a loro volta hanno ospitato più di
-                1,5 miliardi di persone in quasi tutti i paesi del mondo. Ogni
-                giorno, gli host offrono spazi unici ed Esperienze, che
-                consentono a ospiti e partecipanti di interagire con le comunità
-                locali in un modo più genuino
-              </p>
-            </div>
-          </div>
           <div class="offcanvas offcanvas-bottom offcanvasheight " :class="showMenu ? 'show' : ''" tabindex="-1"
             :style="{ visibility: showMenu ? 'visible' : 'hidden' }">
             <div class="offcanvas-body bg-rich-black">
@@ -147,9 +129,9 @@
             </div>
           </div>
         </div>
-        <div class="card w-25 infoscard">
+        <div class="card w-25 infoscard px-0">
         <div class="card-header">
-          <h4 class="fw-bold">Info</h4>
+          <h4 class="fw-bold">Description</h4>
         </div>
             <p class="card-body">{{ apartment.desc }}</p>
         </div>
