@@ -261,12 +261,19 @@ export default {
         const storedInput = localStorage.getItem('userInput');
         if (storedInput) {
             this.userInput = storedInput;
-        }
+        };
+        const storedRadius = localStorage.getItem('radiusInput');
+        if (storedRadius) {
+            this.radiusInput = storedRadius;
+        };
     },
     watch: {
         userInput(newValue) {
             localStorage.setItem('userInput', newValue);
-        }
+        },
+        radiusInput(newValue) {
+            localStorage.setItem('radiusInput', newValue);
+        },
     }
 }
 </script>
