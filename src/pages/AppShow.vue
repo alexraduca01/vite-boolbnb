@@ -29,10 +29,12 @@
       </swiper>
     </main>
     <div class="container">
-      <div class="row">
-        <div class="col-sm-12 text-white">
+      <div class="row position-relative">
+        <div class="col-6 text-white">
           <div class="pt-3">
-            <h2 class="d-flex align-items-center">{{ apartment.title }} <span v-if="apartment.sponsors?.length > 0" class="badge ms-3 fs-6 rounded-pill text-bg-warning text-uppercase"><i class="fa-solid fa-crown"></i> premium</span></h2>
+            <h2 class="d-flex align-items-center">{{ apartment.title }} <span v-if="apartment.sponsors?.length > 0"
+                class="badge ms-3 fs-6 rounded-pill text-bg-warning text-uppercase"><i class="fa-solid fa-crown"></i>
+                premium</span></h2>
             <p>{{ apartment.address }}</p>
           </div>
           <div class="d-flex w-75 py-1">
@@ -44,7 +46,8 @@
                 }}</span></span>
               <div class="pt-3">
                 <span class="mb-4 float-start">
-                  <button class="btn btn-primary bg-light text-dark fw-bold" type="button" @click.prevent="showOffcanvasMenu()">
+                  <button class="btn btn-primary bg-light text-dark fw-bold" type="button"
+                    @click.prevent="showOffcanvasMenu()">
                     Contact Host
                   </button>
                 </span>
@@ -52,7 +55,7 @@
             </div>
           </div>
           <h3 class="pt-1">What you will find:</h3>
-          <div class="d-flex gap-4 pt-2 fw-bold">
+          <div class="d-flex flex-wrap gap-4 pt-2 fw-bold">
             <span class="fs-5 py-1 badge rounded-pill bg-light text-dark"><i class="fa-solid fa-couch"></i> Rooms:
               {{ apartment.rooms }}</span>
             <span class="fs-5 py-1 badge rounded-pill bg-light text-dark"><i class="fa-solid fa-bed fs-6"></i> Beds:
@@ -70,81 +73,80 @@
               </li>
             </ul>
           </div>
-          <div class="centered">
-            <h3 class="py-2 text-uppercase">Location:</h3>
-            <div class="row">
-              <div class="col-12 rounded-top">
-                <div id="map" class="rounded"></div>
-              </div>
+        </div>
+        <div class="col-6" style="padding-top: 12rem;">
+          <div v-if="apartment.desc" class="card px-0">
+            <div class="card-header">
+              <h4 class="fw-bold">Description</h4>
             </div>
+            <p class="card-body">{{ apartment.desc }}</p>
           </div>
         </div>
-        <div>
-          <div
-            class="text-white my-5 py-5 centered d-flex flex-column align-content-center justify-content-center align-items-center">
-            <div py-2>
-              <h2>Chi siamo</h2>
-            </div>
-            <div>
-              <p class="fs-6 text-center">
-                BoolBnb è stata fondata nel 2007, quando due host decisero di
-                accogliere per la prima volta tre ospiti nella loro casa di San
-                Francisco. Da allora, questa community è cresciuta e oggi conta
-                oltre 4 milioni di host, che a loro volta hanno ospitato più di
-                1,5 miliardi di persone in quasi tutti i paesi del mondo. Ogni
-                giorno, gli host offrono spazi unici ed Esperienze, che
-                consentono a ospiti e partecipanti di interagire con le comunità
-                locali in un modo più genuino
-              </p>
-            </div>
-          </div>
-          <div class="offcanvas offcanvas-bottom offcanvasheight " :class="showMenu ? 'show' : ''" tabindex="-1"
-            :style="{ visibility: showMenu ? 'visible' : 'hidden' }">
-            <div class="offcanvas-body bg-rich-black">
-              <div class="d-flex justify-content-end">
-                <button type="button" @click="clearInput()" style="cursor: pointer;" class="btn-close text-reset bg-white text-white"
-                  @click.prevent="showOffcanvasMenu()"></button>
-              </div>
-              <form @submit.prevent="contactForm()" class="text-white fs-3">
-                <div v-if="successMessage != ''">
-                  <p class="fs-6 text-success fw-bold text-center">{{ successMessage }}!</p>
-                </div>
-                <div class="mb-3 d-flex flex-column align-content-center align-items-center">
-                  <label for="name" class="form-label fs-6 text-white">Name</label>
-                  <input type="text" class="form-control w-50" id="name" name="name" aria-describedby="nameHelp"
-                    v-model="name" required />
-                </div>
-                <div class="mb-3 d-flex flex-column align-content-center align-items-center">
-                  <label for="name" class="form-label fs-6 text-white">Surname</label>
-                  <input type="text" class="form-control w-50" id="surname" name="surname" aria-describedby="nameHelp"
-                    v-model="surname" required/>
-                </div>
-                <div class="mb-3 d-flex flex-column align-content-center align-items-center">
-                  <label for="name" class="form-label fs-6 text-white">Phone Number</label>
-                  <input type="text" class="form-control w-50" id="phone_number" name="phone_number"
-                    aria-describedby="nameHelp" v-model="phone_number" />
-                </div>
-                <div class="mb-3 d-flex flex-column align-content-center align-items-center">
-                  <label for="email" class="form-label fs-6 text-white">Email address</label>
-                  <input type="email" class="form-control w-50" id="email" name="email" aria-describedby="emailHelp"
-                    v-model="email" required/>
-                </div>
-                <div class="mb-3 d-flex flex-column align-content-center align-items-center">
-                  <label for="message" class="form-label fs-6 text-white">Your Message</label>
-                  <textarea type="text" class="form-control w-50" id="body" name="body" aria-describedby="body"
-                    v-model="body" required minlength="5"></textarea>
-                  <div class="d-flex py-3">
-                    <button type="reset" class="btn btn-info bg-light text-center " @click="clearInput()">
-                      Reset
-                    </button>
-                    <button type="submit" class="btn btn-primary mx-3">Send</button>
-                  </div>
-                </div>
-              </form>
+        <div class="centered">
+          <h3 class="py-2 text-uppercase text-white">Location:</h3>
+          <div class="row">
+            <div class="col-12 rounded-top pt-3 pb-5">
+              <div id="map" class="rounded"></div>
             </div>
           </div>
         </div>
       </div>
+      <div>
+        <div class="offcanvas offcanvas-bottom offcanvasheight " :class="showMenu ? 'show' : ''" tabindex="-1"
+          :style="{ visibility: showMenu ? 'visible' : 'hidden' }">
+          <div class="offcanvas-body bg-rich-black">
+            <div class="d-flex justify-content-end">
+              <button type="button" @click="clearInput()" style="cursor: pointer;"
+                class="btn-close text-reset bg-white text-white" @click.prevent="showOffcanvasMenu()"></button>
+            </div>
+            <form @submit.prevent="contactForm()" class="text-white fs-3">
+              <div v-if="successMessage != ''">
+                <p class="fs-6 text-success fw-bold text-center">{{ successMessage }}!</p>
+              </div>
+              <div class="container px-0">
+                <p class="fs-6">Fields marked with * are required!</p>
+              </div>
+              <div class="mb-3 d-flex flex-column align-content-center align-items-center">
+                <label for="name" class="form-label fs-6 text-white">Name *</label>
+                <input type="text" class="form-control w-50" id="name" name="name" aria-describedby="nameHelp"
+                  v-model="name" required />
+              </div>
+              <div class="mb-3 d-flex flex-column align-content-center align-items-center">
+                <label for="name" class="form-label fs-6 text-white">Surname *</label>
+                <input type="text" class="form-control w-50" id="surname" name="surname" aria-describedby="nameHelp"
+                  v-model="surname" required />
+              </div>
+              <div class="mb-3 d-flex flex-column align-content-center align-items-center">
+                <label for="name" class="form-label fs-6 text-white">Phone Number</label>
+                <input type="text" class="form-control w-50" id="phone_number" name="phone_number"
+                  aria-describedby="nameHelp" v-model="phone_number" />
+              </div>
+              <div class="mb-3 d-flex flex-column align-content-center align-items-center">
+                <label for="email" class="form-label fs-6 text-white">Email address *</label>
+                <input type="email" class="form-control w-50" id="email" name="email" aria-describedby="emailHelp"
+                  v-model="email" required />
+              </div>
+              <div class="mb-3 d-flex flex-column align-content-center align-items-center">
+                <label for="message" class="form-label fs-6 text-white">Your Message *</label>
+                <textarea type="text" class="form-control w-50" id="body" name="body" aria-describedby="body"
+                  v-model="body" rows="5" required minlength="5"></textarea>
+                <div class="d-flex py-3">
+                  <button type="reset" class="btn btn-info bg-light text-center " @click="clearInput()">
+                    Reset
+                  </button>
+                  <button type="submit" class="btn btn-primary mx-3">Send</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- <div v-if="apartment.desc" class="card w-25 infoscard px-0">
+        <div class="card-header">
+          <h4 class="fw-bold">Description</h4>
+        </div>
+            <p class="card-body">{{ apartment.desc }}</p>
+        </div> -->
     </div>
     <AppFooter style="position: absolute; bottom: 0;" />
   </div>
@@ -267,7 +269,7 @@ export default {
       this.surname = ""
       this.phone_number = ""
       this.email = ""
-      this.body = ""  
+      this.body = ""
     }
   },
   mounted() {
@@ -470,10 +472,20 @@ export default {
   height: 800px;
 }
 
+.infoscard {
+  position: absolute;
+  right: 0;
+  top: 13%;
+}
+
 @media screen and (max-width: 575px) {
   .offcanvas.offcanvas-bottom {
     width: 100% !important;
     height: 100% !important;
   }
-}
-</style>
+
+  .paragraph {
+    display: none;
+  }
+
+}</style>
