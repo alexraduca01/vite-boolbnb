@@ -109,13 +109,16 @@
                 <div v-if="successMessage != ''">
                   <p class="fs-6 text-success fw-bold text-center">{{ successMessage }}!</p>
                 </div>
+                <div class="container px-0">
+                  <p class="fs-6">Fields marked with * are required!</p>
+                </div>
                 <div class="mb-3 d-flex flex-column align-content-center align-items-center">
-                  <label for="name" class="form-label fs-6 text-white">Name</label>
+                  <label for="name" class="form-label fs-6 text-white">Name *</label>
                   <input type="text" class="form-control w-50" id="name" name="name" aria-describedby="nameHelp"
                     v-model="name" required />
                 </div>
                 <div class="mb-3 d-flex flex-column align-content-center align-items-center">
-                  <label for="name" class="form-label fs-6 text-white">Surname</label>
+                  <label for="name" class="form-label fs-6 text-white">Surname *</label>
                   <input type="text" class="form-control w-50" id="surname" name="surname" aria-describedby="nameHelp"
                     v-model="surname" required/>
                 </div>
@@ -125,14 +128,14 @@
                     aria-describedby="nameHelp" v-model="phone_number" />
                 </div>
                 <div class="mb-3 d-flex flex-column align-content-center align-items-center">
-                  <label for="email" class="form-label fs-6 text-white">Email address</label>
+                  <label for="email" class="form-label fs-6 text-white">Email address *</label>
                   <input type="email" class="form-control w-50" id="email" name="email" aria-describedby="emailHelp"
                     v-model="email" required/>
                 </div>
                 <div class="mb-3 d-flex flex-column align-content-center align-items-center">
-                  <label for="message" class="form-label fs-6 text-white">Your Message</label>
+                  <label for="message" class="form-label fs-6 text-white">Your Message *</label>
                   <textarea type="text" class="form-control w-50" id="body" name="body" aria-describedby="body"
-                    v-model="body" required minlength="5"></textarea>
+                    v-model="body" rows="5" required minlength="5"></textarea>
                   <div class="d-flex py-3">
                     <button type="reset" class="btn btn-info bg-light text-center " @click="clearInput()">
                       Reset
