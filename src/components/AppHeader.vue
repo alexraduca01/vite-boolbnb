@@ -1,5 +1,5 @@
 <template>
-    <div class="w-100 bg-rich-black p-3 position-relative" >
+    <div class="w-100 bg-rich-black py-2 position-relative" >
         <div v-if="loaderFlag" class="overflow-y-hidden">
             <LoaderComponent />
         </div>
@@ -49,7 +49,7 @@
                             <button type="button" class="btn-close btn-close-white text-reset"
                                 @click.prevent="showOffcanvasMenu()"></button>
                         </div>
-                        <div class="offcanvas-body d-flex flex-column gap-2 gap-lg-5 bg-rich-black">
+                        <div class="offcanvas-body d-flex flex-column gap-2 gap-lg-4 bg-rich-black">
 
                             <!-- Stanze -->
                             <div class="d-flex gap-4 justify-content-between align-items-center ">

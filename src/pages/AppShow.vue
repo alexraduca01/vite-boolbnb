@@ -5,12 +5,12 @@
       <div class="container">
         <div id="gallery" class="photos-grid-container gallery">
           <div class="main-photo img-box h-100 w-100" @click="showimage(0)">
-            <img :src="store.imgBasePath + imgApartment[0]" alt="" class="h-100 w-100" />
+            <img :src="store.imgBasePath + imgApartment[0]" alt="" class="h-100 cursor-pointer w-100" />
           </div>
           <div>
             <div class="sub">
               <div class="img-box" v-for="(image, index) in imgApartment" :key="index" @click="showimage(index + 1)">
-                <img :src="store.imgBasePath + imgApartment[index + 1]" alt="" />
+                <img :src="store.imgBasePath + imgApartment[index + 1]" class="cursor-pointer" alt="" />
               </div>
             </div>
           </div>
@@ -74,7 +74,7 @@
             </ul>
           </div>
         </div>
-        <div class="col-12 col-md-6 d-flex align-items-center">
+        <div class="col-12 col-md-6 py-3 py-md-0 d-flex align-items-center">
           <div v-if="apartment.desc" class="card px-0">
             <div class="card-header">
               <h4 class="fw-bold">Description</h4>
@@ -273,6 +273,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.cursor-pointer {
+  cursor: pointer;
+}
+
 #map {
   aspect-ratio: 21 / 9;
   width: 100%;

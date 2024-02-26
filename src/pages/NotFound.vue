@@ -1,7 +1,7 @@
 <template>
     <div class="w-100 vh-100 bg-prussian-blue">
         <section class="h-100">
-            <div class="container" style="padding-top: 22vh;">
+            <div class="container" >
                 <div class="row d-flex justify-content-center align-items-center">
                     <div class="col-lg-4 col-md-4 mb-3">
                         <h2 class="mt-5 p-0 mb-5 text-white">Oops!</h2>
@@ -13,7 +13,7 @@
                             </li>
                         </ul>            </div>
                     <div class="col-lg-6 col-md-4 mb-3 mt-5">
-                        <div class="d-flex justify-content-center">
+                        <div class="d-none d-sm-flex justify-content-center">
                             <img src="/public/images/notfound-gif.gif"  alt="logo-notfound">
                         </div>
                     </div>
@@ -36,6 +36,6 @@
     width: 200px;
 }
 h2{
-    font-size: 10rem;
+    font-size: 8rem;
 }
 </style>
