@@ -10,6 +10,7 @@
                     <h1 class="text-white">No apartments found :(</h1>
                 </div>
                 <div class="row" v-else>
+                    <p class="fs-5 text-white">Found {{ store.apartments.length }} results</p>
                     <router-link v-for="item in store.apartments" @click="postVisuals(item.slug)"
                         class="col-12 col-md-6 col-lg-4 mb-5 text-white text-decoration-none"
                         :to="{ name: 'show', params: { slug: item.slug } }">
